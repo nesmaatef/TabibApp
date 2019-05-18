@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "111210776203",
+    "firebase_url": "https://tabibapp-a57e9.firebaseio.com",
+    "project_id": "tabibapp-a57e9",
+    "storage_bucket": "tabibapp-a57e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111210776203:android:b92d71c84614c6fb",
+        "android_client_info": {
+          "package_name": "com.example.tabibapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111210776203-efo8iltg90d0tpl7suemeuue8qav9jcl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tabibapp",
+            "certificate_hash": "f6f9024ef8f5fe123c067fd29781793231599192"
+          }
+        },
+        {
+          "client_id": "111210776203-91rusj4fs22fa0c3hh9q6qi2k0ch3f3g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB67YTu_jBlHox0njvCjyOUEZ7Khag1_vY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111210776203-91rusj4fs22fa0c3hh9q6qi2k0ch3f3g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
