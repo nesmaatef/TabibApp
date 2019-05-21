@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="80dp">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo"
+            android:gravity="center"
+            android:layout_marginLeft="25dp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_centerInParent="true"
+        >
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:padding="5dip"
+            android:background="@drawable/edittext"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="40dp"
+            android:hint="User Phone"
+            android:drawableLeft="@drawable/ic_account_box_black_24dp"
+            android:paddingLeft="10dp"
+            android:drawablePadding="70dp"
+android:shadowColor="@android:color/black"
+
+            />
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:padding="5dip"
+            android:background="@drawable/edittext"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="47dp"
+            android:hint="Pass Word"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:paddingLeft="10dp"
+            android:drawablePadding="70dp"
+            />
+    </LinearLayout>
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btndoctor"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="470dp"
+        android:background="@android:color/white"
+        android:text="تسجيل الدخول"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="normal|bold|italic"
+        app:cornerRadius="30dp"
+        app:fButtonColor="@color/doctor"
+        app:shadowColor="@android:color/black"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        tools:fontFamily="@font/abril_fatface" />
+
+
+
+
+</RelativeLayout>

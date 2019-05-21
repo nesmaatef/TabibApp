@@ -60,6 +60,45 @@
         android:weightSum="2"
         >
 
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btnpatient"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="#F2F5F8"
+            android:text="مريض"
+            android:textColor="@color/doctor"
+            android:textSize="30sp"
+            app:cornerRadius="10dp"
+            app:fButtonColor="@android:color/white"
+            app:shadowColor="@color/doctor"
+            app:shadowEnabled="true"
+            app:shadowHeight="5dp"
+            tools:fontFamily="@font/abril_fatface" />
+
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btndoctor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="#26B4E2"
+            android:text="طبيب"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="normal|bold|italic"
+            app:cornerRadius="10dp"
+            app:fButtonColor="@color/doctor"
+            app:shadowColor="@android:color/white"
+            app:shadowEnabled="true"
+            app:shadowHeight="5dp"
+            tools:fontFamily="@font/abril_fatface" />
 
 
     </LinearLayout>
