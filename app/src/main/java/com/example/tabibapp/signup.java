@@ -1,7 +1,6 @@
 package com.example.tabibapp;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,51 +17,52 @@ import com.google.firebase.database.ValueEventListener;
 
 import info.hoang8f.widget.FButton;
 
-public class Login extends AppCompatActivity {
-EditText edtphone, edtpassword;
-FButton btnlogin;
+public class signup extends AppCompatActivity {
+
+    EditText edtname,edtphone,edtpassword,edtage;
+    FButton btnsignup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-    edtphone= (EditText) findViewById(R.id.edtphone);
-    edtpassword = (EditText) findViewById(R.id.edtpassword);
-        btnlogin = (FButton) findViewById(R.id.btnlogin);
+        setContentView(R.layout.activity_signup);
+        edtname= (EditText) findViewById(R.id.edtname);
+        edtage= (EditText) findViewById(R.id.edtage);
+        edtpassword= (EditText) findViewById(R.id.edtpassword);
+        edtphone= (EditText) findViewById(R.id.edtphone);
+        btnsignup= (FButton) findViewById(R.id.btnsignup);
 
         FirebaseDatabase database =FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("users");
 
-        btnlogin.setOnClickListener(new View.OnClickListener() {
+
+        btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ProgressDialog mdialog = new ProgressDialog(Login.this);
+
+
+                final ProgressDialog mdialog = new ProgressDialog(signup.this);
                 mdialog.setMessage("please waitting.....");
                 mdialog.show();
+
+
 table_user.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         if (dataSnapshot.child(edtphone.getText().toString()).exists()) {
-
             mdialog.dismiss();
-            users user = dataSnapshot.child(edtphone.getText().toString()).getValue(users.class);
-            user.setPhone(edtphone.getText().toString());  //set phone
-
-            if (user.getPassword().equals(edtpassword.getText().toString())) {
-                //Intent homeintent = new Intent(Login.this, Home.class);
-                //common.currentuser = user;
-                //startActivity(homeintent);
-               // finish();
-                Toast.makeText(Login.this, "your login sucess", Toast.LENGTH_SHORT).show();
-
-
-            } else {
-                Toast.makeText(Login.this, "sign in is faild", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(signup.this, "this phone nuber is already exist", Toast.LENGTH_SHORT).show();
         } else {
 
-            Toast.makeText(Login.this, "user is not exist in database", Toast.LENGTH_SHORT).show();
+            mdialog.dismiss();
+            users user = new users(edtname.getText().toString(), edtpassword.getText().toString(),edtage.getText().toString());
+            table_user.child(edtphone.getText().toString()).setValue(user);
+            Toast.makeText(signup.this, "signup successful", Toast.LENGTH_SHORT).show();
+              finish();
         }
+
+
+
 
     }
 
@@ -74,7 +74,5 @@ table_user.addValueEventListener(new ValueEventListener() {
 
             }
         });
-
-
     }
 }
