@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.tabibapp.R;
 import com.example.tabibapp.face.itemclicklistner;
+
+
 public class menuviewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 public TextView txtmenuname;
 public ImageView imageView;
@@ -23,7 +25,7 @@ public ImageView imageView;
     public menuviewholder(@NonNull View itemView) {
         super(itemView);
 
-    txtmenuname=(TextView) itemView.findViewById(R.id.menuname);
+    //txtmenuname=(TextView) itemView.findViewById(R.id.menuname);
         imageView=(ImageView) itemView.findViewById(R.id.menu_image);
 itemView.setOnClickListener(this);
     }

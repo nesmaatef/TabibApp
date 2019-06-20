@@ -11,7 +11,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="470dp"
-        android:id="@+id/recycler_menu"
+        android:id="@+id/recycler_doc"
         android:scrollbars="vertical">
     </android.support.v7.widget.RecyclerView>"
 

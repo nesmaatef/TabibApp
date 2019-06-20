@@ -1,6 +1,7 @@
 package com.example.tabibapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tabibapp.Model.users;
+import com.example.tabibapp.common.common;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,6 +60,10 @@ table_user.addValueEventListener(new ValueEventListener() {
             users user = new users(edtname.getText().toString(), edtpassword.getText().toString(),edtage.getText().toString());
             table_user.child(edtphone.getText().toString()).setValue(user);
             Toast.makeText(signup.this, "signup successful", Toast.LENGTH_SHORT).show();
+            Intent homeintent = new Intent(signup.this, category_list.class);
+            common.currentuser = user;
+            startActivity(homeintent);
+            finish();
               finish();
         }
 

@@ -41,6 +41,7 @@
             android:layout_marginLeft="47dp"
             android:layout_marginTop="40dp"
             android:hint="User Phone"
+            android:inputType="number"
             android:drawableLeft="@drawable/ic_account_box_black_24dp"
             android:paddingLeft="10dp"
             android:drawablePadding="70dp"
@@ -59,6 +60,7 @@ android:shadowColor="@android:color/black"
             android:hint="PassWord"
             android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:paddingLeft="10dp"
+            android:inputType="number"
             android:drawablePadding="70dp"
             />
     </LinearLayout>
@@ -76,12 +78,32 @@ android:shadowColor="@android:color/black"
         android:textStyle="normal|bold|italic"
         app:cornerRadius="30dp"
         app:fButtonColor="@color/doctor"
-        app:shadowColor="@android:color/white"
+        app:shadowColor="@android:color/black"
         app:shadowEnabled="true"
-        app:shadowHeight="5dp"
+        app:shadowHeight="2dp"
         tools:fontFamily="@font/abril_fatface" />
 
+<TextView
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="530dp"
+    android:text="ليس لديك حساب؟"
+    android:textColor="@android:color/black"
+    android:textSize="15sp"
+    android:layout_marginLeft="140dp"
+    android:textStyle="bold"/>
 
+    <TextView
+        android:id="@+id/txtlogin"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="530dp"
+        android:clickable="true"
+        android:text="سجل الان"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
