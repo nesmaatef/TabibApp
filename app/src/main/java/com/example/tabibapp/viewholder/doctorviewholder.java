@@ -1,17 +1,24 @@
 package com.example.tabibapp.viewholder;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import android.view.ContextMenu;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.tabibapp.R;
+import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class doctorviewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class doctorviewholder extends RecyclerView.ViewHolder implements View.OnClickListener ,
+View.OnCreateContextMenuListener
+
+
+{
 public TextView txtname, txtdesc, txtmap, txtprice;
 public CircleImageView imgdoc;
     private itemclicklistner itemClickListener;
@@ -29,6 +36,7 @@ public CircleImageView imgdoc;
         txtprice= (TextView) itemView.findViewById(R.id.txtprice);
          imgdoc = (CircleImageView) itemView.findViewById(R.id.doctor_image);
         itemView.setOnClickListener(this);
+        itemView.setOnCreateContextMenuListener(this);
 
     }
 
@@ -38,4 +46,14 @@ public CircleImageView imgdoc;
 
 
     }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("Select the action");
+        menu.add(0,0,getAdapterPosition(),common.UPDATE);
+        menu.add(0,1,getAdapterPosition(),common.DELETE);
+    }
 }
+
+

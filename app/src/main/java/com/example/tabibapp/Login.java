@@ -2,13 +2,14 @@ package com.example.tabibapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tabibapp.Model.users;
 import com.example.tabibapp.common.common;
@@ -24,7 +25,8 @@ public class Login extends AppCompatActivity {
 EditText edtphone, edtpassword;
 FButton btnlogin;
 TextView txtlogin;
-
+FirebaseDatabase database;
+DatabaseReference table_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +38,8 @@ TextView txtlogin;
         txtlogin= (TextView) findViewById(R.id.txtlogin);
 
 
-        FirebaseDatabase database =FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("users");
+         database =FirebaseDatabase.getInstance();
+         table_user = database.getReference("users");
 
         txtlogin.setOnClickListener(new View.OnClickListener() {
     @Override

@@ -7,14 +7,36 @@ public class doctor {
     private String image;
     private String price;
     private String catid;
+    private String times;
+    private String timeswait;
 
-    public doctor(String name, String desc, String map, String image, String price, String catid) {
+
+
+    public String getTimes() {
+        return times;
+    }
+
+    public void setTimes(String times) {
+        this.times = times;
+    }
+
+    public String getTimeswait() {
+        return timeswait;
+    }
+
+    public void setTimeswait(String timeswait) {
+        this.timeswait = timeswait;
+    }
+
+    public doctor(String name, String desc, String map, String image, String price, String catid, String times, String timeswait) {
         this.name = name;
         this.desc = desc;
         this.map = map;
         this.image = image;
         this.price = price;
         this.catid = catid;
+        this.times = times;
+        this.timeswait = timeswait;
     }
 
     public String getName() {

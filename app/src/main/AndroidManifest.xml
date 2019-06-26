@@ -11,13 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".doc_list"
-            android:theme="@style/AppTheme1">
-
-        </activity>
-        <activity android:name=".category_list">
-
-        </activity>
+        <activity
+            android:name=".enter_data_doc"
+            android:label="@string/title_activity_enter_data_doc"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".doc_details" />
+        <activity
+            android:name=".doc_list"
+            android:theme="@style/AppTheme1" />
+        <activity android:name=".category_list" />
         <activity android:name=".signup" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">
