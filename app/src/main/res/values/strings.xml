@@ -92,4 +92,5 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_enter_data_doc">enter_data_doc</string>
+    <string name="title_activity_doc_list1">doc_list1</string>
 </resources>

@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +35,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -59,9 +62,12 @@ public class doc_list extends AppCompatActivity {
     Uri saveuri;
 
     doctor newdoctor;
+    EditText edtsearch;
+    ImageButton imgsearch;
 
 
     FirebaseRecyclerAdapter<doctor, doctorviewholder> adapter;
+    FirebaseRecyclerAdapter<doctor, doctorviewholder> searchadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +86,31 @@ rootlayout=(RelativeLayout) findViewById(R.id.rootlayout);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        edtsearch=(EditText) findViewById(R.id.edtsearch);
+        imgsearch=(ImageButton) findViewById(R.id.imgsearch);
+
+
         //getintent
         if (getIntent()!=null)
             categoryid=getIntent().getStringExtra("categoryid");
         if (!categoryid.isEmpty() && categoryid!=null) {
             loaddoctorlist(categoryid);
         }
+
+        imgsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchtext =edtsearch.getText().toString();
+                searchfun(searchtext);
+
+            }
+        });
     }
 
+
+
     private void loaddoctorlist(String categoryid) {
+      //  Query firebasesearch =doctorlist.orderByChild("name").startAt(searchtext).endAt(searchtext + "\uf8ff");
 
 adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         R.layout.doc_item,
@@ -121,6 +143,8 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         recyclerView.setAdapter(adapter);
 
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
        if (item.getItemId() ==R.id.action_settings)
@@ -140,8 +164,8 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
     ///upload new doctor /delete/ update
     private void showdialoge() {
         AlertDialog.Builder alertdialog= new AlertDialog.Builder(doc_list.this);
-        alertdialog.setTitle("Add new doctor");
-        alertdialog.setMessage("please fill full information");
+      //  alertdialog.setTitle("Add new doctor");
+       // alertdialog.setMessage("please fill full information");
 
         LayoutInflater inflater =this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.add_new_doc, null);
@@ -283,8 +307,8 @@ newdoctor=new doctor();
 
     private void showupdatedialogfood(final String key, final doctor item) {
         AlertDialog.Builder alertdialog= new AlertDialog.Builder(doc_list.this);
-        alertdialog.setTitle("Update new food");
-        alertdialog.setMessage("please fill full information");
+      //  alertdialog.setTitle("Update new food");
+       // alertdialog.setMessage("please fill full information");
 
         LayoutInflater inflater =this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.add_new_doc, null);
@@ -393,5 +417,44 @@ newdoctor=new doctor();
                 mdialog.setMessage("Uploaded" +progress+"%");
             }
         });
+    }
+
+
+
+
+
+      private void searchfun(String searchtext) {
+        Query firebasesearch =doctorlist.orderByChild("name").startAt(searchtext).endAt(searchtext + "\\utf-8");
+
+          searchadapter =new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
+                  R.layout.doc_item,
+                  doctorviewholder.class,
+                  firebasesearch ) {
+              @Override
+              protected void populateViewHolder(doctorviewholder viewHolder, doctor model, int position) {
+                  Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);
+                  viewHolder.txtname.setText(model.getName());
+                  viewHolder.txtprice.setText(model.getPrice());
+                  viewHolder.txtmap.setText(model.getMap());
+                  viewHolder.txtdesc.setText(model.getDesc());
+                  final doctor clickitem =model;
+
+                  viewHolder.setItemClickListener(new itemclicklistner() {
+                      @Override
+                      public void onClick(View view, int position, boolean isLongClick) {
+                          // Toast.makeText(doc_list.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
+                          Intent docdetails = new Intent(doc_list.this, doc_details.class);
+
+                          docdetails.putExtra("DoctorId", adapter.getRef(position).getKey());
+                          startActivity(docdetails);
+
+                      }
+                  });
+
+
+              }
+          };
+          recyclerView.setAdapter( searchadapter);
+
     }
 }

@@ -4,25 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".category_list">
+    tools:context=".splashscreen">
 
-    <androidx.recyclerview.widget.RecyclerView
-
+    <com.felipecsl.gifimageview.library.GifImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_menu"
-        android:scrollbars="vertical">
-    </androidx.recyclerview.widget.RecyclerView>"
-
-
-
-
-
-
-
-
-
+        android:id="@+id/gifimageview"
+        android:scaleType="fitCenter"/>
 
 
 

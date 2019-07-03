@@ -8,18 +8,18 @@
     android:background="@drawable/background">
 
     <LinearLayout
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="80dp">
+        android:layout_marginLeft="120dp">
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:background="@drawable/logo"
             android:gravity="center"
-            android:layout_marginLeft="25dp"/>
+            />
     </LinearLayout>
 
 
@@ -29,6 +29,7 @@
         android:orientation="vertical"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+
         android:layout_centerInParent="true"
         >
 
@@ -49,34 +50,23 @@ android:shadowColor="@android:color/black"
 
             />
 
-        <EditText
-            android:id="@+id/edtpassword"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:padding="5dip"
-            android:background="@drawable/edittext"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="47dp"
-            android:hint="PassWord"
-            android:drawableLeft="@drawable/ic_lock_black_24dp"
-            android:paddingLeft="10dp"
-            android:inputType="number"
-            android:drawablePadding="70dp"
-            />
+
     </LinearLayout>
+
+
 
     <info.hoang8f.widget.FButton
         android:id="@+id/btnlogin"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="470dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="400dp"
         android:background="@android:color/white"
         android:text="تسجيل الدخول"
         android:textColor="@android:color/white"
         android:textSize="30sp"
         android:textStyle="normal|bold|italic"
-        app:cornerRadius="30dp"
+        app:cornerRadius="25sp"
         app:fButtonColor="@color/doctor"
         app:shadowColor="@android:color/black"
         app:shadowEnabled="true"
@@ -86,7 +76,7 @@ android:shadowColor="@android:color/black"
 <TextView
     android:layout_width="150dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="530dp"
+    android:layout_marginTop="455dp"
     android:text="ليس لديك حساب؟"
     android:textColor="@android:color/black"
     android:textSize="15sp"
@@ -97,11 +87,11 @@ android:shadowColor="@android:color/black"
         android:id="@+id/txtlogin"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="530dp"
+        android:layout_marginLeft="30sp"
+        android:layout_marginTop="455dp"
         android:clickable="true"
         android:text="سجل الان"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="15sp"
         android:textStyle="bold" />
 

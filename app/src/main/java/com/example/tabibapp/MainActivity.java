@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() ==R.id.admin) {
-            Intent intent = new Intent(MainActivity.this, category_list.class);
+            Intent intent = new Intent(MainActivity.this, Login.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

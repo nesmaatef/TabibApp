@@ -22,16 +22,16 @@ import info.hoang8f.widget.FButton;
 
 public class signup extends AppCompatActivity {
 
-    EditText edtname,edtphone,edtpassword,edtage;
+    EditText edtphone;
     FButton btnsignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        edtname= (EditText) findViewById(R.id.edtname);
-        edtage= (EditText) findViewById(R.id.edtage);
-        edtpassword= (EditText) findViewById(R.id.edtpassword);
+       // edtname= (EditText) findViewById(R.id.edtname);
+      //  edtage= (EditText) findViewById(R.id.edtage);
+       // edtpassword= (EditText) findViewById(R.id.edtpassword);
         edtphone= (EditText) findViewById(R.id.edtphone);
         btnsignup= (FButton) findViewById(R.id.btnsignup);
 
@@ -58,10 +58,10 @@ table_user.addValueEventListener(new ValueEventListener() {
         } else {
 
             mdialog.dismiss();
-            users user = new users(edtname.getText().toString(), edtpassword.getText().toString(),edtage.getText().toString());
+            users user = new users();
             table_user.child(edtphone.getText().toString()).setValue(user);
             Toast.makeText(signup.this, "signup successful", Toast.LENGTH_SHORT).show();
-            Intent homeintent = new Intent(signup.this, category_list.class);
+            Intent homeintent = new Intent(signup.this, cat_list1.class);
             common.currentuser = user;
             startActivity(homeintent);
             finish();

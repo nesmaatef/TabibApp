@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import info.hoang8f.widget.FButton;
 
 public class Login extends AppCompatActivity {
-EditText edtphone, edtpassword;
+EditText edtphone;
 FButton btnlogin;
 TextView txtlogin;
 FirebaseDatabase database;
@@ -33,7 +33,7 @@ DatabaseReference table_user;
         setContentView(R.layout.activity_login);
 
     edtphone= (EditText) findViewById(R.id.edtphone);
-    edtpassword = (EditText) findViewById(R.id.edtpassword);
+  //  edtpassword = (EditText) findViewById(R.id.edtpassword);
         btnlogin = (FButton) findViewById(R.id.btnlogin);
         txtlogin= (TextView) findViewById(R.id.txtlogin);
 
@@ -60,23 +60,37 @@ DatabaseReference table_user;
 table_user.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        if (dataSnapshot.child(edtphone.getText().toString()).exists()) {
 
-            mdialog.dismiss();
+
+        if (dataSnapshot.child(edtphone.getText().toString()).exists()) {
+ mdialog.dismiss();
             users user = dataSnapshot.child(edtphone.getText().toString()).getValue(users.class);
             user.setPhone(edtphone.getText().toString());  //set phone
 
-            if (user.getPassword().equals(edtpassword.getText().toString())) {
+            if (Boolean.parseBoolean(user.getIsadmin())){
                 Intent homeintent = new Intent(Login.this, category_list.class);
                 common.currentuser = user;
                 startActivity(homeintent);
                 finish();
-                Toast.makeText(Login.this, "your login sucess", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Hello Admin", Toast.LENGTH_SHORT).show();}
+            else if (Boolean.parseBoolean(user.getIsstaff())){
+               // Intent homeintent = new Intent(Login.this, category_list.class);
+                //common.currentuser = user;
+                //startActivity(homeintent);
+                //finish();
+                Toast.makeText(Login.this, "Hello Doctor", Toast.LENGTH_SHORT).show();
 
-
-            } else {
-                Toast.makeText(Login.this, "sign in is faild", Toast.LENGTH_SHORT).show();
             }
+            else {
+                Intent homeintent = new Intent(Login.this, cat_list1.class);
+                common.currentuser = user;
+                startActivity(homeintent);
+                finish();
+                Toast.makeText(Login.this, "hello, you are sign successful", Toast.LENGTH_SHORT).show();
+
+            }
+
+
         } else {
 
             Toast.makeText(Login.this, "user is not exist in database", Toast.LENGTH_SHORT).show();
