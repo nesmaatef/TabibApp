@@ -22,32 +22,32 @@ import com.google.firebase.database.ValueEventListener;
 import info.hoang8f.widget.FButton;
 
 public class Login extends AppCompatActivity {
-EditText edtphone;
-FButton btnlogin;
-TextView txtlogin;
-FirebaseDatabase database;
-DatabaseReference table_user;
+    EditText edtphone;
+    FButton btnlogin;
+    TextView txtlogin;
+    FirebaseDatabase database;
+    DatabaseReference table_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-    edtphone= (EditText) findViewById(R.id.edtphone);
-  //  edtpassword = (EditText) findViewById(R.id.edtpassword);
+        edtphone= (EditText) findViewById(R.id.edtphone);
+        //  edtpassword = (EditText) findViewById(R.id.edtpassword);
         btnlogin = (FButton) findViewById(R.id.btnlogin);
         txtlogin= (TextView) findViewById(R.id.txtlogin);
 
 
-         database =FirebaseDatabase.getInstance();
-         table_user = database.getReference("users");
+        database =FirebaseDatabase.getInstance();
+        table_user = database.getReference("users");
 
         txtlogin.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent =new Intent(Login.this, signup.class);
-        startActivity(intent);
-    }
-});
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(Login.this, signup.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -57,52 +57,52 @@ DatabaseReference table_user;
                 final ProgressDialog mdialog = new ProgressDialog(Login.this);
                 mdialog.setMessage("please waitting.....");
                 mdialog.show();
-table_user.addValueEventListener(new ValueEventListener() {
-    @Override
-    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                table_user.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-        if (dataSnapshot.child(edtphone.getText().toString()).exists()) {
- mdialog.dismiss();
-            users user = dataSnapshot.child(edtphone.getText().toString()).getValue(users.class);
-            user.setPhone(edtphone.getText().toString());  //set phone
+                        if (dataSnapshot.child(edtphone.getText().toString()).exists()) {
+                            mdialog.dismiss();
+                            users user = dataSnapshot.child(edtphone.getText().toString()).getValue(users.class);
+                            user.setPhone(edtphone.getText().toString());  //set phone
 
-            if (Boolean.parseBoolean(user.getIsadmin())){
-                Intent homeintent = new Intent(Login.this, category_list.class);
-                common.currentuser = user;
-                startActivity(homeintent);
-                finish();
-                Toast.makeText(Login.this, "Hello Admin", Toast.LENGTH_SHORT).show();}
-            else if (Boolean.parseBoolean(user.getIsstaff())){
-               // Intent homeintent = new Intent(Login.this, category_list.class);
-                //common.currentuser = user;
-                //startActivity(homeintent);
-                //finish();
-                Toast.makeText(Login.this, "Hello Doctor", Toast.LENGTH_SHORT).show();
+                            if (Boolean.parseBoolean(user.getIsadmin())){
+                                Intent homeintent = new Intent(Login.this, category_list.class);
+                                common.currentuser = user;
+                                startActivity(homeintent);
+                                finish();
+                                Toast.makeText(Login.this, "Hello Admin", Toast.LENGTH_SHORT).show();}
+                            else if (Boolean.parseBoolean(user.getIsstaff())){
+                                // Intent homeintent = new Intent(Login.this, category_list.class);
+                                //common.currentuser = user;
+                                //startActivity(homeintent);
+                                //finish();
+                                Toast.makeText(Login.this, "Hello Doctor", Toast.LENGTH_SHORT).show();
 
-            }
-            else {
-                Intent homeintent = new Intent(Login.this, cat_list1.class);
-                common.currentuser = user;
-                startActivity(homeintent);
-                finish();
-                Toast.makeText(Login.this, "hello, you are sign successful", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Intent homeintent = new Intent(Login.this, cat_list1.class);
+                                common.currentuser = user;
+                                startActivity(homeintent);
+                                finish();
+                                Toast.makeText(Login.this, "hello, you are sign successful", Toast.LENGTH_SHORT).show();
 
-            }
+                            }
 
 
-        } else {
+                        } else {
 
-            Toast.makeText(Login.this, "user is not exist in database", Toast.LENGTH_SHORT).show();
-        }
+                            Toast.makeText(Login.this, "user is not exist in database", Toast.LENGTH_SHORT).show();
+                        }
 
-    }
+                    }
 
-    @Override
-    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-    }
-});
+                    }
+                });
 
             }
         });

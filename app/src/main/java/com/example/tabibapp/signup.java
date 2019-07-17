@@ -22,64 +22,64 @@ import info.hoang8f.widget.FButton;
 
 public class signup extends AppCompatActivity {
 
-    EditText edtphone;
-    FButton btnsignup;
+	EditText edtphone;
+	FButton btnsignup;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-       // edtname= (EditText) findViewById(R.id.edtname);
-      //  edtage= (EditText) findViewById(R.id.edtage);
-       // edtpassword= (EditText) findViewById(R.id.edtpassword);
-        edtphone= (EditText) findViewById(R.id.edtphone);
-        btnsignup= (FButton) findViewById(R.id.btnsignup);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_signup);
+		// edtname= (EditText) findViewById(R.id.edtname);
+		//  edtage= (EditText) findViewById(R.id.edtage);
+		// edtpassword= (EditText) findViewById(R.id.edtpassword);
+		edtphone= (EditText) findViewById(R.id.edtphone);
+		btnsignup= (FButton) findViewById(R.id.btnsignup);
 
-        FirebaseDatabase database =FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("users");
-
-
-        btnsignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+		FirebaseDatabase database =FirebaseDatabase.getInstance();
+		final DatabaseReference table_user = database.getReference("users");
 
 
-                final ProgressDialog mdialog = new ProgressDialog(signup.this);
-                mdialog.setMessage("please waitting.....");
-                mdialog.show();
+		btnsignup.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 
 
-table_user.addValueEventListener(new ValueEventListener() {
-    @Override
-    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        if (dataSnapshot.child(edtphone.getText().toString()).exists()) {
-            mdialog.dismiss();
-            Toast.makeText(signup.this, "this phone nuber is already exist", Toast.LENGTH_SHORT).show();
-        } else {
-
-            mdialog.dismiss();
-            users user = new users();
-            table_user.child(edtphone.getText().toString()).setValue(user);
-            Toast.makeText(signup.this, "signup successful", Toast.LENGTH_SHORT).show();
-            Intent homeintent = new Intent(signup.this, cat_list1.class);
-            common.currentuser = user;
-            startActivity(homeintent);
-            finish();
-              finish();
-        }
+				final ProgressDialog mdialog = new ProgressDialog(signup.this);
+				mdialog.setMessage("please waitting.....");
+				mdialog.show();
 
 
+				table_user.addValueEventListener(new ValueEventListener() {
+					@Override
+					public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+						if (dataSnapshot.child(edtphone.getText().toString()).exists()) {
+							mdialog.dismiss();
+							Toast.makeText(signup.this, "this phone nuber is already exist", Toast.LENGTH_SHORT).show();
+						} else {
+
+							mdialog.dismiss();
+							users user = new users();
+							table_user.child(edtphone.getText().toString()).setValue(user);
+							Toast.makeText(signup.this, "signup successful", Toast.LENGTH_SHORT).show();
+							Intent homeintent = new Intent(signup.this, cat_list1.class);
+							common.currentuser = user;
+							startActivity(homeintent);
+							finish();
+							finish();
+						}
 
 
-    }
 
-    @Override
-    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-    }
-});
+					}
 
-            }
-        });
-    }
+					@Override
+					public void onCancelled(@NonNull DatabaseError databaseError) {
+
+					}
+				});
+
+			}
+		});
+	}
 }

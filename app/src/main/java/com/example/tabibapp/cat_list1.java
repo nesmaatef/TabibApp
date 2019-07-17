@@ -95,10 +95,10 @@ public class cat_list1 extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-         if (item.getItemId() ==R.id.more){
-             Intent homeintent = new Intent(cat_list1.this, more.class);
-        startActivity(homeintent);
-        Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();}
+        if (item.getItemId() ==R.id.more){
+            Intent homeintent = new Intent(cat_list1.this, more.class);
+            startActivity(homeintent);
+            Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();}
 
         return super.onOptionsItemSelected(item);
     }

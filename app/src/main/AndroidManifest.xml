@@ -3,6 +3,7 @@
     package="com.example.tabibapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".request"></activity>
+        <activity android:name=".book" />
+        <activity android:name=".add_doctor" />
         <activity android:name=".splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +24,7 @@
         </activity>
         <activity
             android:name=".more"
-            android:theme="@style/AppTheme1"></activity>
+            android:theme="@style/AppTheme1" />
         <activity android:name=".doc_list1" />
         <activity android:name=".cat_list1" />
         <activity android:name=".doc_details" />
@@ -30,9 +34,7 @@
         <activity android:name=".category_list" />
         <activity android:name=".signup" />
         <activity android:name=".Login" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

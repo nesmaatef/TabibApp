@@ -4,26 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/whatsapp_image"
-    tools:context=".category_list">
+    tools:context=".request"
+    android:background="@drawable/whatsapp_image">
 
     <androidx.recyclerview.widget.RecyclerView
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_menu"
-        android:scrollbars="vertical">
-    </androidx.recyclerview.widget.RecyclerView>"
-
-
-
-
-
-
-
-
-
-
-
+        android:id="@+id/listbook"
+        android:background="@android:color/transparent"
+        android:scrollbars="vertical"/>
 
 </RelativeLayout>

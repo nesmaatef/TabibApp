@@ -15,12 +15,12 @@ import com.example.tabibapp.face.itemclicklistner;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class doctorviewholder extends RecyclerView.ViewHolder implements View.OnClickListener ,
-View.OnCreateContextMenuListener
+        View.OnCreateContextMenuListener
 
 
 {
-public TextView txtname, txtdesc, txtmap, txtprice;
-public CircleImageView imgdoc;
+    public TextView txtname, txtdesc, txtmap, txtprice;
+    public CircleImageView imgdoc;
     private itemclicklistner itemClickListener;
 
     public void setItemClickListener(itemclicklistner itemClickListener){
@@ -34,7 +34,7 @@ public CircleImageView imgdoc;
         txtdesc= (TextView) itemView.findViewById(R.id.txtdesc);
         txtmap= (TextView) itemView.findViewById(R.id.txtmap);
         txtprice= (TextView) itemView.findViewById(R.id.txtprice);
-         imgdoc = (CircleImageView) itemView.findViewById(R.id.doctor_image);
+        imgdoc = (CircleImageView) itemView.findViewById(R.id.doctor_image);
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
 
