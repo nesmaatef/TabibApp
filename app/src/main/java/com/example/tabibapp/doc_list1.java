@@ -1,5 +1,4 @@
 package com.example.tabibapp;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -98,8 +97,6 @@ public class doc_list1 extends AppCompatActivity {
             protected void populateViewHolder(doctorviewholder viewHolder, doctor model, int position) {
                 Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);
                 viewHolder.txtname.setText(model.getName());
-                viewHolder.txtprice.setText(model.getPrice());
-                viewHolder.txtmap.setText(model.getMap());
                 viewHolder.txtdesc.setText(model.getDesc());
                 final doctor clickitem =model;
 

@@ -44,58 +44,10 @@
                 app:met_singleLineEllipsis="true"
                 android:inputType="textMultiLine"
                 />
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:id="@+id/edtprice"
-                android:hint="Price"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                app:met_baseColor="@android:color/black"
-                app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                android:inputType="number"
-                />
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:id="@+id/edtmap"
-                android:hint="map"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                app:met_baseColor="@android:color/black"
-                app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                android:inputType="text"
-                />
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:id="@+id/edttimes"
-                android:hint="times"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                app:met_baseColor="@android:color/black"
-                app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                android:inputType="text"
-                />
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:id="@+id/edttimeswait"
-                android:hint="timeswait"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                app:met_baseColor="@android:color/black"
-                app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                android:inputType="text"
-                />
+
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"

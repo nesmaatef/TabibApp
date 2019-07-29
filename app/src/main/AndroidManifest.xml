@@ -12,16 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".request"></activity>
+        <activity android:name=".clinicprofile"></activity>
+        <activity android:name=".clinicslist" />
+        <activity android:name=".appointment" />
+
+        <activity android:name=".request" />
         <activity android:name=".book" />
         <activity android:name=".add_doctor" />
-        <activity android:name=".splashscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".splashscreen" />
         <activity
             android:name=".more"
             android:theme="@style/AppTheme1" />
@@ -34,7 +32,13 @@
         <activity android:name=".category_list" />
         <activity android:name=".signup" />
         <activity android:name=".Login" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

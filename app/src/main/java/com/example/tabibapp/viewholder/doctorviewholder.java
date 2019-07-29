@@ -3,6 +3,7 @@ package com.example.tabibapp.viewholder;
 
 import android.view.ContextMenu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,8 +20,9 @@ public class doctorviewholder extends RecyclerView.ViewHolder implements View.On
 
 
 {
-    public TextView txtname, txtdesc, txtmap, txtprice;
+    public TextView txtname, txtdesc;
     public CircleImageView imgdoc;
+    public ImageView fav;
     private itemclicklistner itemClickListener;
 
     public void setItemClickListener(itemclicklistner itemClickListener){
@@ -32,9 +34,8 @@ public class doctorviewholder extends RecyclerView.ViewHolder implements View.On
 
         txtname= (TextView) itemView.findViewById(R.id.txtname);
         txtdesc= (TextView) itemView.findViewById(R.id.txtdesc);
-        txtmap= (TextView) itemView.findViewById(R.id.txtmap);
-        txtprice= (TextView) itemView.findViewById(R.id.txtprice);
         imgdoc = (CircleImageView) itemView.findViewById(R.id.doctor_image);
+        fav = (ImageView) itemView.findViewById(R.id.fav);
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
 

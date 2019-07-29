@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tabibapp.DataBase.database;
 import com.example.tabibapp.Model.category;
 import com.example.tabibapp.Model.doctor;
 import com.example.tabibapp.Model.users;
@@ -69,6 +70,8 @@ public class doc_list extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageReference;
     Uri saveuri;
+    com.example.tabibapp.DataBase.database localdb;
+
 
     doctor newdoctor;
   //  EditText edtsearch;
@@ -83,6 +86,9 @@ MaterialSearchBar materialSearchBar;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doc_list);
+
+        localdb=new database(this);
+
 
         //firebase
         database=FirebaseDatabase.getInstance();
@@ -167,8 +173,6 @@ rootlayout=(RelativeLayout) findViewById(R.id.rootlayout);
             protected void populateViewHolder(doctorviewholder viewHolder, doctor model, int position) {
                 Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);
                 viewHolder.txtname.setText(model.getName());
-                viewHolder.txtprice.setText(model.getPrice());
-                viewHolder.txtmap.setText(model.getMap());
                 viewHolder.txtdesc.setText(model.getDesc());
                 final doctor clickitem =model;
 
@@ -217,17 +221,44 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         doctorviewholder.class,
         doctorlist.orderByChild("catid").equalTo(categoryid)) {
     @Override
-    protected void populateViewHolder(doctorviewholder viewHolder, doctor model, int position) {
+    protected void populateViewHolder(final doctorviewholder viewHolder, final doctor model, final int position) {
         Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);
 
     viewHolder.txtname.setText(model.getName());
 
 
-        viewHolder.txtprice.setText(model.getPrice());
-      //  common.currentprice.getPrice();
 
-        viewHolder.txtmap.setText(model.getMap());
         viewHolder.txtdesc.setText(model.getDesc());
+
+        //fav
+
+        if (localdb.isfavorite(adapter.getRef(position).getKey()))
+            viewHolder.fav.setImageResource(R.drawable.ic_favorite_black_24dp);
+
+        //click to change status
+        viewHolder.fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!localdb.isfavorite(adapter.getRef(position).getKey()))
+                {
+                    localdb.addtofavorite(adapter.getRef(position).getKey());
+                    viewHolder.fav.setImageResource(R.drawable.ic_favorite_black_24dp);
+                    Toast.makeText(doc_list.this, ""+model.getName()+"was added to favorites", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    localdb.removefromfavorite(adapter.getRef(position).getKey());
+                    viewHolder.fav.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    Toast.makeText(doc_list.this, ""+model.getName()+"was removed from favorites", Toast.LENGTH_SHORT).show();
+
+
+
+                }
+            }
+        });
+
+
+
+
         final doctor clickitem =model;
 
 
@@ -279,10 +310,6 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         View add_menu_layout = inflater.inflate(R.layout.add_new_doc, null);
         edtname=add_menu_layout.findViewById(R.id.edtname);
         edtdesc=add_menu_layout.findViewById(R.id.edtdesc);
-        edtmap=add_menu_layout.findViewById(R.id.edtmap);
-        edtprice=add_menu_layout.findViewById(R.id.edtprice);
-        edttimes=add_menu_layout.findViewById(R.id.edttimes);
-        edttimeswait=add_menu_layout.findViewById(R.id.edttimeswait);
 
         btnselect=add_menu_layout.findViewById(R.id.btnselect);
         btnupload=add_menu_layout.findViewById(R.id.btnupload);
@@ -350,10 +377,6 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
 newdoctor=new doctor();
                                newdoctor.setName(edtname.getText().toString());
                                 newdoctor.setDesc(edtdesc.getText().toString());
-                                newdoctor.setMap(edtmap.getText().toString());
-                                newdoctor.setPrice(edtprice.getText().toString());
-                                newdoctor.setTimes(edttimes.getText().toString());
-                                newdoctor.setTimeswait(edttimeswait.getText().toString());
                                 newdoctor.setImage(uri.toString());
                                 newdoctor.setCatid(categoryid);
                             }
@@ -422,10 +445,6 @@ newdoctor=new doctor();
         View add_menu_layout = inflater.inflate(R.layout.add_new_doc, null);
         edtname=add_menu_layout.findViewById(R.id.edtname);
         edtdesc=add_menu_layout.findViewById(R.id.edtdesc);
-        edtmap=add_menu_layout.findViewById(R.id.edtmap);
-        edtprice=add_menu_layout.findViewById(R.id.edtprice);
-        edttimes=add_menu_layout.findViewById(R.id.edttimes);
-        edttimeswait=add_menu_layout.findViewById(R.id.edttimeswait);
 
         btnselect=add_menu_layout.findViewById(R.id.btnselect);
         btnupload=add_menu_layout.findViewById(R.id.btnupload);
@@ -433,10 +452,6 @@ newdoctor=new doctor();
         //set default value
         edtname.setText(item.getName());
         edtdesc.setText(item.getDesc());
-        edtprice.setText(item.getPrice());
-        edttimeswait.setText(item.getTimeswait());
-        edttimes.setText(item.getTimes());
-        edtmap.setText(item.getMap());
 
 
 
@@ -467,11 +482,7 @@ newdoctor=new doctor();
 
                 //update information
                 item.setName(edtname.getText().toString());
-                item.setPrice(edtprice.getText().toString());
                 item.setDesc(edtdesc.getText().toString());
-                item.setTimeswait(edttimeswait.getText().toString());
-                item.setMap(edtmap.getText().toString());
-                item.setTimes(edttimes.getText().toString());
 
 
 

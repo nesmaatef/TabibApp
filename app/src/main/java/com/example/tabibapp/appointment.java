@@ -20,7 +20,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static com.example.tabibapp.common.common.currentname;
 
 public class appointment extends AppCompatActivity {
 
@@ -33,9 +32,9 @@ public class appointment extends AppCompatActivity {
     doctor currentdoctor ;
 
 
-String doctorid="";
-    String current1="";
-    String current2="";
+String clinicid="";
+    String docname="";
+    String clinicprice="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +45,7 @@ String doctorid="";
     //    appointment2=database2.getReference("appointmenttomorrow");
 
         //try
-        appointment3=database3.getReference("doctor");
+        appointment3=database3.getReference("clinics");
 
 
 
@@ -56,27 +55,28 @@ String doctorid="";
         recycler1.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recycler1.setLayoutManager(layoutManager);
+
 Intent intent=getIntent();
-    current1 = intent.getStringExtra("current1");
-    current2 = intent.getStringExtra("current2");
+        docname = intent.getStringExtra("namedoctor");
+        clinicprice = intent.getStringExtra("clinicprice");
 
-    doctorid = intent.getStringExtra("DoctorId");
+    clinicid = intent.getStringExtra("clinicid");
 
 
-    if (!doctorid.isEmpty())
+    if (!clinicid.isEmpty())
 
-        loadappointlist3(doctorid);
+        loadappointlist3(clinicid);
 
 
 
 
 
     }
-    private void loadappointlist3(final String doctorid) {
+    private void loadappointlist3(final String clinicid) {
         adapter3 =new FirebaseRecyclerAdapter<appoint,appointmentviewholder>(appoint.class,
                 R.layout.appoint_item,
                 appointmentviewholder.class,
-                appointment3.child(doctorid).child("appointment")) {
+                appointment3.child(clinicid).child("appointment")) {
             @Override
             protected void populateViewHolder(final appointmentviewholder viewholder, final appoint model, int i) {
 
@@ -96,10 +96,10 @@ Intent intent=getIntent();
 
                         //));
                         Intent docdetails = new Intent(appointment.this,com.example.tabibapp.book.class);
-                        docdetails.putExtra("docname",current1);
-                        docdetails.putExtra("docprice",current2);
+                        docdetails.putExtra("name",docname);
+                        docdetails.putExtra("price",clinicprice);
                         docdetails.putExtra("docdate",model.getFrom());
-                        docdetails.putExtra("docid",doctorid);
+                        docdetails.putExtra("idclinic",clinicid);
 
 
 
