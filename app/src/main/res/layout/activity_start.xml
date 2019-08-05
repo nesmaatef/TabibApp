@@ -4,13 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".splashscreen">
+    tools:context=".StartActivity"
+    android:background="@drawable/group_8"
+    >
 
-    <com.felipecsl.gifimageview.library.GifImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/gifimageview"
-        android:scaleType="fitCenter"/>
+
+
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/group_9"
+            android:layout_centerInParent="true"/>
 
 
 

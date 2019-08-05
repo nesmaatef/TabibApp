@@ -5,30 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#ADD8E6">
+    android:background="@drawable/group_8"
+    android:id="@+id/realtive">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="20dp"
-        >
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
 
-<ImageView
-    android:layout_width="180dp"
-    android:layout_height="180dp"
-    android:background="@drawable/logo"
-    android:gravity="center"
-    android:layout_marginLeft="90dp"
-    />
-    </LinearLayout>
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/group_9" />
+    </RelativeLayout>
 
 
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_marginTop="300dp"
         android:orientation="vertical"
         android:weightSum="2"
@@ -36,28 +33,29 @@
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btnpatient"
-            android:layout_width="300dp"
+            android:layout_width="271dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_margin="8dp"
-            android:layout_weight="1"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/group_10"
             android:text="مريض"
-            android:textColor="@color/doctor"
-            android:layout_gravity="right"
+            android:textColor="#0e6e92"
             android:textSize="30sp"
-            app:cornerRadius="10dp"
+            app:cornerRadius="30dp"
             app:fButtonColor="@android:color/white"
-            app:shadowColor="@color/doctor"
+            app:shadowColor="#0e6e92"
             app:shadowEnabled="true"
             app:shadowHeight="5dp"
-            tools:fontFamily="@font/abril_fatface"
+
             />
 
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btndoctor"
-            android:layout_width="300dp"
+            android:layout_width="262dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_marginLeft="8dp"
@@ -68,8 +66,8 @@
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="normal|bold|italic"
-            app:cornerRadius="10dp"
-            app:fButtonColor="#283139"
+            app:cornerRadius="30dp"
+            app:fButtonColor="#0e6e92"
             app:shadowColor="@android:color/white"
             app:shadowEnabled="true"
             app:shadowHeight="5dp"
@@ -77,6 +75,17 @@
 
 
     </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_person_black_24dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/imgadmin"
+        />
 
 
 

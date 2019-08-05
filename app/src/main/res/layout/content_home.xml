@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".home"
+    tools:showIn="@layout/app_bar_home"
+    android:background="@drawable/group_8"
+ >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="اختر التخصص المناسب"
+        android:textSize="23sp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/txtview"
+        android:layout_marginTop="20dp"
+        android:textColor="#6ACEBE"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="-------------------------------"
+        android:layout_below="@id/txtview"
+        android:layout_alignParentRight="true"
+        android:fontFamily="@font/cairo_extralight"
+        android:id="@+id/txtview1"
+
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_menu"
+        android:scrollbars="vertical"
+        android:layout_below="@id/txtview1">
+    </androidx.recyclerview.widget.RecyclerView>"
+
+
+</RelativeLayout>

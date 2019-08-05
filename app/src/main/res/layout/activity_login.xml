@@ -5,31 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
-    android:background="#ADD8E6"
+    android:background="@drawable/group_8"
     android:id="@+id/relative">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linear"
-        android:gravity="center_horizontal"
-
-        >
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
 
         <ImageView
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:background="@drawable/logo"
-            android:gravity="center"
-            />
-    </LinearLayout>
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/group_9" />
+    </RelativeLayout>
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:id="@+id/txtphone">
 
 
 
@@ -39,13 +36,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/edittext"
-            android:hint="User Phone"
+            android:hint="رقم التليفون"
+            android:drawableTint="@color/doctor"
             android:gravity="center"
             android:inputType="number"
-            android:drawableLeft="@drawable/ic_account_box_black_24dp"
-            android:drawablePadding="70dp"
+            android:drawableEnd="@drawable/ic_profile"
+            android:drawablePadding="10dp"
             android:shadowColor="@android:color/black"
-
             />
 
     </LinearLayout>
@@ -55,57 +52,52 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:orientation="vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-android:layout_marginTop="300dp"
-        android:layout_alignParentBottom="true"
-
+android:layout_below="@+id/txtphone"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"
 
         >
 
-
-
-
         <info.hoang8f.widget.FButton
             android:id="@+id/btnlogin"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="75dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+android:layout_gravity="center"
             android:background="@android:color/white"
             android:text="تسجيل الدخول"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="normal|bold|italic"
-            app:cornerRadius="25sp"
-            app:fButtonColor="#283139"
+            app:cornerRadius="40sp"
+            app:fButtonColor="#0e6e92"
             app:shadowColor="@android:color/black"
             app:shadowEnabled="true"
             app:shadowHeight="2dp"
-            tools:fontFamily="@font/abril_fatface" />
+            tools:fontFamily="@font/cairo_extralight" />
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="13dp"
             android:text="ليس لديك حساب؟"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:layout_marginLeft="170dp"
-            android:textStyle="bold"/>
+            android:layout_marginLeft="180dp"
+            android:textStyle="bold"
+            tools:fontFamily="@font/cairo_extralight"/>
 
         <TextView
             android:id="@+id/txtlogin"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="110dp"
             android:layout_marginTop="-20dp"
             android:clickable="true"
             android:text="سجل الان"
-            android:textColor="@android:color/black"
+            android:textColor="#0e6e92"
             android:textSize="15sp"
             android:textStyle="bold"
-            />
+            tools:fontFamily="@font/cairo_extralight"/>
 
 
     </LinearLayout>

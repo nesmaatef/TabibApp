@@ -15,7 +15,7 @@ public class clinicviewholder extends RecyclerView.ViewHolder implements View.On
 
     public TextView txtmap;
     private itemclicklistner itemClickListener;
-    public void setItemClickListener(itemclicklistner itemClickListener){
+    public  void setItemClickListener(itemclicklistner itemClickListener){
         this.itemClickListener=itemClickListener;
     }
 

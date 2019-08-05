@@ -1,187 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardBackgroundColor="#F5F5F5"
+android:background="@drawable/group_8"
     tools:context=".clinicprofile">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear1">
+    <RelativeLayout
+        android:id="@+id/realtive2"
+        android:layout_width="189dp"
+        android:layout_height="115dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/clinicimg"/>
-    </LinearLayout>
+            android:layout_width="220dp"
+            android:layout_height="157dp"
+            android:src="@drawable/group_9" />
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:orientation="horizontal"
-        android:weightSum="2"
+        android:layout_below="@id/realtive2"
+        android:id="@+id/line2"
 
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:hint="doc name"
-            android:textColor="@android:color/black"
-            android:id="@+id/doc_name"
-            android:textStyle="bold"
-            android:layout_weight="1"
-            android:gravity="right"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/img_clinic"
+            android:src="@drawable/background"
 
             />
-
-        <TextView
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:hint="Clinic name"
-            android:text="عياده الدكتور"
-            android:textColor="@android:color/black"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:layout_weight="1"
-            />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Clinic name"
-            android:text="map"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:gravity="right"
-android:layout_weight="1"
-            android:id="@+id/map"
-            />
-
-        <TextView
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:hint="Clinic name"
-            android:text="العنوان"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
-
-
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="310dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Clinic name"
-            android:text="price"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:gravity="right"
-            android:layout_weight="1"
-            android:id="@+id/price"
-            />
-
-        <TextView
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:hint="Clinic name"
-            android:text="سعر الكشف"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
-
-
-
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="380dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Clinic name"
-            android:text="times"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:gravity="right"
-            android:layout_weight="1"
-            android:id="@+id/times"
-            />
-
-        <TextView
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:hint="Clinic name"
-            android:text="مده الانتظار"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
-
-
-
 
 
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-    <info.hoang8f.widget.FButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:hint="مواعيد العياده المتاحه"
-        android:textColor="@android:color/white"
-        android:textAlignment="center"
-        android:id="@+id/gotimes"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/line2"
+        android:background="@android:color/white"
+        android:layout_marginTop="15dp"
+        android:id="@+id/line4"
+        android:layout_centerHorizontal="true"
 
-        />
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="22sp"
+            android:text="اسم العياده"
+            android:textColor="#1283B3"
+            android:textAlignment="center"
+            android:id="@+id/clinic_name"
+            android:fontFamily="@font/cairo_extralight"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+android:layout_alignRight="@+id/clinic_name"
+            android:layout_marginRight="-50dp"
+            android:text="عياده"
+            android:textColor="#1283B3"
+            android:textAlignment="center"
+            android:fontFamily="@font/cairo_extralight"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="عنوان العياده"
+            android:textAlignment="center"
+            android:fontFamily="@font/cairo_extralight"
+            android:id="@+id/clinic_map"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_below="@id/clinic_map"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:drawableRight="@drawable/ic_monetization_on_black_24dp"
+            android:text="سعر الكشف"
+            android:textAlignment="center"
+            android:fontFamily="@font/cairo_extralight"
+            android:id="@+id/txt5"
+
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/clinic_map"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_centerHorizontal="true"
+            android:text="السعر"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:id="@+id/clinic_price"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/txt5"
+            android:layout_alignParentRight="true"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_marginRight="30dp"
+            android:text="مده الانتظار"
+            android:drawableRight="@drawable/ic_access_time_black_24dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/cairo_extralight"
+            android:id="@+id/txt7"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/clinic_price"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_centerHorizontal="true"
+            android:text="المده"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:id="@+id/clinic_times"
+
+            />
+
+
+
+
+
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/goclinics1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/cairo_extralight"
+            android:text="اختر المعاد المناسب"
+            android:textAlignment="center"
+            android:textColor="#1283B3"
+            android:textSize="20sp"
+            android:textStyle="bold"
 
-</androidx.cardview.widget.CardView>
+
+            />
+
+        <TextView
+            android:id="@+id/goappoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/cairo_extralight"
+            android:text="اضغط هنا"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+
+
+            android:textStyle="bold" />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

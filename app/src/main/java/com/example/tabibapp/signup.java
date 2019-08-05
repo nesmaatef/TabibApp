@@ -61,10 +61,9 @@ public class signup extends AppCompatActivity {
 							users user = new users();
 							table_user.child(edtphone.getText().toString()).setValue(user);
 							Toast.makeText(signup.this, "signup successful", Toast.LENGTH_SHORT).show();
-							Intent homeintent = new Intent(signup.this, cat_list1.class);
+							Intent homeintent = new Intent(signup.this, cat_list_patient.class);
 							common.currentuser = user;
 							startActivity(homeintent);
-							finish();
 							finish();
 						}
 

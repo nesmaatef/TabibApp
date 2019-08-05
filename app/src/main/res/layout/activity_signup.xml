@@ -4,76 +4,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
-    android:background="#ADD8E6">
+    tools:context=".signup"
+    android:background="@drawable/group_8"
+    android:id="@+id/relative">
 
-    <LinearLayout
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="110dp">
+    <RelativeLayout
+        android:layout_width="230dp"
+        android:layout_height="191dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:background="@drawable/logo"
-            android:gravity="center"
-            android:layout_marginLeft="5dp"/>
-    </LinearLayout>
+            android:layout_width="184dp"
+            android:layout_height="141dp"
+            android:src="@drawable/group_9"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/txtphone">
+
+
+
+
+        <EditText
+            android:id="@+id/edtphone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext"
+            android:hint="رقم التليفون"
+            android:drawableTint="@color/doctor"
+            android:gravity="center"
+            android:inputType="number"
+            android:drawableEnd="@drawable/ic_profile"
+            android:drawablePadding="10dp"
+            android:shadowColor="@android:color/black"
+
+            />
+
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:orientation="vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="300dp"
+        android:layout_below="@+id/txtphone"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"
 
         >
 
-        <EditText
-            android:id="@+id/edtphone"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:padding="5dip"
-            android:background="@drawable/edittext"
-            android:layout_marginLeft="47dp"
-            android:layout_marginTop="0dp"
-            android:hint="User Phone"
-            android:inputType="number"
-            android:drawableLeft="@drawable/ic_account_box_black_24dp"
-            android:paddingLeft="10dp"
-            android:drawablePadding="70dp"
-            android:shadowColor="@android:color/black"
-
-            />
-
-
         <info.hoang8f.widget.FButton
             android:id="@+id/btnsignup"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="75dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="@android:color/white"
             android:text="انشاء حساب"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="normal|bold|italic"
-            app:cornerRadius="25sp"
-            app:fButtonColor="#283139"
+            app:cornerRadius="40sp"
+            app:fButtonColor="#0e6e92"
             app:shadowColor="@android:color/black"
             app:shadowEnabled="true"
             app:shadowHeight="2dp"
-            tools:fontFamily="@font/abril_fatface" />
+            tools:fontFamily="@font/cairo_extralight" />
 
+        <TextView
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="لديك حساب بالفعل"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:layout_marginLeft="170dp"
+            android:textStyle="bold"
+            tools:fontFamily="@font/cairo_extralight"/>
+
+        <TextView
+            android:id="@+id/txtlogin"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="-33dp"
+            android:clickable="true"
+            android:text="تسجيل الدخول"
+            android:textColor="#0e6e92"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:fontFamily="@font/cairo_extralight"/>
 
 
     </LinearLayout>
-
 
 
 

@@ -87,7 +87,7 @@ Intent intent=getIntent();
                 viewholder.setItemClickListener(new itemclicklistner() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        // Toast.makeText(doc_list.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(doc_list_admin.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
 
                       //  new database(getBaseContext()).addtobook(new reserve(
                         //        doctorid, current1,current2,

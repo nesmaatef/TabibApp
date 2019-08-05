@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".hospital_profile">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/linear2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/background"
+                android:id="@+id/imgprofile"/>
+        </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear2"
+        android:weightSum="2"
+        android:layout_marginTop="20dp"
+        android:id="@+id/linear3"
+
+        >
+        <TextView
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_name_hos"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:hint="مركز"
+            android:textColor="@android:color/black"
+            android:textSize="23sp"
+            android:layout_weight="2"
+            android:maxLines="4"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:id="@+id/txt2"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:hint="مركز"
+            android:textColor="@android:color/black"
+            android:textSize="23sp"
+            android:layout_weight="1"/>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear3"
+        android:weightSum="2"
+        android:layout_marginTop="20dp"
+        android:id="@+id/linear4"
+
+        >
+        <TextView
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_price_hos"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:hint="مركز"
+            android:textColor="@android:color/black"
+            android:textSize="23sp"
+            android:layout_weight="2"
+            android:maxLines="4"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:id="@+id/txt3"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:hint="السعر"
+            android:textColor="@android:color/black"
+            android:textSize="23sp"
+            android:layout_weight="1"/>
+
+
+
+
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:layout_marginTop="30dp"
+    android:layout_below="@+id/linear4"
+    android:layout_alignParentRight="true"
+    android:weightSum="3">
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="right"
+        android:text="العنوان"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="مده الانتظار"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="وصف المركز"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/linear4"
+        android:layout_alignParentLeft="true"
+        android:weightSum="3">
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:text="العنوان"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:maxLines="4"
+            android:id="@+id/addrees"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="مده الانتظار"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/times"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="وصف المركز"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:maxLines="4"
+            android:id="@+id/desc_hos"/>
+    </LinearLayout>
+
+
+
+    <info.hoang8f.widget.FButton
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:text="اظهر الدكاتره المتاحه للحجز"
+    android:textColor="@android:color/white"
+    android:textSize="25sp"
+        android:id="@+id/fbhospital"
+    />
+
+
+
+
+
+</RelativeLayout>
+

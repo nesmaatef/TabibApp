@@ -1,16 +1,16 @@
 package com.example.tabibapp.Model;
 
 public class category {
-  // private String name;
+   private String name;
   private String Image;
 
-  // public String getName() {
-  //    return name;
-  //}
+   public String getName() {
+      return name;
+  }
 
-  // public void setName(String name) {
-  //   this.name = name;
-  //}
+   public void setName(String name) {
+     this.name = name;
+  }
 
   public String getImage() {
     return Image;
@@ -20,8 +20,8 @@ public class category {
     this.Image = image;
   }
 
-  public category(String image) {
-    //this.name = name;
+  public category(String image, String name) {
+    this.name = name;
     Image = image;
   }
 

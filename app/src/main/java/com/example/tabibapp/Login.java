@@ -68,21 +68,23 @@ public class Login extends AppCompatActivity {
                             user.setPhone(edtphone.getText().toString());  //set phone
 
                             if (Boolean.parseBoolean(user.getIsadmin())){
-                                Intent homeintent = new Intent(Login.this, category_list.class);
+                                Intent homeintent = new Intent(Login.this, home.class);
                                 common.currentuser = user;
                                 startActivity(homeintent);
                                 finish();
                                 Toast.makeText(Login.this, "Hello Admin", Toast.LENGTH_SHORT).show();}
+
                             else if (Boolean.parseBoolean(user.getIsstaff())){
-                                // Intent homeintent = new Intent(Login.this, category_list.class);
-                                //common.currentuser = user;
-                                //startActivity(homeintent);
-                                //finish();
+                                Intent docintent = new Intent(Login.this, doctor_details.class);
+                                docintent.putExtra("doctorid1", edtphone.getText().toString());
+                                common.currentuser = user;
+                                startActivity(docintent);
+                               finish();
                                 Toast.makeText(Login.this, "Hello Doctor", Toast.LENGTH_SHORT).show();
 
                             }
                             else {
-                                Intent homeintent = new Intent(Login.this, cat_list1.class);
+                                Intent homeintent = new Intent(Login.this, home.class);
                                 common.currentuser = user;
                                 startActivity(homeintent);
                                 finish();

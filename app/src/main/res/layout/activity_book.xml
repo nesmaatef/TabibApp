@@ -6,47 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".book"
     android:id="@+id/root"
-    android:background="@drawable/whatsapp_image"
+    android:background="@drawable/group_8"
 
     android:padding="16dp">
+
+    <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_width="218dp"
+        android:layout_height="131dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="184dp"
+            android:layout_height="141dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/group_9" />
+    </RelativeLayout>
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/doctor">
+        android:background="#3089A1"
+        android:layout_below="@id/relative1"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true">
 
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/edtdocname"
-    android:textColor="@android:color/white"/>
+    android:textColor="@android:color/white"
+    android:layout_margin="10dp"
+    android:fontFamily="@font/cairo_extralight"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edtdocprice"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/cairo_extralight"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edtdocdate"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/cairo_extralight"/>
 
 
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <info.hoang8f.widget.FButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        app:backgroundTint="@android:color/white"
-        android:layout_alignParentRight="true"
+        android:text="احجز الان"
+        android:textSize="25sp"
+        android:fontFamily="@font/cairo_extralight"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bookdoctor"
         android:layout_alignParentBottom="true"
 
 
-        app:srcCompat="@drawable/ic_library_books_black_24dp" />
+         />
 
 
 

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
 
@@ -12,7 +12,7 @@
 
     </style>
 
-    <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme1" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/doctor_item</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
@@ -29,5 +29,22 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="RatingDisplayStyle" parent="@style/Widget.AppCompat.ButtonBar.AlertDialog">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/RatindDialogButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/RatindDialogButtonStyle</item>
+    </style>
+
+    <style name="RatindDialogButtonStyle" parent="@style/Widget.AppCompat.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="RatingDialogFadeAnim" parent="@style/Widget.AppCompat.ButtonBar.AlertDialog">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
 
 </resources>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/whatsapp_image"
+    android:background="@drawable/group_8"
     android:id="@+id/root1"
     tools:context=".clinicslist">
 
@@ -18,8 +18,9 @@
         android:textSize="22sp"
         android:id="@+id/txtdesc"
         android:textColor="@android:color/black"
-        android:hint="اختر العياده المناسبه"
+        android:hint="عنواين العيادات المتاحه"
         android:textColorHint="@android:color/white"
+        android:fontFamily="@font/cairo_extralight"
         />
     <androidx.recyclerview.widget.RecyclerView
 

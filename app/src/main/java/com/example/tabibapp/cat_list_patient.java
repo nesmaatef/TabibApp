@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.category;
-import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.menuviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -22,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-public class cat_list1 extends AppCompatActivity {
+public class cat_list_patient extends AppCompatActivity {
 
     FirebaseDatabase database ;
     DatabaseReference category ;
@@ -64,7 +62,7 @@ public class cat_list1 extends AppCompatActivity {
                 category ) {
             @Override
             protected void populateViewHolder(menuviewholder viewHolder, com.example.tabibapp.Model.category model, int position) {
-                //  viewHolder.txtmenuname.setText((model.getName()));
+                  viewHolder.txtmenuname.setText((model.getName()));
                 Picasso.get().load(model.getImage())
                         .into(viewHolder.imageView);
 
@@ -73,8 +71,8 @@ public class cat_list1 extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
 
-                        // Toast.makeText(category_list.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
-                        Intent doclist = new Intent(cat_list1.this, doc_list1.class);
+                        // Toast.makeText(category_list_admin.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
+                        Intent doclist = new Intent(cat_list_patient.this, doc_list_patient.class);
 
                         //because categoryid is key , so we just get key of this
 
@@ -96,7 +94,7 @@ public class cat_list1 extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() ==R.id.more){
-            Intent homeintent = new Intent(cat_list1.this, more.class);
+            Intent homeintent = new Intent(cat_list_patient.this, more.class);
             startActivity(homeintent);
             Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();}
 

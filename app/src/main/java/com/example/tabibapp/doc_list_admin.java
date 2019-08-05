@@ -14,10 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,8 +25,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.DataBase.database;
-import com.example.tabibapp.Model.category;
 import com.example.tabibapp.Model.doctor;
+import com.example.tabibapp.Model.fav;
 import com.example.tabibapp.Model.users;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
@@ -41,7 +39,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -55,32 +52,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class doc_list extends AppCompatActivity {
+public class doc_list_admin extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
     DatabaseReference doctorlist;
+    DatabaseReference adduser;
+
     String categoryid="";
     RelativeLayout rootlayout;
 
-    MaterialEditText edtname, edtdesc, edtprice, edtmap, edttimes, edttimeswait;
+    MaterialEditText edtname, edtdesc, edtphone, edtmap, edttimes, edttimeswait;
     Button btnselect, btnupload;
 
     FirebaseStorage storage;
     StorageReference storageReference;
+    ImageView imgadmin,fav;
     Uri saveuri;
     com.example.tabibapp.DataBase.database localdb;
+    String user="";
 
 
     doctor newdoctor;
+    users newuser;
   //  EditText edtsearch;
    // ImageButton imgsearch;
-MaterialSearchBar materialSearchBar;
-    List<String> suggestList =new ArrayList<>();
+
 
     FirebaseRecyclerAdapter<doctor, doctorviewholder> adapter;
-    FirebaseRecyclerAdapter<doctor, doctorviewholder> searchadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,14 +93,19 @@ MaterialSearchBar materialSearchBar;
         //firebase
         database=FirebaseDatabase.getInstance();
         doctorlist=database.getReference("doctor");
+        adduser =database.getReference("users");
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
 rootlayout=(RelativeLayout) findViewById(R.id.rootlayout);
-
+imgadmin=(ImageView) findViewById(R.id.imgadmin);
+        fav=(ImageView) findViewById(R.id.fav);
         recyclerView=(RecyclerView) findViewById(R.id.recycler_doc);
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+         user =common.currentuser.toString();
+
 
         //getintent
         if (getIntent()!=null)
@@ -108,110 +113,16 @@ rootlayout=(RelativeLayout) findViewById(R.id.rootlayout);
         if (!categoryid.isEmpty() && categoryid!=null) {
             loaddoctorlist(categoryid);
         }
-//searchbar
-        materialSearchBar=(MaterialSearchBar) findViewById(R.id.searchBar);
-        materialSearchBar.setHint("search your doctor here");
-        loadsuggest();
-        materialSearchBar.setLastSuggestions(suggestList);
-        materialSearchBar.setCardViewElevation(10);
-        materialSearchBar.addTextChangeListener(new TextWatcher() {
+        imgadmin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                List<String> suggest =new ArrayList<String>();
-                for (String search:suggestList){
-                    if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
-                        suggest.add(search);
-                }
-                materialSearchBar.setLastSuggestions(suggest);
-                
-                
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        
-        materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
-            @Override
-            public void onSearchStateChanged(boolean enabled) {
-                if (!enabled)
-                    recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onSearchConfirmed(CharSequence text) {
-                startSearch(text);
-
-            }
-
-            @Override
-            public void onButtonClicked(int buttonCode) {
-
+            public void onClick(View v) {
+                showdialoge();
             }
         });
 
 
-
-       
-
-
     }
 
-    private void startSearch(CharSequence text) {
-        searchadapter =new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
-                R.layout.doc_item,
-                doctorviewholder.class,
-                doctorlist.orderByChild("name").equalTo(text.toString()) ) {
-            @Override
-            protected void populateViewHolder(doctorviewholder viewHolder, doctor model, int position) {
-                Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);
-                viewHolder.txtname.setText(model.getName());
-                viewHolder.txtdesc.setText(model.getDesc());
-                final doctor clickitem =model;
-
-                viewHolder.setItemClickListener(new itemclicklistner() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        // Toast.makeText(doc_list.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
-                        Intent docdetails = new Intent(doc_list.this, doc_details.class);
-
-                        docdetails.putExtra("DoctorId", adapter.getRef(position).getKey());
-                        startActivity(docdetails);
-
-                    }
-                });
-
-
-            }
-        };
-        recyclerView.setAdapter( searchadapter);
-    }
-
-    private void loadsuggest() {
-        doctorlist.orderByChild("name").addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            for (DataSnapshot postsnapshot:dataSnapshot.getChildren()){
-
-                doctor item =postsnapshot.getValue(doctor.class);
-                suggestList.add(item.getName());
-            }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-        }
-    });
-
-    }
 
 
     private void loaddoctorlist(String categoryid) {
@@ -230,32 +141,6 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
 
         viewHolder.txtdesc.setText(model.getDesc());
 
-        //fav
-
-        if (localdb.isfavorite(adapter.getRef(position).getKey()))
-            viewHolder.fav.setImageResource(R.drawable.ic_favorite_black_24dp);
-
-        //click to change status
-        viewHolder.fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!localdb.isfavorite(adapter.getRef(position).getKey()))
-                {
-                    localdb.addtofavorite(adapter.getRef(position).getKey());
-                    viewHolder.fav.setImageResource(R.drawable.ic_favorite_black_24dp);
-                    Toast.makeText(doc_list.this, ""+model.getName()+"was added to favorites", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    localdb.removefromfavorite(adapter.getRef(position).getKey());
-                    viewHolder.fav.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                    Toast.makeText(doc_list.this, ""+model.getName()+"was removed from favorites", Toast.LENGTH_SHORT).show();
-
-
-
-                }
-            }
-        });
-
 
 
 
@@ -265,11 +150,11 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         viewHolder.setItemClickListener(new itemclicklistner() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-               // Toast.makeText(doc_list.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(doc_list_admin.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
 
 
 
-                Intent docdetails = new Intent(doc_list.this, doc_details.class);
+                Intent docdetails = new Intent(doc_list_admin.this, doc_details.class);
                 docdetails.putExtra("DoctorId", adapter.getRef(position).getKey());
                 startActivity(docdetails);
 
@@ -302,7 +187,7 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
 
     ///upload new doctor /delete/ update
     private void showdialoge() {
-        AlertDialog.Builder alertdialog= new AlertDialog.Builder(doc_list.this);
+        AlertDialog.Builder alertdialog= new AlertDialog.Builder(doc_list_admin.this);
       //  alertdialog.setTitle("Add new doctor");
        // alertdialog.setMessage("please fill full information");
 
@@ -310,6 +195,7 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         View add_menu_layout = inflater.inflate(R.layout.add_new_doc, null);
         edtname=add_menu_layout.findViewById(R.id.edtname);
         edtdesc=add_menu_layout.findViewById(R.id.edtdesc);
+        edtphone=add_menu_layout.findViewById(R.id.edtphone);
 
         btnselect=add_menu_layout.findViewById(R.id.btnselect);
         btnupload=add_menu_layout.findViewById(R.id.btnupload);
@@ -341,7 +227,11 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
 
                 if (newdoctor !=null)
                 {
-                    doctorlist.push().setValue(newdoctor);
+              //     doctorlist.push().setValue(newdoctor);
+                   doctorlist.child(edtphone.getText().toString()).setValue(newdoctor);
+                   adduser.child(edtphone.getText().toString()).setValue(newuser);
+                    //doctorlist.child(edtphone.getText().toString()).setValue(common.currentuser.toString());
+
                     Snackbar.make(rootlayout, "New category" +newdoctor.getName()+ "was added",Snackbar.LENGTH_SHORT).show();
                 }
 
@@ -370,15 +260,21 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         mdialog.dismiss();
-                        Toast.makeText(doc_list.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(doc_list_admin.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
                         imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
 newdoctor=new doctor();
+newuser=new users();
                                newdoctor.setName(edtname.getText().toString());
                                 newdoctor.setDesc(edtdesc.getText().toString());
                                 newdoctor.setImage(uri.toString());
                                 newdoctor.setCatid(categoryid);
+                                newuser.setIsstaff("true");
+
+
+
+
                             }
                         });
                     }
@@ -386,7 +282,7 @@ newdoctor=new doctor();
             @Override
             public void onFailure(@NonNull Exception e) {
                 mdialog.dismiss();
-                Toast.makeText(doc_list.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(doc_list_admin.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -418,11 +314,7 @@ newdoctor=new doctor();
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if (item.getTitle().equals(common.UPDATE)){
-
-            showupdatedialogfood(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
-        }
-        else if (item.getTitle().equals(common.DELETE)){
+        if (item.getTitle().equals(common.DELETE)){
 
             deletefood(adapter.getRef(item.getOrder()).getKey());
 
@@ -436,70 +328,6 @@ newdoctor=new doctor();
 
     }
 
-    private void showupdatedialogfood(final String key, final doctor item) {
-        AlertDialog.Builder alertdialog= new AlertDialog.Builder(doc_list.this);
-      //  alertdialog.setTitle("Update new food");
-       // alertdialog.setMessage("please fill full information");
-
-        LayoutInflater inflater =this.getLayoutInflater();
-        View add_menu_layout = inflater.inflate(R.layout.add_new_doc, null);
-        edtname=add_menu_layout.findViewById(R.id.edtname);
-        edtdesc=add_menu_layout.findViewById(R.id.edtdesc);
-
-        btnselect=add_menu_layout.findViewById(R.id.btnselect);
-        btnupload=add_menu_layout.findViewById(R.id.btnupload);
-
-        //set default value
-        edtname.setText(item.getName());
-        edtdesc.setText(item.getDesc());
-
-
-
-
-        //event for button
-        btnselect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseimage();
-
-            }
-        });
-
-        btnupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeimage(item);            }
-        });
-
-        alertdialog.setView(add_menu_layout);
-      //  alertdialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
-
-        //setbutton
-        alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-
-                //update information
-                item.setName(edtname.getText().toString());
-                item.setDesc(edtdesc.getText().toString());
-
-
-
-
-                doctorlist.child(key).setValue(item);
-                Snackbar.make(rootlayout, " doctor" +item.getName()+ "was updated",Snackbar.LENGTH_SHORT).show();
-
-            }
-        });
-        alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        alertdialog.show();
-    }
 
     private void changeimage(final doctor item) {
         final ProgressDialog mdialog = new ProgressDialog(this);
@@ -513,7 +341,7 @@ newdoctor=new doctor();
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         mdialog.dismiss();
-                        Toast.makeText(doc_list.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(doc_list_admin.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
                         imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
@@ -526,7 +354,7 @@ newdoctor=new doctor();
             @Override
             public void onFailure(@NonNull Exception e) {
                 mdialog.dismiss();
-                Toast.makeText(doc_list.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(doc_list_admin.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -537,6 +365,8 @@ newdoctor=new doctor();
             }
         });
     }
+
+
 
 
 

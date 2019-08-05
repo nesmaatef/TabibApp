@@ -24,9 +24,8 @@ import info.hoang8f.widget.FButton;
 
 public class clinicprofile extends AppCompatActivity {
 
-    TextView txtname,txtmap,txtprice,txtwait;
+    TextView txtname,txtmap,txtprice,txtwait,button;
     ImageView imgclinic;
-    FButton button;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference clinicdata;
     String clinicid ="";
@@ -43,12 +42,12 @@ public class clinicprofile extends AppCompatActivity {
         firebaseDatabase=FirebaseDatabase.getInstance();
         clinicdata =firebaseDatabase.getReference("clinics");
 
-        txtname= (TextView) findViewById(R.id.doc_name);
-        txtmap= (TextView) findViewById(R.id.map);
-        txtprice= (TextView) findViewById(R.id.price);
-        txtwait= (TextView) findViewById(R.id.times);
-        imgclinic= (ImageView) findViewById(R.id.clinicimg);
-        button= (FButton) findViewById(R.id.gotimes);
+        txtname= (TextView) findViewById(R.id.clinic_name);
+        txtmap= (TextView) findViewById(R.id.clinic_map);
+        txtprice= (TextView) findViewById(R.id.clinic_price);
+        txtwait= (TextView) findViewById(R.id.clinic_times);
+        imgclinic= (ImageView) findViewById(R.id.img_clinic);
+        button= (TextView) findViewById(R.id.goappoints);
 
         Intent intent=getIntent();
         doctormane =getIntent().getStringExtra("docname");

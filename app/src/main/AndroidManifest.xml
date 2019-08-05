@@ -12,24 +12,48 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".clinicprofile"></activity>
-        <activity android:name=".clinicslist" />
-        <activity android:name=".appointment" />
-
-        <activity android:name=".request" />
+        <activity
+            android:name=".home"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".favourites" />
+        <activity android:name=".StartActivity" />
+        <activity android:name=".doctor_details" />
+        <activity
+            android:name=".hospital_profile"
+            android:label="بيانات المركز" />
+        <activity
+            android:name=".hospital"
+            android:label="اختر المركز" />
+        <activity
+            android:name=".clinicprofile"
+            android:label="بيانات العياده" />
+        <activity
+            android:name=".clinicslist"
+            android:label="اختر العياده" />
+        <activity
+            android:name=".appointment"
+            android:label="قائمه المواعيد" />
+        <activity
+            android:name=".request"
+            android:label="تاكيد الحجز" />
         <activity android:name=".book" />
-        <activity android:name=".add_doctor" />
-        <activity android:name=".splashscreen" />
         <activity
             android:name=".more"
             android:theme="@style/AppTheme1" />
-        <activity android:name=".doc_list1" />
-        <activity android:name=".cat_list1" />
-        <activity android:name=".doc_details" />
         <activity
-            android:name=".doc_list"
+            android:name=".doc_list_patient"
+            android:label="اختر الدكتور المناسب" />
+        <activity
+            android:name=".cat_list_patient"
+            android:label="اختر التخصص" />
+        <activity
+            android:name=".doc_details"
+            android:label="بيانات الدكتور" />
+        <activity
+            android:name=".doc_list_admin"
+            android:label="اختر الدكتور المناسب"
             android:theme="@style/AppTheme1" />
-        <activity android:name=".category_list" />
         <activity android:name=".signup" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">

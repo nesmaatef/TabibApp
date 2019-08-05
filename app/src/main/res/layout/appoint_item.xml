@@ -19,11 +19,13 @@
             android:id="@+id/txtvalue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/fbutton_color_green_sea"
+            android:background="#4CC4B3"
             android:gravity="center"
             android:text="Here"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/cairo_extralight"
+            />
 
 
 
