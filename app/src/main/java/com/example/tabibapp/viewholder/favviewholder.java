@@ -13,16 +13,17 @@ import com.example.tabibapp.R;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 
+import java.text.ParseException;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static androidx.recyclerview.widget.RecyclerView.*;
-
-public class favviewholder extends ViewHolder implements View.OnClickListener
+public class favviewholder extends RecyclerView.ViewHolder implements View.OnClickListener
 
 
 {
     public TextView txtname, txtdesc;
     public CircleImageView imgdoc;
+    public ImageView fav;
     private itemclicklistner itemClickListener;
 
     public void setItemClickListener(itemclicklistner itemClickListener){
@@ -35,16 +36,22 @@ public class favviewholder extends ViewHolder implements View.OnClickListener
         txtname= (TextView) itemView.findViewById(R.id.txtname);
         txtdesc= (TextView) itemView.findViewById(R.id.txtdesc);
         imgdoc = (CircleImageView) itemView.findViewById(R.id.doctor_image);
+      //  fav = (ImageView) itemView.findViewById(R.id.fav);
         itemView.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
-        itemClickListener.onClick(view, getAdapterPosition(), false);
+        try {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
     }
+
 
 
 

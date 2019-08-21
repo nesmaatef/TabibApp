@@ -2,9 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="80dp"
-    android:layout_height="60dp"
-    app:cardElevation="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+app:cardBackgroundColor="#4CC4B3"    app:cardElevation="10dp"
     android:layout_margin="10dp"
     app:cardCornerRadius="10dp">
 
@@ -18,20 +18,83 @@
         <TextView
             android:id="@+id/txtvalue"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:background="#4CC4B3"
             android:gravity="center"
-            android:text="Here"
+            android:text="Here day"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/cairo_extralight"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+    <TextView
+            android:id="@+id/txtvalue1"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#4CC4B3"
+            android:gravity="center"
+            android:text="من"
+        android:layout_alignParentRight="true"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:fontFamily="@font/cairo_extralight"
+android:layout_marginTop="50dp"
+            />
+        <TextView
+            android:id="@+id/txtvalue2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#4CC4B3"
+            android:gravity="center"
+            android:text="الساعه"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/txtvalue1"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_marginTop="50dp"
+            />
+        <TextView
+            android:id="@+id/txtvalue3"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#4CC4B3"
+            android:gravity="center"
+            android:text="الي"
+            android:layout_toLeftOf="@id/txtvalue2"
+            android:layout_marginRight="100dp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_marginTop="50dp"
+            />
+        <TextView
+            android:id="@+id/txtvalue4"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#4CC4B3"
+            android:gravity="center"
+            android:text="الساعه"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/txtvalue3"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_marginTop="50dp"
             />
 
 
 
-
-
     </RelativeLayout>
+
+
 
 
 

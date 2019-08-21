@@ -8,6 +8,7 @@ public class common {
     public static users currentuser ;
     public static  doctor currentname ;
     public static doctor currentprice ;
+    public static String person ="false";
 
     public static int pick_image_request= 71;
 

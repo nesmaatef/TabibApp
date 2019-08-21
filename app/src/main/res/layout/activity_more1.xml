@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/group_8"
+    android:weightSum="10"
+    tools:context=".more1">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/group_9" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:background="#2E86C1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="عن البرنامج"
+            android:textColor="@android:color/white"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/cairo_extralight"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="برنامج طبيب,يساعدك فى اختيارا لطبيب المناسب فى كافه المجالات المتاحه,كما انه يوفر لك المعلومات الكافيه عن الطبيب ومعومات عن مراكز الكشف ومراكز الاشعه والتحاليل,كما انك تستطيع الحجز من خلال التطبيق لسهوله الوصول للطبيب."
+            android:textColor="@android:color/white"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/cairo_extralight"
+            android:textStyle="italic"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:text="رجاء قم بتقيم الدكتور تبعا للتجربه,للتعدلات على التطبيق قم بالتواصل معنا عبر الايميل او رقم التليفون,شكرا لاستخدامك تطبيق الطبيب."
+            android:fontFamily="@font/cairo_extralight"
+            android:textStyle="italic"
+            />
+
+
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

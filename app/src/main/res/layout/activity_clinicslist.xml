@@ -7,8 +7,29 @@
     android:layout_height="match_parent"
     android:background="@drawable/group_8"
     android:id="@+id/root1"
-    tools:context=".clinicslist">
+    tools:context=".clinicslist"
 
+
+    >
+
+    <RelativeLayout
+        android:id="@+id/realtive4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_more_vert_blue_24dp"
+            android:visibility="invisible"
+            android:id="@+id/imgmore"
+
+            />
+    </RelativeLayout>
     <TextView
         android:layout_width="250dp"
         android:layout_height="50dp"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".request"
-    android:background="@drawable/whatsapp_image">
+    android:background="@drawable/group_8">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

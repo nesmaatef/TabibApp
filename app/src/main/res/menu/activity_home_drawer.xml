@@ -4,32 +4,30 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="المفضل" />
+            android:id="@+id/nav_dates"
+            android:icon="@drawable/ic_folder_black_24dp"
+            android:title="مواعيدي"
+
+            />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="مواعيدي" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_callus"
+            android:icon="@drawable/ic_phone_in_talk_black_24dp"
             android:title="اتصل بنا" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_import_contacts_black_24dp"
+            android:title="عن البرنامج" />
+
+        <item
+            android:id="@+id/nav_myprofile"
+            android:icon="@drawable/ic_professional_profile_with_image"
+            android:title="الصفحه الشخصيه"
+            />
 
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
-        </menu>
-    </item>
+
 
 </menu>

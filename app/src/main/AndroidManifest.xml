@@ -12,13 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".hour"></activity>
+        <activity android:name=".fav" />
+        <activity android:name=".more1" />
         <activity
             android:name=".home"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".favourites" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".StartActivity" />
-        <activity android:name=".doctor_details" />
         <activity
             android:name=".hospital_profile"
             android:label="بيانات المركز" />

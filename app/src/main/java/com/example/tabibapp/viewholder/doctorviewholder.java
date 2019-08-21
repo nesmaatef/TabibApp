@@ -13,6 +13,8 @@ import com.example.tabibapp.R;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 
+import java.text.ParseException;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class doctorviewholder extends RecyclerView.ViewHolder implements View.OnClickListener ,
@@ -35,7 +37,7 @@ public class doctorviewholder extends RecyclerView.ViewHolder implements View.On
         txtname= (TextView) itemView.findViewById(R.id.txtname);
         txtdesc= (TextView) itemView.findViewById(R.id.txtdesc);
         imgdoc = (CircleImageView) itemView.findViewById(R.id.doctor_image);
-        fav = (ImageView) itemView.findViewById(R.id.fav);
+       // fav = (ImageView) itemView.findViewById(R.id.fav);
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
 
@@ -43,7 +45,11 @@ public class doctorviewholder extends RecyclerView.ViewHolder implements View.On
 
     @Override
     public void onClick(View view) {
-        itemClickListener.onClick(view, getAdapterPosition(), false);
+        try {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
     }

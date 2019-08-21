@@ -33,7 +33,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         edtphone= (EditText) findViewById(R.id.edtphone);
-        //  edtpassword = (EditText) findViewById(R.id.edtpassword);
         btnlogin = (FButton) findViewById(R.id.btnlogin);
         txtlogin= (TextView) findViewById(R.id.txtlogin);
 
@@ -60,8 +59,6 @@ public class Login extends AppCompatActivity {
                 table_user.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
                         if (dataSnapshot.child(edtphone.getText().toString()).exists()) {
                             mdialog.dismiss();
                             users user = dataSnapshot.child(edtphone.getText().toString()).getValue(users.class);
@@ -69,34 +66,45 @@ public class Login extends AppCompatActivity {
 
                             if (Boolean.parseBoolean(user.getIsadmin())){
                                 Intent homeintent = new Intent(Login.this, home.class);
+                                homeintent.putExtra("true", "false");
                                 common.currentuser = user;
                                 startActivity(homeintent);
                                 finish();
                                 Toast.makeText(Login.this, "Hello Admin", Toast.LENGTH_SHORT).show();}
 
                             else if (Boolean.parseBoolean(user.getIsstaff())){
-                                Intent docintent = new Intent(Login.this, doctor_details.class);
+                                Intent docintent = new Intent(Login.this, home.class);
                                 docintent.putExtra("doctorid1", edtphone.getText().toString());
+                                docintent.putExtra("true", "true");
                                 common.currentuser = user;
+                                common.person="true";
                                 startActivity(docintent);
                                finish();
                                 Toast.makeText(Login.this, "Hello Doctor", Toast.LENGTH_SHORT).show();
 
                             }
-                            else {
+                            else if (Boolean.parseBoolean(user.getIspatient())){
                                 Intent homeintent = new Intent(Login.this, home.class);
+                                homeintent.putExtra("true", "false");
                                 common.currentuser = user;
                                 startActivity(homeintent);
                                 finish();
+
                                 Toast.makeText(Login.this, "hello, you are sign successful", Toast.LENGTH_SHORT).show();
 
                             }
 
 
-                        } else {
+                            else {
 
-                            Toast.makeText(Login.this, "user is not exist in database", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "user is not exist in database", Toast.LENGTH_SHORT).show();
+
+                            }
+
+
                         }
+                      //  finish();
+
 
                     }
 

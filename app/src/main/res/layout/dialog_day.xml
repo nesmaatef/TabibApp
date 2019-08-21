@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp"
+        android:hint="day"
+        android:textStyle="italic"
+        android:fontFamily="@font/cairo_extralight"/>
+
+    <TextView
+        android:id="@+id/txtfrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp"
+        android:hint="from"
+        android:layout_marginTop="10dp"
+        android:textStyle="italic"
+        android:fontFamily="@font/cairo_extralight"/>
+
+    <TextView
+        android:id="@+id/txtto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        android:hint="to"
+        android:textStyle="italic"
+        android:fontFamily="@font/cairo_extralight"/>
+
+</LinearLayout>
+
+</androidx.cardview.widget.CardView>

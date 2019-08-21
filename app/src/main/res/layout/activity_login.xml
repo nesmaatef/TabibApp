@@ -22,8 +22,8 @@
     </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_width="300dp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:id="@+id/txtphone">
@@ -33,19 +33,19 @@
 
         <EditText
             android:id="@+id/edtphone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edittext"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
             android:hint="رقم التليفون"
-            android:drawableTint="@color/doctor"
-            android:gravity="center"
+            android:ems="10"
+            android:background="@drawable/edittext"
             android:inputType="number"
-            android:drawableEnd="@drawable/ic_profile"
-            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ic_profile"
+            android:padding="15dp"
+            android:drawablePadding="15dp"
             android:shadowColor="@android:color/black"
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -62,12 +62,13 @@ android:layout_below="@+id/txtphone"
             android:id="@+id/btnlogin"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-android:layout_gravity="center"
+            android:layout_gravity="center"
             android:background="@android:color/white"
+            android:fontFamily="@font/cairo_extralight"
             android:text="تسجيل الدخول"
             android:textColor="@android:color/white"
             android:textSize="30sp"
-            android:textStyle="normal|bold|italic"
+            android:textStyle="bold"
             app:cornerRadius="40sp"
             app:fButtonColor="#0e6e92"
             app:shadowColor="@android:color/black"

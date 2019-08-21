@@ -25,67 +25,41 @@
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="110dp"
         android:layout_marginTop="300dp"
         android:orientation="vertical"
         android:weightSum="2"
+        android:id="@+id/linear4"
         >
 
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btnpatient"
-            android:layout_width="271dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/group_10"
-            android:text="مريض"
-            android:textColor="#0e6e92"
-            android:textSize="30sp"
-            app:cornerRadius="30dp"
-            app:fButtonColor="@android:color/white"
-            app:shadowColor="#0e6e92"
-            app:shadowEnabled="true"
-            app:shadowHeight="5dp"
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="مرحبا بك فى تطبيق طبيبك الخاص, ابحث عن الطبيب المناسب......"
+           android:textSize="25sp"
+           android:fontFamily="@font/cairo_extralight"
+           android:textColor="#0e6e92"
+           android:textStyle="bold"/>
 
-            />
-
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btndoctor"
-            android:layout_width="262dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:background="#283139"
-            android:text="طبيب"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="normal|bold|italic"
-            app:cornerRadius="30dp"
-            app:fButtonColor="#0e6e92"
-            app:shadowColor="@android:color/white"
-            app:shadowEnabled="true"
-            app:shadowHeight="5dp"
-            tools:fontFamily="@font/abril_fatface" />
 
 
     </LinearLayout>
 
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_person_black_24dp"
+    <info.hoang8f.widget.FButton
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear4"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="30dp"
-        android:id="@+id/imgadmin"
-        />
+        android:text="قم بتسجيل الدخول...."
+        android:textSize="16sp"
+        android:id="@+id/button"
+        app:fButtonColor="#0e6e92"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:fontFamily="@font/cairo_extralight"/>
+
+
 
 
 

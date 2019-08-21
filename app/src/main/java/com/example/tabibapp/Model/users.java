@@ -10,6 +10,7 @@ public class users {
 
     private String phone;
     private String isstaff;
+    private String ispatient;
 
     public String getIsadmin() {
         return isadmin;
@@ -45,9 +46,16 @@ public class users {
     }
 
 
+    public String getIspatient() {
+        return ispatient;
+    }
+
+    public void setIspatient(String ispatient) {
+        this.ispatient = ispatient;
+    }
+
     public users() {
         this.isstaff="false";
-        // this.isadmin="true";
-
+        this.ispatient="false";
     }
 }

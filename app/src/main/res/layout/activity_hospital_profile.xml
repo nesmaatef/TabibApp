@@ -5,178 +5,193 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".hospital_profile">
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/linear2">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/background"
-                android:id="@+id/imgprofile"/>
-        </RelativeLayout>
+    tools:context=".hospital_profile"
+    android:background="@drawable/group_8">
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear2"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+
+        >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/imgprofile"
+        android:src="@drawable/background"
+
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/linear2"
+        android:background="@android:color/white">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linear2"
-        android:weightSum="2"
         android:layout_marginTop="20dp"
         android:id="@+id/linear3"
 
         >
         <TextView
             android:layout_height="wrap_content"
-            android:id="@+id/txt_name_hos"
-            android:layout_width="wrap_content"
-            android:text=""
-            android:hint="مركز"
-            android:textColor="@android:color/black"
-            android:textSize="23sp"
-            android:layout_weight="2"
-            android:maxLines="4"/>
-
-        <TextView
-            android:layout_height="wrap_content"
             android:id="@+id/txt2"
             android:layout_width="wrap_content"
             android:text=""
+android:layout_toRightOf="@id/txt_name_hos"
             android:hint="مركز"
             android:textColor="@android:color/black"
-            android:textSize="23sp"
-            android:layout_weight="1"/>
+            android:textSize="14sp"
+            android:maxLines="4"
+            android:fontFamily="@font/cairo_extralight"/>
 
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linear3"
-        android:weightSum="2"
-        android:layout_marginTop="20dp"
-        android:id="@+id/linear4"
-
-        >
         <TextView
+            android:fontFamily="@font/cairo_extralight"
             android:layout_height="wrap_content"
-            android:id="@+id/txt_price_hos"
+            android:id="@+id/txt_name_hos"
             android:layout_width="wrap_content"
             android:text=""
+            android:layout_centerHorizontal="true"
             android:hint="مركز"
             android:textColor="@android:color/black"
-            android:textSize="23sp"
-            android:layout_weight="2"
+            android:textSize="13sp"
+            />
+        <TextView
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_price"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:layout_below="@id/txt2"
+android:layout_alignParentRight="true"
+            android:hint="سعر الكشف"
+            android:drawableRight="@drawable/ic_monetization_on_black_24dp"
+
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
             android:maxLines="4"/>
 
         <TextView
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_marginTop="35dp"
             android:layout_height="wrap_content"
-            android:id="@+id/txt3"
+            android:id="@+id/price"
+            android:layout_below="@id/txt_name_hos"
             android:layout_width="wrap_content"
             android:text=""
-            android:hint="السعر"
+android:layout_toLeftOf="@id/txt_price"
+            android:hint="مركز"
             android:textColor="@android:color/black"
-            android:textSize="23sp"
-            android:layout_weight="1"/>
+            android:textSize="13sp"
+            />
 
+        <TextView
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_time"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:layout_below="@id/txt2"
+            android:hint="مده الانتظار"
+            android:drawableRight="@drawable/ic_access_time_black_24dp"
+
+            android:layout_marginTop="35dp"
+            android:layout_toRightOf="@id/times"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:maxLines="4"/>
+
+        <TextView
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_marginTop="35dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/times"
+            android:layout_below="@id/txt_name_hos"
+            android:layout_width="wrap_content"
+            android:hint="المده"
+            android:layout_marginLeft="30dp"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_marginTop="35dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_map"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/txt_price"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableStart="@drawable/ic_place_black_24dp"
+            />
+        <TextView
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_marginTop="35dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/map"
+            android:layout_below="@id/txt_price"
+            android:layout_width="wrap_content"
+android:layout_toLeftOf="@id/txt_map"
+            android:hint="عنوان المركز"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_marginTop="35dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_desc"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/txt_map"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableStart="@drawable/ic_import_contacts_black_24dp"
+            />
+        <TextView
+            android:fontFamily="@font/cairo_extralight"
+            android:layout_marginTop="35dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/desc"
+            android:layout_below="@id/map"
+            android:layout_width="wrap_content"
+            android:layout_toLeftOf="@id/txt_map"
+            android:hint="تفاصيل المركز"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            />
+
+
+    </RelativeLayout>
 
 
 
     </LinearLayout>
+    android:id="@+id/fbhospital"
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="300dp"
-    android:orientation="vertical"
-    android:layout_marginTop="30dp"
-    android:layout_below="@+id/linear4"
-    android:layout_alignParentRight="true"
-    android:weightSum="3">
     <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="right"
-        android:text="العنوان"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"/>
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="مده الانتظار"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"/>
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="وصف المركز"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"/>
-</LinearLayout>
-
-    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/linear4"
-        android:layout_alignParentLeft="true"
-        android:weightSum="3">
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="right"
-            android:text="العنوان"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:maxLines="4"
-            android:id="@+id/addrees"/>
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="مده الانتظار"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:id="@+id/times"/>
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="وصف المركز"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:maxLines="4"
-            android:id="@+id/desc_hos"/>
-    </LinearLayout>
-
-
-
-    <info.hoang8f.widget.FButton
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:text="اظهر الدكاتره المتاحه للحجز"
-    android:textColor="@android:color/white"
-    android:textSize="25sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="اضغط هنا لعرض الاطباء داخل المركز"
+        android:fontFamily="@font/cairo_extralight"
         android:id="@+id/fbhospital"
-    />
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#2E4053"
+        android:layout_marginBottom="20dp"
+        />
 
 
 

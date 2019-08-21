@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +24,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.DataBase.database;
 import com.example.tabibapp.Model.doctor;
-import com.example.tabibapp.Model.fav;
 import com.example.tabibapp.Model.users;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
@@ -35,21 +32,15 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class doc_list_admin extends AppCompatActivity {
@@ -98,7 +89,7 @@ public class doc_list_admin extends AppCompatActivity {
         storageReference=storage.getReference();
 rootlayout=(RelativeLayout) findViewById(R.id.rootlayout);
 imgadmin=(ImageView) findViewById(R.id.imgadmin);
-        fav=(ImageView) findViewById(R.id.fav);
+      //  fav=(ImageView) findViewById(R.id.fav);
         recyclerView=(RecyclerView) findViewById(R.id.recycler_doc);
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
@@ -171,10 +162,14 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       if (item.getItemId() ==R.id.action_settings)
-           showdialoge();
-        //   Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();
-        return super.onOptionsItemSelected(item);
+       if (item.getItemId() ==R.id.action_settings) {
+           showdialoge();}
+       else if (item.getItemId()==R.id.action_refresh){
+           loaddoctorlist(categoryid);
+       }
+           //   Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();
+           return super.onOptionsItemSelected(item);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -227,13 +222,13 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
 
                 if (newdoctor !=null)
                 {
-              //     doctorlist.push().setValue(newdoctor);
                    doctorlist.child(edtphone.getText().toString()).setValue(newdoctor);
-                   adduser.child(edtphone.getText().toString()).setValue(newuser);
-                    //doctorlist.child(edtphone.getText().toString()).setValue(common.currentuser.toString());
+                    adduser.child(edtphone.getText().toString()).setValue(newuser);
 
                     Snackbar.make(rootlayout, "New category" +newdoctor.getName()+ "was added",Snackbar.LENGTH_SHORT).show();
                 }
+
+
 
             }
         });
@@ -264,8 +259,8 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
                         imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-newdoctor=new doctor();
-newuser=new users();
+                 newdoctor=new doctor();
+                 newuser=new users();
                                newdoctor.setName(edtname.getText().toString());
                                 newdoctor.setDesc(edtdesc.getText().toString());
                                 newdoctor.setImage(uri.toString());

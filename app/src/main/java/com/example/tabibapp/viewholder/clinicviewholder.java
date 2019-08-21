@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tabibapp.R;
 import com.example.tabibapp.face.itemclicklistner;
 
+import java.text.ParseException;
+
 public class clinicviewholder extends RecyclerView.ViewHolder implements View.OnClickListener ,
         View.OnCreateContextMenuListener {
 
@@ -31,7 +33,11 @@ public class clinicviewholder extends RecyclerView.ViewHolder implements View.On
 
     @Override
     public void onClick(View view) {
-        itemClickListener.onClick(view, getAdapterPosition(), false);
+        try {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
-import com.example.tabibapp.Model.fav;
+import com.example.tabibapp.fav;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class database extends SQLiteAssetHelper {
 
 
     //favorites
-    public void addtofavorite(fav doctor){
+ /*   public void addtofavorite(fav doctor){
         SQLiteDatabase db =getReadableDatabase();
         String query =String.format("INSERT INTO fav(doctorid, userphone,doctorname,doctordescription,doctorimage,doctorcatid)" +
                 " VALUES('%s','%s','%s','%s','%s','%s');",
@@ -58,7 +58,7 @@ public class database extends SQLiteAssetHelper {
     }
 
 
-    public List<fav> getallfav( String userphone) {
+    public List<fav> getallfav(String userphone) {
 
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
@@ -94,5 +94,5 @@ public class database extends SQLiteAssetHelper {
         db.execSQL(query);
 
     }
-
+*/
 }

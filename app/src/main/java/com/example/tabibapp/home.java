@@ -1,52 +1,25 @@
 package com.example.tabibapp;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
-import com.example.tabibapp.DataBase.database;
 import com.example.tabibapp.Model.category;
-import com.example.tabibapp.Model.doctor;
-import com.example.tabibapp.Model.fav;
 import com.example.tabibapp.Model.users;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
-import com.example.tabibapp.viewholder.doctorviewholder;
 import com.example.tabibapp.viewholder.menuviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.mancj.materialsearchbar.MaterialSearchBar;
-import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -54,18 +27,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import static android.view.View.VISIBLE;
 
 public class home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,6 +42,9 @@ public class home extends AppCompatActivity
     RecyclerView recyclermenu ;
     RecyclerView.LayoutManager layoutmanager ;
     FirebaseRecyclerAdapter<com.example.tabibapp.Model.category, menuviewholder> adapter;
+    String doctor="";
+    users user;
+    String value="false";
 
 
     @Override
@@ -92,6 +62,29 @@ public class home extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        Intent intent =getIntent();
+        value =intent.getStringExtra("true");
+        doctor =intent.getStringExtra("doctorid1");
+
+
+
+        if (value.equals("true")) {
+            Menu menu = navigationView.getMenu();
+            MenuItem target = menu.findItem(R.id.nav_myprofile);
+            target.setVisible(true);
+        } else if (value.equals("false")) {
+            Menu menu = navigationView.getMenu();
+            MenuItem target = menu.findItem(R.id.nav_myprofile);
+            target.setVisible(false);
+        }
+
+
+        View headerview =navigationView.getHeaderView(0);
+        TextView txtfullname =(TextView)headerview.findViewById(R.id.textView);
+        txtfullname.setText(common.currentuser.getPhone());
+
+
+
         //try
         //init frebase
         database =FirebaseDatabase.getInstance();
@@ -100,9 +93,6 @@ public class home extends AppCompatActivity
         // load data
         recyclermenu =(RecyclerView) findViewById(R.id.recycler_menu);
         recyclermenu.setLayoutManager(new GridLayoutManager(this,2));
-        //   Animation controller = AnimationUtils.loadAnimation(recyclermenu.getContext(),
-        //         R.anim.layoutfalldown);
-        // recyclermenu.setAnimation(controller);
 
 
         loadmenu();
@@ -151,15 +141,21 @@ public class home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_dates) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_callus) {
+            Intent homeintent = new Intent(home.this, more.class);
+            startActivity(homeintent);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_about) {
+            Intent intent = new Intent(home.this, more1.class);
+            startActivity(intent);
 
-        }  else if (id == R.id.nav_share) {
+        }else if (id == R.id.nav_myprofile) {
+            Intent intent = new Intent(home.this, doc_details.class);
+            intent.putExtra("doctorid1",doctor);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_send) {
 
         }
 

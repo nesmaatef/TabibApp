@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tabibapp.R;
 import com.example.tabibapp.face.itemclicklistner;
 
+import java.text.ParseException;
+
 public class appointmentviewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView value;
+    public TextView value,value1,value2;
 
     private itemclicklistner itemClickListener;
 
@@ -24,12 +26,21 @@ public class appointmentviewholder extends RecyclerView.ViewHolder implements Vi
         super(itemView);
 
         value= (TextView) itemView.findViewById(R.id.txtvalue);
+        value1= (TextView) itemView.findViewById(R.id.txtvalue2);
+        value2= (TextView) itemView.findViewById(R.id.txtvalue4);
+
         itemView.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
-        itemClickListener.onClick(view, getAdapterPosition(), false);
+
+        try {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 }

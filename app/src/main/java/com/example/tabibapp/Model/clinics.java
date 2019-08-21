@@ -6,6 +6,15 @@ public class clinics {
     private String map;
     private String name;
     private String price;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTimeswait() {
         return timeswait;
@@ -59,16 +68,19 @@ public class clinics {
 
 
 
-
-    public clinics(String docid, String image, String map, String name, String price, String timeswait) {
+    public clinics(String docid, String image, String map, String name, String price, String timeswait, String id) {
         this.docid = docid;
         this.image = image;
         this.map = map;
         this.name = name;
         this.price = price;
         this.timeswait = timeswait;
+        this.id=id;
     }
 
     public clinics() {
+    }
+    public String tostring(){
+        return this.id;
     }
 }

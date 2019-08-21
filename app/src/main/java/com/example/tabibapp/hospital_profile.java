@@ -42,15 +42,15 @@ public class hospital_profile extends AppCompatActivity {
 
         // init view
         txt_name_hos= (TextView) findViewById(R.id.txt_name_hos);
-        txt_price_hos= (TextView) findViewById(R.id.txt_price_hos);
-        addrees= (TextView) findViewById(R.id.addrees);
+        txt_price_hos= (TextView) findViewById(R.id.price);
+        addrees= (TextView) findViewById(R.id.map);
 
         times= (TextView) findViewById(R.id.times);
-        desc_hos= (TextView) findViewById(R.id.desc_hos);
+        desc_hos= (TextView) findViewById(R.id.desc);
 
 
         imgprofile=(ImageView) findViewById(R.id.imgprofile);
-        fbhospital=(FButton) findViewById(R.id.fbhospital);
+      //  fbhospital=(FButton) findViewById(R.id.fbhospital);
 
         if (getIntent() !=null)
             hospitalid =getIntent().getStringExtra("hospitalid");

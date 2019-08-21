@@ -1,5 +1,6 @@
 package com.example.tabibapp;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +22,7 @@ import com.example.tabibapp.Model.doctor;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.doctorviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,6 +56,9 @@ public class doc_list_patient extends AppCompatActivity {
     doctor newdoctor;
 
 
+    private doctor favorite;
+
+
     FirebaseRecyclerAdapter<doctor, doctorviewholder> adapter;
 
     MaterialSearchBar materialSearchBar;
@@ -76,6 +81,7 @@ public class doc_list_patient extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
 
         //getintent
         if (getIntent()!=null)
@@ -132,6 +138,11 @@ public class doc_list_patient extends AppCompatActivity {
 
             }
         });
+
+
+
+
+
     }
 
     private void loaddoctorlist(String categoryid) {
@@ -141,7 +152,7 @@ public class doc_list_patient extends AppCompatActivity {
                 doctorviewholder.class,
                 doctorlist.orderByChild("catid").equalTo(categoryid)) {
             @Override
-            protected void populateViewHolder(doctorviewholder viewHolder, doctor model, int position) {
+            protected void populateViewHolder(final doctorviewholder viewHolder, doctor model, int position) {
                 Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);
                 viewHolder.txtname.setText(model.getName());
                 viewHolder.txtdesc.setText(model.getDesc());
@@ -156,13 +167,19 @@ public class doc_list_patient extends AppCompatActivity {
                         docdetails.putExtra("DoctorId", adapter.getRef(position).getKey());
                         startActivity(docdetails);
 
+
                     }
                 });
 
 
             }
+
+
         };
         recyclerView.setAdapter(adapter);
+
+
+
 
     }
     @Override
@@ -228,6 +245,10 @@ public class doc_list_patient extends AppCompatActivity {
         });
 
     }
+
+
+
+
 
 
 

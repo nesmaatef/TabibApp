@@ -14,10 +14,9 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/group_1"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="30dp"
+        android:src="@drawable/iconfinder_edit_find_replace_118921"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="5dp"
         android:id="@+id/imgadmin"
         />
 
@@ -25,34 +24,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="اختر الدكتور المناسب"
+        android:text="اختر الدكتور المناسب.."
         android:textSize="23sp"
         android:layout_alignParentRight="true"
         android:id="@+id/txtview"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
         android:fontFamily="@font/cairo_extralight"/>
-
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="------------------------------"
-        android:layout_below="@id/txtview"
-        android:layout_alignParentRight="true"
-        android:textColor="@android:color/white"
-        android:fontFamily="@font/cairo_extralight"
-        android:id="@+id/txtview1"
-
-        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
         android:id="@+id/recycler_doc"
         android:scrollbars="vertical"
-        android:layout_below="@id/txtview1">
+        android:layout_below="@id/txtview">
 
 
     </androidx.recyclerview.widget.RecyclerView>"
+
+
+
     </RelativeLayout>
 
 

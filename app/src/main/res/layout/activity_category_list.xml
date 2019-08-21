@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/realtive1"
         android:text="اختر التخصص المناسب"
-        android:textSize="23sp"
+        android:textSize="16sp"
+        android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"
         android:id="@+id/txtview"
         android:textColor="#6ACEBE"/>
@@ -34,9 +35,11 @@
     <TextView
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="-------------------------------"
+        android:text="--------------------"
         android:layout_below="@id/txtview"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:gravity="right"
         android:fontFamily="@font/cairo_extralight"
         android:id="@+id/txtview1"
 

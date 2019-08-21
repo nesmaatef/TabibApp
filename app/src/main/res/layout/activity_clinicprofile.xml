@@ -7,25 +7,35 @@
 android:background="@drawable/group_8"
     tools:context=".clinicprofile">
 
+
+
+
     <RelativeLayout
-        android:id="@+id/realtive2"
-        android:layout_width="189dp"
-        android:layout_height="115dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:id="@+id/realtive4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+       android:layout_marginTop="50dp"
+
+        >
 
         <ImageView
-            android:layout_width="220dp"
-            android:layout_height="157dp"
-            android:src="@drawable/group_9" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_more_vert_blue_24dp"
+            android:id="@+id/imgmore"
+            android:visibility="invisible"
+
+            />
     </RelativeLayout>
 
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/realtive2"
         android:id="@+id/line2"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
 
         >
 
@@ -45,7 +55,7 @@ android:background="@drawable/group_8"
         android:layout_height="wrap_content"
         android:layout_below="@id/line2"
         android:background="@android:color/white"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/line4"
         android:layout_centerHorizontal="true"
 
@@ -55,7 +65,7 @@ android:background="@drawable/group_8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:textSize="22sp"
+            android:textSize="16sp"
             android:text="اسم العياده"
             android:textColor="#1283B3"
             android:textAlignment="center"
@@ -66,7 +76,7 @@ android:background="@drawable/group_8"
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:textSize="16sp"
 android:layout_alignRight="@+id/clinic_name"
             android:layout_marginRight="-50dp"
             android:text="عياده"
@@ -81,7 +91,7 @@ android:layout_alignRight="@+id/clinic_name"
             android:layout_marginTop="60dp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:text="عنوان العياده"
             android:textAlignment="center"
@@ -94,9 +104,8 @@ android:layout_alignRight="@+id/clinic_name"
             android:layout_marginTop="40dp"
             android:layout_below="@id/clinic_map"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:drawableRight="@drawable/ic_monetization_on_black_24dp"
             android:text="سعر الكشف"
             android:textAlignment="center"
@@ -107,7 +116,7 @@ android:layout_alignRight="@+id/clinic_name"
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/clinic_map"
             android:layout_marginTop="40dp"
@@ -116,7 +125,7 @@ android:layout_alignRight="@+id/clinic_name"
             android:text="السعر"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:id="@+id/clinic_price"
 
             />
@@ -128,8 +137,7 @@ android:layout_alignRight="@+id/clinic_name"
             android:layout_below="@id/txt5"
             android:layout_alignParentRight="true"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:layout_marginRight="30dp"
+            android:textSize="15sp"
             android:text="مده الانتظار"
             android:drawableRight="@drawable/ic_access_time_black_24dp"
             android:textAlignment="center"
@@ -139,7 +147,7 @@ android:layout_alignRight="@+id/clinic_name"
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/clinic_price"
             android:layout_marginTop="10dp"
@@ -148,7 +156,7 @@ android:layout_alignRight="@+id/clinic_name"
             android:text="المده"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:id="@+id/clinic_times"
 
             />

@@ -6,44 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".appointment"
     android:background="@drawable/group_8">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/iconfinder_edit_find_replace_118921"
+        android:visibility="invisible"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/imgmore1"
+        android:layout_marginTop="10dp"
+
+        />
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:layout_marginTop="30dp">
+    android:layout_marginTop="40dp">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="اليوم"
-        android:textSize="25sp"
-        android:textColor="@android:color/black"/>
+        android:layout_height="wrap_content"
+        android:text="اختر المعاد المناسب"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/cairo_extralight"/>
 
     <androidx.recyclerview.widget.RecyclerView
 
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:id="@+id/recycler1"
         android:scrollbars="vertical"
         android:layout_marginTop="40dp"
         >
     </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="غدا"
-        android:layout_marginTop="280dp"
-        android:textSize="25sp"
-        android:textColor="@android:color/white"/>
 
-    <androidx.recyclerview.widget.RecyclerView
 
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/recycler2"
-        android:scrollbars="vertical"
-        android:layout_marginTop="350dp">
-    </androidx.recyclerview.widget.RecyclerView>"
+
 
 
 </RelativeLayout>
