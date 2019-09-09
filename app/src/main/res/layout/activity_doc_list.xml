@@ -37,6 +37,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
         android:id="@+id/recycler_doc"
+        android:layoutAnimation="@anim/layoutfalldown"
         android:scrollbars="vertical"
         android:layout_below="@id/txtview">
 

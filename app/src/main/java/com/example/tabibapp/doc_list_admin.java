@@ -2,6 +2,7 @@ package com.example.tabibapp;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tabibapp.DataBase.database;
 import com.example.tabibapp.Model.doctor;
 import com.example.tabibapp.Model.users;
 import com.example.tabibapp.common.common;
@@ -61,7 +61,7 @@ public class doc_list_admin extends AppCompatActivity {
     StorageReference storageReference;
     ImageView imgadmin,fav;
     Uri saveuri;
-    com.example.tabibapp.DataBase.database localdb;
+    Context context;
     String user="";
 
 
@@ -78,7 +78,6 @@ public class doc_list_admin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doc_list);
 
-        localdb=new database(this);
 
 
         //firebase
@@ -91,9 +90,13 @@ rootlayout=(RelativeLayout) findViewById(R.id.rootlayout);
 imgadmin=(ImageView) findViewById(R.id.imgadmin);
       //  fav=(ImageView) findViewById(R.id.fav);
         recyclerView=(RecyclerView) findViewById(R.id.recycler_doc);
+
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        
+
 
          user =common.currentuser.toString();
 
@@ -265,6 +268,8 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
                                 newdoctor.setDesc(edtdesc.getText().toString());
                                 newdoctor.setImage(uri.toString());
                                 newdoctor.setCatid(categoryid);
+                                newdoctor.setPhone(edtphone.getText().toString());
+
                                 newuser.setIsstaff("true");
 
 

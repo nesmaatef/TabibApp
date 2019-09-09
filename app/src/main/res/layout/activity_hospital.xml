@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".hospital"
-    android:background="@drawable/whatsapp_image">
+    android:background="@drawable/group_8">
 
     <com.mancj.materialsearchbar.MaterialSearchBar
         android:layout_width="match_parent"
@@ -16,6 +16,26 @@
         app:mt_hint="search your doctor here"
 
         />
+
+    <RelativeLayout
+        android:id="@+id/realtive7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_more_vert_blue_24dp"
+            android:id="@+id/imgmore"
+            android:visibility="invisible"
+
+            />
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
 

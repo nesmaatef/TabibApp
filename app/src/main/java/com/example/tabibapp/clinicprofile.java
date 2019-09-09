@@ -1,9 +1,5 @@
 package com.example.tabibapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -16,17 +12,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.tabibapp.Model.clinics;
-import com.example.tabibapp.Model.doctor;
 import com.example.tabibapp.common.common;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,8 +36,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.UUID;
-
-import info.hoang8f.widget.FButton;
 
 import static android.view.View.VISIBLE;
 
@@ -92,7 +86,6 @@ public class clinicprofile extends AppCompatActivity {
 
 
 
-        // get food id
         if (getIntent() !=null)
             clinicid =getIntent().getStringExtra("clinicid");
 
@@ -104,6 +97,10 @@ public class clinicprofile extends AppCompatActivity {
         if (doctorphone!=null){
             loadclinic1(clinicid);
 
+        }
+
+        if (common.person.equals("true")){
+            imgmore.setVisibility(VISIBLE);
         }
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +239,6 @@ public class clinicprofile extends AppCompatActivity {
         });
     }
     private void loadclinic1(String clinicid) {
-        imgmore.setVisibility(VISIBLE);
 
         clinicdata.child(clinicid).addValueEventListener(new ValueEventListener() {
             @Override

@@ -59,9 +59,15 @@ public class signup extends AppCompatActivity {
 
 							mdialog.dismiss();
 							users user = new users();
+							user.setIsadmin("false");
+							user.setIspatient("true");
+							user.setIsstaff("false");
+
 							table_user.child(edtphone.getText().toString()).setValue(user);
 							Toast.makeText(signup.this, "signup successful", Toast.LENGTH_SHORT).show();
-							Intent homeintent = new Intent(signup.this, cat_list_patient.class);
+							Intent homeintent = new Intent(signup.this, home.class);
+							homeintent.putExtra("true", "false");
+
 							common.currentuser = user;
 							startActivity(homeintent);
 							finish();

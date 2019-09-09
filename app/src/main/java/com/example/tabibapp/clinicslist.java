@@ -19,29 +19,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.clinics;
-import com.example.tabibapp.Model.doctor;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.clinicviewholder;
-import com.example.tabibapp.viewholder.doctorviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseError;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import static android.view.View.VISIBLE;
@@ -54,7 +45,7 @@ public class clinicslist extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference cliniclist;
     String doctorid="";
-    String docphone="";
+     String docphone="";
     String docphone1="";
 
     FirebaseRecyclerAdapter<clinics, clinicviewholder> adapter;
@@ -92,15 +83,15 @@ public class clinicslist extends AppCompatActivity {
         doctorname = intent.getStringExtra("doctorname");
 
 
-        if (doctorid.isEmpty()){
-            docphone=intent.getStringExtra("doctorphone") ;
+        if (common.person.equals("false")){
+            docphone=intent.getStringExtra("doctorphone1") ;
         loadcliniclist1(docphone);
-            Toast.makeText(this, "hi"+doctorid, Toast.LENGTH_SHORT).show();}
+            Toast.makeText(this, "hi"+docphone, Toast.LENGTH_SHORT).show();}
 
-        else  if (getIntent()!=null){
-            //doctorid=getIntent().getStringExtra("DoctorId");
+        else  if (common.person.equals("true")){
             docphone1=intent.getStringExtra("doctorphone1") ;
-            loadcliniclist(docphone);}
+            loadcliniclist(docphone1);
+        }
 
         imgmore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,11 +102,14 @@ public class clinicslist extends AppCompatActivity {
 
     }
 
-    private void loadcliniclist(final String doctorid) {
+    private void loadcliniclist(final String docphone1) {
+
+        imgmore.setVisibility(VISIBLE);
+
         adapter=new FirebaseRecyclerAdapter<clinics, clinicviewholder>(clinics.class,
                 R.layout.clinic_item,
                 clinicviewholder.class,
-                cliniclist.orderByChild("docid").equalTo(doctorid)) {
+                cliniclist.orderByChild("docid").equalTo(docphone1)) {
             @Override
             protected void populateViewHolder(clinicviewholder clinicviewholder, clinics clinics, int i) {
 
@@ -138,7 +132,6 @@ public class clinicslist extends AppCompatActivity {
     recyclerView.setAdapter(adapter);
     }
     private void loadcliniclist1(final String docphone) {
-        imgmore.setVisibility(VISIBLE);
 
         adapter=new FirebaseRecyclerAdapter<clinics, clinicviewholder>(clinics.class,
                 R.layout.clinic_item,
@@ -261,7 +254,7 @@ public class clinicslist extends AppCompatActivity {
                                 newclinic.setImage(uri.toString());
                                 newclinic.setPrice(edtprice.getText().toString());
                                 newclinic.setTimeswait(edttimes.getText().toString());
-                                newclinic.setDocid(docphone);
+                                newclinic.setDocid(common.currentdoctorphone);
 
 
 

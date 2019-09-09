@@ -2,49 +2,41 @@ package com.example.tabibapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.category;
-import com.example.tabibapp.Model.users;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.menuviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-
-import android.view.View;
-
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
-import android.view.MenuItem;
-
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.Menu;
-import android.widget.TextView;
-
-import static android.view.View.VISIBLE;
-
 public class home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FirebaseDatabase database ;
     DatabaseReference category ;
-    //    TextView txtfullname;
     RecyclerView recyclermenu ;
     RecyclerView.LayoutManager layoutmanager ;
     FirebaseRecyclerAdapter<com.example.tabibapp.Model.category, menuviewholder> adapter;
     String doctor="";
-    users user;
     String value="false";
+    String value1;
 
 
     @Override
@@ -65,18 +57,37 @@ public class home extends AppCompatActivity
         Intent intent =getIntent();
         value =intent.getStringExtra("true");
         doctor =intent.getStringExtra("doctorid1");
+        value1=common.currentadmin;
 
 
 
         if (value.equals("true")) {
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_myprofile);
-            target.setVisible(true);
+            MenuItem target1 = menu.findItem(R.id.nav_dates);
+            target1.setVisible(true);
         } else if (value.equals("false")) {
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_myprofile);
+            MenuItem target1 = menu.findItem(R.id.nav_dates);
             target.setVisible(false);
+            target1.setVisible(false);
+
         }
+
+         if (value1.equals("true")) {
+            Menu menu = navigationView.getMenu();
+            MenuItem target = menu.findItem(R.id.nav_setting);
+            target.setVisible(true);
+
+        }
+        else if (value1.equals("false")) {
+            Menu menu = navigationView.getMenu();
+            MenuItem target = menu.findItem(R.id.nav_setting);
+            target.setVisible(false);
+
+        }
+
 
 
         View headerview =navigationView.getHeaderView(0);
@@ -90,10 +101,52 @@ public class home extends AppCompatActivity
         database =FirebaseDatabase.getInstance();
         category =database.getReference("category");
 
+        //try animation
+        adapter=new FirebaseRecyclerAdapter<com.example.tabibapp.Model.category, menuviewholder>(com.example.tabibapp.Model.category.class,
+                R.layout.category_item,
+                menuviewholder.class,
+                category ) {
+            @Override
+            protected void populateViewHolder(menuviewholder viewHolder, final com.example.tabibapp.Model.category model, int position) {
+                Picasso.get().load(model.getImage())
+                        .into(viewHolder.imageView);
+                viewHolder.txtmenuname.setText(model.getName());
+
+
+                final category clickitem =model;
+                viewHolder.setItemClickListener(new itemclicklistner() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+
+                        if (adapter.getRef(position).getKey().equals("06")){
+                            Intent hoslist = new Intent(home.this, hospital.class);
+                            hoslist.putExtra("categoryid1", adapter.getRef(position).getKey());
+                            startActivity(hoslist);
+                        }
+                        else if (value.equals("true")) {
+                            Intent doclist = new Intent(home.this, doc_list_admin.class);
+                            doclist.putExtra("categoryid", adapter.getRef(position).getKey());
+                            startActivity(doclist);
+                        }
+                        else if (value.equals("false")) {
+                            Intent doclist = new Intent(home.this, doc_list_patient.class);
+                            doclist.putExtra("categoryid", adapter.getRef(position).getKey());
+                            startActivity(doclist);
+                        }
+
+
+                    }
+                });
+
+            }
+        };
+
         // load data
         recyclermenu =(RecyclerView) findViewById(R.id.recycler_menu);
         recyclermenu.setLayoutManager(new GridLayoutManager(this,2));
-
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(recyclermenu.getContext(),
+                R.anim.layoutfalldown);
+        recyclermenu.setLayoutAnimation(controller);
 
         loadmenu();
 
@@ -116,7 +169,7 @@ public class home extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
+       // getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
@@ -128,9 +181,9 @@ public class home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+      //  if (id == R.id.action_settings) {
+        //    return true;
+        //}
 
         return super.onOptionsItemSelected(item);
     }
@@ -142,7 +195,9 @@ public class home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_dates) {
-            // Handle the camera action
+            Intent homeintent = new Intent(home.this, request.class);
+            homeintent.putExtra("doctorphone",doctor);
+            startActivity(homeintent);
         } else if (id == R.id.nav_callus) {
             Intent homeintent = new Intent(home.this, more.class);
             startActivity(homeintent);
@@ -158,6 +213,12 @@ public class home extends AppCompatActivity
 
 
         }
+        else if (id == R.id.nav_chat) {
+            Intent intent = new Intent(home.this, StartActivity.class);
+            startActivity(intent);
+
+
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -166,47 +227,9 @@ public class home extends AppCompatActivity
     // try
 
     private void loadmenu() {
-        adapter=new FirebaseRecyclerAdapter<com.example.tabibapp.Model.category, menuviewholder>(com.example.tabibapp.Model.category.class,
-                R.layout.category_item,
-                menuviewholder.class,
-                category ) {
-            @Override
-            protected void populateViewHolder(menuviewholder viewHolder, final com.example.tabibapp.Model.category model, int position) {
-                Picasso.get().load(model.getImage())
-                        .into(viewHolder.imageView);
-                viewHolder.txtmenuname.setText(model.getName());
-
-
-                final category clickitem =model;
-                viewHolder.setItemClickListener(new itemclicklistner() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-
-                        if (adapter.getRef(position).getKey().equals("06")){
-                            Intent hoslist = new Intent(home.this, hospital.class);
-                            hoslist.putExtra("categoryid1", adapter.getRef(position).getKey());
-                            startActivity(hoslist);
-                        }
-                        else {
-                            // Toast.makeText(category_list_admin.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
-                            Intent doclist = new Intent(home.this, doc_list_admin.class);
-
-                            //because categoryid is key , so we just get key of this
-
-                            doclist.putExtra("categoryid", adapter.getRef(position).getKey());
-
-                            startActivity(doclist);
-                        }
-
-
-                    }
-                });
-
-            }
-        };
         recyclermenu.setAdapter(adapter);
-        //    recyclermenu.getAdapter().notifyDataSetChanged();
-        //  recyclermenu.scheduleLayoutAnimation();
+           recyclermenu.getAdapter().notifyDataSetChanged();
+          recyclermenu.scheduleLayoutAnimation();
 
     }
 

@@ -30,25 +30,13 @@
       />
 
 
-  <TextView
-      android:layout_width="150dp"
-      android:layout_height="wrap_content"
-      android:text="---------------------"
-      android:layout_below="@id/txtview"
-      android:layout_alignParentRight="true"
-      android:textColor="@android:color/white"
-      android:fontFamily="@font/cairo_extralight"
-      android:id="@+id/txtview1"
-
-      />
-
 
   <androidx.recyclerview.widget.RecyclerView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/recycler_doc"
       android:scrollbars="vertical"
-      android:layout_below="@id/txtview1">
+      android:layout_below="@id/txtview">
   </androidx.recyclerview.widget.RecyclerView>"
 
 

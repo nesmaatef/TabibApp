@@ -1,6 +1,5 @@
 package com.example.tabibapp;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,7 +21,6 @@ import com.example.tabibapp.Model.doctor;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.doctorviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -68,7 +66,7 @@ public class doc_list_patient extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doc_list);
+        setContentView(R.layout.activity_doc_list1);
 
         //firebase
         database=FirebaseDatabase.getInstance();

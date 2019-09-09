@@ -25,6 +25,16 @@
             android:icon="@drawable/ic_professional_profile_with_image"
             android:title="الصفحه الشخصيه"
             />
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_professional_profile_with_image"
+            android:title="المحادثات"
+            />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_professional_profile_with_image"
+            android:title="الاعدادات"
+            />
 
     </group>
 

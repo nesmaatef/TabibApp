@@ -6,9 +6,19 @@ import com.example.tabibapp.Model.users;
 public class common {
 
     public static users currentuser ;
-    public static  doctor currentname ;
+    public static  String currentdoctorphone ;
+    public static  String currentuserphone ;
+    public static  String currentadmin="false" ;
+
+
+
     public static doctor currentprice ;
     public static String person ="false";
+    public static String person1 ="false";
+
+    public static String currentisstaff ="false";
+
+
 
     public static int pick_image_request= 71;
 

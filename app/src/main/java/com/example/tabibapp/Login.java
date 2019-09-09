@@ -67,6 +67,7 @@ public class Login extends AppCompatActivity {
                             if (Boolean.parseBoolean(user.getIsadmin())){
                                 Intent homeintent = new Intent(Login.this, home.class);
                                 homeintent.putExtra("true", "false");
+                                common.currentadmin="true";
                                 common.currentuser = user;
                                 startActivity(homeintent);
                                 finish();
@@ -77,6 +78,7 @@ public class Login extends AppCompatActivity {
                                 docintent.putExtra("doctorid1", edtphone.getText().toString());
                                 docintent.putExtra("true", "true");
                                 common.currentuser = user;
+                                common.currentisstaff="true";
                                 common.person="true";
                                 startActivity(docintent);
                                finish();
@@ -87,6 +89,7 @@ public class Login extends AppCompatActivity {
                                 Intent homeintent = new Intent(Login.this, home.class);
                                 homeintent.putExtra("true", "false");
                                 common.currentuser = user;
+                                common.currentuserphone=user.getPhone();
                                 startActivity(homeintent);
                                 finish();
 
