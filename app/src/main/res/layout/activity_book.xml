@@ -56,6 +56,13 @@
         android:textColor="@android:color/white"
         android:layout_margin="10dp"
         android:fontFamily="@font/cairo_extralight"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtcomment"
+            android:textColor="@android:color/white"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/cairo_extralight"/>
 
 
 

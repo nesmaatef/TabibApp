@@ -3,6 +3,15 @@ package com.example.tabibapp.Model;
 public class hospitals {
     private String name;
     private String map;
+    private String phone ;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getCatid() {
         return catid;
@@ -66,7 +75,7 @@ public class hospitals {
         this.price = price;
     }
 
-    public hospitals(String name, String map, String desc, String times, String image, String price, String catid) {
+    public hospitals(String name, String map, String desc, String times, String image, String price, String catid, String phone) {
         this.name = name;
         this.map = map;
         this.desc = desc;
@@ -74,6 +83,7 @@ public class hospitals {
         this.image = image;
         this.price = price;
         this.catid= catid;
+        this.phone=phone;
     }
 
     public hospitals() {

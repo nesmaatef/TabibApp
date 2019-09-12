@@ -186,9 +186,6 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
     ///upload new doctor /delete/ update
     private void showdialoge() {
         AlertDialog.Builder alertdialog= new AlertDialog.Builder(doc_list_admin.this);
-      //  alertdialog.setTitle("Add new doctor");
-       // alertdialog.setMessage("please fill full information");
-
         LayoutInflater inflater =this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.add_new_doc, null);
         edtname=add_menu_layout.findViewById(R.id.edtname);
@@ -271,6 +268,9 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
                                 newdoctor.setPhone(edtphone.getText().toString());
 
                                 newuser.setIsstaff("true");
+                                newuser.setIspatient("false");
+                                newuser.setIsadmin("false");
+
 
 
 

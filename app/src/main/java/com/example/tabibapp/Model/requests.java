@@ -1,37 +1,23 @@
 package com.example.tabibapp.Model;
 
-public class reserve {
-    private String Doctor_phone;
+public class requests {
     private String Clinic_name;
     private String Clinic_price;
     private String Clinic_date;
     private String User_phone;
     private String Comment;
-
-    public String getComment() {
-        return Comment;
-    }
-
-    public void setComment(String comment) {
-        Comment = comment;
-    }
-
-    public reserve(String doctor_phone, String clinic_name, String clinic_price, String clinic_date, String user_phone, String comment) {
-        Doctor_phone = doctor_phone;
-        Clinic_name = clinic_name;
-        Clinic_price = clinic_price;
-        Clinic_date = clinic_date;
-        User_phone = user_phone;
-        Comment=comment;
-    }
+    private String status;
 
     public String getDoctor_phone() {
-        return Doctor_phone;
+        return doctor_phone;
     }
 
     public void setDoctor_phone(String doctor_phone) {
-        Doctor_phone = doctor_phone;
+        this.doctor_phone = doctor_phone;
     }
+
+    private String doctor_phone;
+
 
     public String getClinic_name() {
         return Clinic_name;
@@ -65,6 +51,32 @@ public class reserve {
         User_phone = user_phone;
     }
 
-    public reserve() {
+    public String getComment() {
+        return Comment;
+    }
+
+    public void setComment(String comment) {
+        Comment = comment;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public requests(String clinic_name, String clinic_price, String clinic_date, String user_phone, String comment, String status, String doctor_phone) {
+        Clinic_name = clinic_name;
+        Clinic_price = clinic_price;
+        Clinic_date = clinic_date;
+        User_phone = user_phone;
+        Comment = comment;
+        this.status = status;
+        this.doctor_phone = doctor_phone;
+    }
+
+    public requests() {
     }
 }

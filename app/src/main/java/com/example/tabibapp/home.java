@@ -153,8 +153,9 @@ public class home extends AppCompatActivity
 
 
 
-
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -215,6 +216,12 @@ public class home extends AppCompatActivity
         }
         else if (id == R.id.nav_chat) {
             Intent intent = new Intent(home.this, StartActivity.class);
+            startActivity(intent);
+
+
+        }
+        else if (id == R.id.nav_setting) {
+            Intent intent = new Intent(home.this, add_setting.class);
             startActivity(intent);
 
 

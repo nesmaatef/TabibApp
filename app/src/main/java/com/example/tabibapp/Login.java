@@ -74,6 +74,7 @@ public class Login extends AppCompatActivity {
                                 Toast.makeText(Login.this, "Hello Admin", Toast.LENGTH_SHORT).show();}
 
                             else if (Boolean.parseBoolean(user.getIsstaff())){
+
                                 Intent docintent = new Intent(Login.this, home.class);
                                 docintent.putExtra("doctorid1", edtphone.getText().toString());
                                 docintent.putExtra("true", "true");

@@ -9,6 +9,9 @@ public class common {
     public static  String currentdoctorphone ;
     public static  String currentuserphone ;
     public static  String currentadmin="false" ;
+    public static  String currenthospital="false" ;
+
+
 
 
 

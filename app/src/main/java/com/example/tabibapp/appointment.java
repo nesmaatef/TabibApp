@@ -1,12 +1,5 @@
 package com.example.tabibapp;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -22,24 +15,25 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.tabibapp.Model.users;
-import com.example.tabibapp.common.common;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.tabibapp.Model.appoint;
 import com.example.tabibapp.Model.doctor;
-import com.example.tabibapp.book;
-
+import com.example.tabibapp.Model.users;
+import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.appointmentviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -50,7 +44,7 @@ import static android.view.View.VISIBLE;
 public class appointment extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     FirebaseDatabase  database3 ;
-    DatabaseReference appointment3 ;
+    DatabaseReference appointment3, appointment4;
     RecyclerView recycler1,recycler2 ;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.LayoutManager layoutmanager ;
@@ -64,6 +58,7 @@ String clinicid="";
     String docname="";
     String clinicprice="";
     String clinicname="";
+    String hospitalid="";
 
     TimePickerDialog timePickerDialog;
     Calendar calendar;
@@ -81,6 +76,8 @@ String clinicid="";
 
         //try
         appointment3=database3.getReference("clinics");
+        appointment4=database3.getReference("hospital");
+
 
 
 
@@ -99,23 +96,46 @@ String clinicid="";
             }
         });
 
-       if (common.person.equals("true")){
+       if (common.person.equals("true") && common.currenthospital.equals("true")){
            img.setVisibility(VISIBLE);
        }
 
-Intent intent=getIntent();
-        docname = intent.getStringExtra("namedoctor");
-        clinicprice = intent.getStringExtra("clinicprice");
 
-    clinicid = intent.getStringExtra("clinicid");
-        clinicname = intent.getStringExtra("clinicname");
+        if (common.currenthospital.equals("false")) {
+            Intent intent = getIntent();
+            docname = intent.getStringExtra("namedoctor");
+            clinicprice = intent.getStringExtra("clinicprice");
+            clinicid = intent.getStringExtra("clinicid");
+            clinicname = intent.getStringExtra("clinicname");
+
+            loadappointlist3(clinicid);
+        }
+
+        else if (common.currenthospital.equals("true")) {
+            Intent intent = getIntent();
+            hospitalid=intent.getStringExtra("hospitalid");
+
+            loadhospitalappointments(hospitalid);
+        }
 
 
 
-        if (!clinicid.isEmpty())
+    }
 
-        loadappointlist3(clinicid);
+    private void loadhospitalappointments(final String hospitalid) {
+        adapter3=new FirebaseRecyclerAdapter<appoint, appointmentviewholder>(appoint.class,
+                R.layout.appoint_item,
+                appointmentviewholder.class,
+                appointment4.child(hospitalid).child("appointment") ) {
+            @Override
+            protected void populateViewHolder(final appointmentviewholder appointmentviewholder,final appoint appoint, int i) {
+                appointmentviewholder.value.setText(appoint.getDay());
+                appointmentviewholder.value1.setText(appoint.getFrom());
+                appointmentviewholder.value2.setText(appoint.getTo());
+            }
+        };
 
+        recycler1.setAdapter(adapter3);
 
 
     }
@@ -225,7 +245,6 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             protected void populateViewHolder(final appointmentviewholder viewholder, final appoint model, int i) {
 
-              //  viewholder.value.setText(model.getDay());
                 viewholder.value.setText(model.getDay());
                 viewholder.value1.setText(model.getFrom());
                 viewholder.value2.setText(model.getTo());
