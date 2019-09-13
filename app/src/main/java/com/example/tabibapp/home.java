@@ -37,6 +37,7 @@ public class home extends AppCompatActivity
     String doctor="";
     String value="false";
     String value1;
+    String val;
 
 
     @Override
@@ -129,7 +130,7 @@ public class home extends AppCompatActivity
                             hoslist.putExtra("categoryid1", adapter.getRef(position).getKey());
                             startActivity(hoslist);
                         }
-                        else if (value.equals("true")) {
+                        else if (value.equals("true") || common.currentadmin.equals("true")) {
                             Intent doclist = new Intent(home.this, doc_list_admin.class);
                             doclist.putExtra("categoryid", adapter.getRef(position).getKey());
                             startActivity(doclist);

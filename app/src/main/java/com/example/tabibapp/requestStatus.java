@@ -38,7 +38,7 @@ String value,v ;
         recyclerView.setLayoutManager(layoutManager);
 
         value =common.currentuserphone;
-        if (common.person.equals("true")){
+        if (common.person.equals("true") || common.currenthospital.equals("true")){
         loadrequesstatus(value);
             Toast.makeText(this, "true", Toast.LENGTH_SHORT).show();}
         else if (common.person.equals("false")){
