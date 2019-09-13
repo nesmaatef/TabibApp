@@ -59,6 +59,8 @@ String clinicid="";
     String clinicprice="";
     String clinicname="";
     String hospitalid="";
+    String hospital_name="";
+    String hospital_price="";
 
     TimePickerDialog timePickerDialog;
     Calendar calendar;
@@ -92,13 +94,28 @@ String clinicid="";
             @Override
             public void onClick(View v) {
                 showdialog();
-                Toast.makeText(appointment.this, "hi", Toast.LENGTH_SHORT).show();
             }
         });
 
-       if (common.person.equals("true") && common.currenthospital.equals("true")){
+       if (common.person.equals("true")){
            img.setVisibility(VISIBLE);
+           img.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   showdialog();
+               }
+           });
        }
+
+        if (common.currenthospital1.equals("true")){
+            img.setVisibility(VISIBLE);
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showdialog_hos();
+                }
+            });
+        }
 
 
         if (common.currenthospital.equals("false")) {
@@ -114,11 +131,107 @@ String clinicid="";
         else if (common.currenthospital.equals("true")) {
             Intent intent = getIntent();
             hospitalid=intent.getStringExtra("hospitalid");
+            hospital_name=intent.getStringExtra("hospitalname");
+            hospital_price=intent.getStringExtra("hospitalprice");
+
 
             loadhospitalappointments(hospitalid);
         }
 
 
+
+    }
+
+    private void showdialog_hos() {
+        AlertDialog.Builder alertdialog= new AlertDialog.Builder(appointment.this);
+        LayoutInflater inflater =this.getLayoutInflater();
+        View add_menu_layout = inflater.inflate(R.layout.dialog_day, null);
+        txtday=add_menu_layout.findViewById(R.id.txtday);
+        txtfrom=add_menu_layout.findViewById(R.id.txtfrom);
+        txtto=add_menu_layout.findViewById(R.id.txtto);
+
+        alertdialog.setView(add_menu_layout);
+        txtday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+        txtfrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                currentMinute = calendar.get(Calendar.MINUTE);
+
+                timePickerDialog = new TimePickerDialog(appointment.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        if (hourOfDay >= 12) {
+                            amPm = "PM";
+                        } else {
+                            amPm = "AM";
+                        }
+                        txtfrom.setText(String.format("%02d:%02d", hourOfDay, minutes) + amPm);
+                    }
+                }, currentHour, currentMinute, false);
+
+                timePickerDialog.show();
+
+            }
+        });
+        txtto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                currentMinute = calendar.get(Calendar.MINUTE);
+
+                timePickerDialog = new TimePickerDialog(appointment.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        if (hourOfDay >= 12) {
+                            amPm = "PM";
+                        } else {
+                            amPm = "AM";
+                        }
+                        txtto.setText(String.format("%02d:%02d", hourOfDay, minutes) + amPm);
+                    }
+                }, currentHour, currentMinute, false);
+
+                timePickerDialog.show();
+
+
+            }
+        });
+        alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                newappoint=new appoint();
+                newappoint.setDay(txtday.getText().toString());
+                newappoint.setFrom(txtfrom.getText().toString());
+                newappoint.setTo(txtto.getText().toString());
+               // appointment3.child(clinicid).child("appointment").child(txtday.getText().toString()).setValue(newappoint);
+                 appointment4.child(hospitalid).child("appointment").child(txtday.getText().toString()).setValue(newappoint);
+
+
+
+
+
+            }
+        });
+        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Toast.makeText(appointment.this, "no date added", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        alertdialog.show();
 
     }
 
@@ -132,7 +245,52 @@ String clinicid="";
                 appointmentviewholder.value.setText(appoint.getDay());
                 appointmentviewholder.value1.setText(appoint.getFrom());
                 appointmentviewholder.value2.setText(appoint.getTo());
+
+                final String date22 = new SimpleDateFormat("E, MMM dd yyyy", Locale.getDefault()).format(new Date());
+                Toast.makeText(appointment.this, "Current time =>"+ date22, Toast.LENGTH_SHORT).show();
+
+                final appoint clickitem =appoint;
+                final String string =appoint.getDay();
+
+
+                appointmentviewholder.setItemClickListener(new itemclicklistner() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onClick(View view, int position, boolean isLongClick) throws ParseException {
+                    try {
+                        DateFormat formatter;
+                        formatter = new SimpleDateFormat("E, MMM dd yyyy");
+                        Date date = formatter.parse(date22);
+
+                        DateFormat formatter1;
+                        formatter1 = new SimpleDateFormat("E, MMM dd, yyyy");
+                        Date  date33 = formatter1.parse(string);
+
+                        if (date.before(date33)) {
+                            Toast.makeText(appointment.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
+                            Intent hosdetail = new Intent(appointment.this, book.class);
+                            hosdetail.putExtra("name", hospital_name);
+                            hosdetail.putExtra("price", hospital_price);
+                            hosdetail.putExtra("docdate", appoint.getDay());
+                            startActivity(hosdetail);
+
+                        }
+                        else if (date.after(date33)){
+                            Toast.makeText(appointment.this, "you cannot submit in this day", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+
             }
+
         };
 
         recycler1.setAdapter(adapter3);
@@ -249,11 +407,6 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 viewholder.value1.setText(model.getFrom());
                 viewholder.value2.setText(model.getTo());
 
-                 //set current time
-               // final Date c = Calendar.getInstance().getTime();
-                //Toast.makeText(appointment.this, "Current time =>"+ c, Toast.LENGTH_SHORT).show();
-                //SimpleDateFormat df = new SimpleDateFormat("MMMM d, yyyy");
-                //String formattedDate = df.format(c);
                 final String date22 = new SimpleDateFormat("E, MMM dd yyyy", Locale.getDefault()).format(new Date());
                 Toast.makeText(appointment.this, "Current time =>"+ date22, Toast.LENGTH_SHORT).show();
 
@@ -282,7 +435,6 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                docdetails.putExtra("name", docname);
                                docdetails.putExtra("price", clinicprice);
                                docdetails.putExtra("docdate", model.getDay());
-                               docdetails.putExtra("clinicname", clinicname);
                                startActivity(docdetails);
 
                            }

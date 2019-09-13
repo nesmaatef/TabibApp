@@ -107,9 +107,8 @@ public class clinicprofile extends AppCompatActivity {
             public void onClick(View v) {
                   Intent goappoint = new Intent(clinicprofile.this, appointment.class);
                  goappoint.putExtra("clinicid", clinicid);
-                 goappoint.putExtra("namedoctor", doctormane);
+                 goappoint.putExtra("namedoctor", currentclinic.getMap());
                  goappoint.putExtra("clinicprice", currentclinic.getPrice());
-                goappoint.putExtra("clinicname", currentclinic.getMap());
 
 
                 startActivity(goappoint);
@@ -199,7 +198,6 @@ public class clinicprofile extends AppCompatActivity {
                 currentclinic.setMap(txtmap.getText().toString());
                 currentclinic.setPrice(txtprice.getText().toString());
                 currentclinic.setTimeswait(txtwait.getText().toString());
-
                 currentclinic.setDocid(txtphone.getText().toString());
 
 

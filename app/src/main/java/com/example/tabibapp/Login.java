@@ -81,6 +81,7 @@ public class Login extends AppCompatActivity {
                                 common.currentuser = user;
                                 common.currentisstaff="true";
                                 common.person="true";
+                                common.currentuserphone=user.getPhone();
                                 startActivity(docintent);
                                finish();
                                 Toast.makeText(Login.this, "Hello Doctor", Toast.LENGTH_SHORT).show();
@@ -90,6 +91,19 @@ public class Login extends AppCompatActivity {
                                 Intent homeintent = new Intent(Login.this, home.class);
                                 homeintent.putExtra("true", "false");
                                 common.currentuser = user;
+                                common.currentuserphone=user.getPhone();
+                                startActivity(homeintent);
+                                finish();
+
+                                Toast.makeText(Login.this, "hello, you are sign successful", Toast.LENGTH_SHORT).show();
+
+                            }
+                            else if (Boolean.parseBoolean(user.getIshospital())){
+                                Intent homeintent = new Intent(Login.this, home.class);
+                                homeintent.putExtra("true", "true");
+                                common.currentuser = user;
+                                common.currenthospital ="true";
+                                common.currenthospital1 ="true";
                                 common.currentuserphone=user.getPhone();
                                 startActivity(homeintent);
                                 finish();

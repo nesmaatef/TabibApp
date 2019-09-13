@@ -8,7 +8,7 @@
         <item
             android:id="@+id/nav_dates"
             android:icon="@drawable/ic_folder_black_24dp"
-            android:title="مواعيدي"
+            android:title="الكشوفات"
 
             />
         <item
@@ -27,14 +27,22 @@
             />
         <item
             android:id="@+id/nav_chat"
-            android:icon="@drawable/ic_professional_profile_with_image"
+            android:icon="@drawable/ic_chat_black_24dp"
             android:title="المحادثات"
             />
         <item
             android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_professional_profile_with_image"
+            android:icon="@drawable/ic_settings_black_24dp"
             android:title="الاعدادات"
             />
+        <item
+            android:id="@+id/nav_mydates"
+            android:icon="@drawable/ic_add_alert_black_24dp"
+            android:title="مواعيدى"
+            />
+
+
+
 
     </group>
 

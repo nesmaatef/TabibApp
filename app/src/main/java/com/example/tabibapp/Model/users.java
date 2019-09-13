@@ -12,6 +12,17 @@ public class users {
     private String isstaff;
     private String ispatient;
 
+    public String getIshospital() {
+        return ishospital;
+    }
+
+    public void setIshospital(String ishospital) {
+        this.ishospital = ishospital;
+    }
+
+    private String ishospital;
+
+
     public String getIsadmin() {
         return isadmin;
     }

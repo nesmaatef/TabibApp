@@ -10,6 +10,9 @@ public class common {
     public static  String currentuserphone ;
     public static  String currentadmin="false" ;
     public static  String currenthospital="false" ;
+    public static  String currenthospital1="false" ;
+
+
 
 
 

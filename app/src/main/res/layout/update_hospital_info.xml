@@ -20,8 +20,8 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtname"
-                android:hint="ادخل اسم المركز"
+                android:id="@+id/edtname_hos"
+                android:hint="الاسم"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
@@ -34,23 +34,8 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:id="@+id/edtdesc"
-                android:hint="معلومه عن المركز"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                app:met_baseColor="@android:color/black"
-                app:met_floatingLabel="highlight"
-                app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                android:inputType="textMultiLine"
-                />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:id="@+id/edtphone"
-                android:hint="رقم المركز للتسجيل"
+                android:id="@+id/edtdesc_hos"
+                android:hint="وصف المركز"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
@@ -63,7 +48,7 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:id="@+id/hospital_price"
+                android:id="@+id/edtprice_hos"
                 android:hint="سعر الكشف"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
@@ -77,8 +62,8 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:id="@+id/wait"
-                android:hint="مده الانتظار داخل المركز"
+                android:id="@+id/edtmap_hos"
+                android:hint="العنوان"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
@@ -91,8 +76,8 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:id="@+id/map_hos"
-                android:hint="عنوان المركز"
+                android:id="@+id/edttime_hos"
+                android:hint="مده الانتظار"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
@@ -102,19 +87,9 @@
                 app:met_singleLineEllipsis="true"
                 android:inputType="textMultiLine"
                 />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/txtcatid"
-                android:text="06"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                app:met_baseColor="@android:color/black"
-                app:met_floatingLabel="highlight"
-                app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                />
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -151,6 +126,8 @@
                     android:background="@color/colorPrimary"
 
                     />
+
+
 
 
             </LinearLayout>

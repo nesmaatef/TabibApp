@@ -65,13 +65,19 @@ public class home extends AppCompatActivity
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_myprofile);
             MenuItem target1 = menu.findItem(R.id.nav_dates);
+           // MenuItem target2 = menu.findItem(R.id.nav_mydates);
             target1.setVisible(true);
+           // target2.setVisible(false);
+
         } else if (value.equals("false")) {
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_myprofile);
             MenuItem target1 = menu.findItem(R.id.nav_dates);
+           // MenuItem target2 = menu.findItem(R.id.nav_mydates);
             target.setVisible(false);
             target1.setVisible(false);
+           // target2.setVisible(true);
+
 
         }
 
@@ -197,7 +203,7 @@ public class home extends AppCompatActivity
 
         if (id == R.id.nav_dates) {
             Intent homeintent = new Intent(home.this, request.class);
-            homeintent.putExtra("doctorphone",doctor);
+            homeintent.putExtra("doctorphone",common.currentuserphone);
             startActivity(homeintent);
         } else if (id == R.id.nav_callus) {
             Intent homeintent = new Intent(home.this, more.class);
@@ -208,10 +214,16 @@ public class home extends AppCompatActivity
             startActivity(intent);
 
         }else if (id == R.id.nav_myprofile) {
-            Intent intent = new Intent(home.this, doc_details.class);
-            intent.putExtra("doctorid1",doctor);
-            startActivity(intent);
 
+            if (common.currenthospital.equals("true")){
+                Intent intent = new Intent(home.this, hospital_profile.class);
+                intent.putExtra("hospitalid", common.currentuserphone);
+                startActivity(intent);
+            }else if (common.currenthospital.equals("false")) {
+                Intent intent = new Intent(home.this, doc_details.class);
+                intent.putExtra("doctorid1", doctor);
+                startActivity(intent);
+            }
 
         }
         else if (id == R.id.nav_chat) {
@@ -222,6 +234,12 @@ public class home extends AppCompatActivity
         }
         else if (id == R.id.nav_setting) {
             Intent intent = new Intent(home.this, add_setting.class);
+            startActivity(intent);
+
+
+        }
+        else if (id == R.id.nav_mydates) {
+            Intent intent = new Intent(home.this, requestStatus.class);
             startActivity(intent);
 
 

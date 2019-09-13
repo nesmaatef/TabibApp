@@ -36,7 +36,7 @@ import info.hoang8f.widget.FButton;
 public class add_setting extends AppCompatActivity {
     FButton addhospital;
     TextView txt;
-    MaterialEditText edtname, edtdesc, edtphone;
+    MaterialEditText edtname, edtdesc, edtphone,hospital_price,wait, map_hos ;
     Button btnselect, btnupload;
     Uri saveuri;
     FirebaseStorage storage;
@@ -77,7 +77,9 @@ users newuser;
         edtdesc=add_menu_layout.findViewById(R.id.edtdesc);
         edtphone=add_menu_layout.findViewById(R.id.edtphone);
         txt=add_menu_layout.findViewById(R.id.txtcatid);
-
+        hospital_price=add_menu_layout.findViewById(R.id.hospital_price);
+                wait=add_menu_layout.findViewById(R.id. wait);
+                map_hos=add_menu_layout.findViewById(R.id. map_hos);
 
         btnselect=add_menu_layout.findViewById(R.id.btnselect);
         btnupload=add_menu_layout.findViewById(R.id.btnupload);
@@ -146,10 +148,10 @@ users newuser;
                                 newhospital.setPhone(edtphone.getText().toString());
                                 newhospital.setCatid("06");
                                 newhospital.setImage(uri.toString());
-
-                                newuser.setIsstaff("true");
+                                newuser.setIsstaff("false");
                                 newuser.setIspatient("false");
                                 newuser.setIsadmin("false");
+                                newuser.setIshospital("true");
 
 
 

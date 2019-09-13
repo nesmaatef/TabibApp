@@ -270,6 +270,7 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
                                 newuser.setIsstaff("true");
                                 newuser.setIspatient("false");
                                 newuser.setIsadmin("false");
+                                newuser.setIshospital("false");
 
 
 

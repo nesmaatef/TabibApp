@@ -62,6 +62,7 @@ public class signup extends AppCompatActivity {
 							user.setIsadmin("false");
 							user.setIspatient("true");
 							user.setIsstaff("false");
+							user.setIshospital("false");
 
 							table_user.child(edtphone.getText().toString()).setValue(user);
 							Toast.makeText(signup.this, "signup successful", Toast.LENGTH_SHORT).show();
