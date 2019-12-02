@@ -8,7 +8,7 @@
         <item
             android:id="@+id/nav_dates"
             android:icon="@drawable/ic_folder_black_24dp"
-            android:title="الكشوفات"
+            android:title="طلبات الحجز"
 
             />
         <item
@@ -38,7 +38,13 @@
         <item
             android:id="@+id/nav_mydates"
             android:icon="@drawable/ic_add_alert_black_24dp"
-            android:title="مواعيدى"
+            android:title="طلب الكشف"
+            />
+
+        <item
+            android:id="@+id/nav_add_doctor"
+            android:icon="@drawable/ic_add_alert_black_24dp"
+            android:title="طلبات الانضمام"
             />
 
 

@@ -8,6 +8,10 @@
     <color name="item">#DCDCDC</color>
 
     <color name="doctor_item1">#395263</color>
+    #0e6e92
 
+    <color name="styly_item">#0e6e92</color>
+    #FFFFFF
+    <color name="styly_item1">#FFFFFF</color>
 
 </resources>

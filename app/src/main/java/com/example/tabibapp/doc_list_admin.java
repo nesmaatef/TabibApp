@@ -218,7 +218,6 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
 
                 if (newdoctor !=null)
                 {

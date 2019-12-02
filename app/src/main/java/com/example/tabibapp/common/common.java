@@ -13,6 +13,10 @@ public class common {
     public static  String currenthospital1="false" ;
 
 
+//try tabbed
+
+    public static  String doctorphone="" ;
+    public static  String doctortrue="false" ;
 
 
 

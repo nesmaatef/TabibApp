@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,6 +93,21 @@ public class home extends AppCompatActivity
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_setting);
             target.setVisible(false);
+
+        }
+
+
+        if (common.currentadmin.equals("true")){
+            Menu menu = navigationView.getMenu();
+            MenuItem target = menu.findItem(R.id.nav_add_doctor);
+            target.setVisible(true);
+            Toast.makeText(this, "true", Toast.LENGTH_SHORT).show();
+        }
+        else if (common.currentadmin.equals("false")){
+            Menu menu = navigationView.getMenu();
+            MenuItem target = menu.findItem(R.id.nav_add_doctor);
+            target.setVisible(false);
+            Toast.makeText(this, "false", Toast.LENGTH_SHORT).show();
 
         }
 

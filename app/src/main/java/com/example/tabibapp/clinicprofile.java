@@ -105,7 +105,7 @@ public class clinicprofile extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  Intent goappoint = new Intent(clinicprofile.this, appointment.class);
+                  Intent goappoint = new Intent(clinicprofile.this, clinic_services.class);
                  goappoint.putExtra("clinicid", clinicid);
                  goappoint.putExtra("namedoctor", currentclinic.getMap());
                  goappoint.putExtra("clinicprice", currentclinic.getPrice());

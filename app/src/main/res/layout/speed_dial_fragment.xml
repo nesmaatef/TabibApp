@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/group_8"
+  >
+
+
+    <RelativeLayout
+        android:id="@+id/realtive2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/group_9" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/realtive4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/line2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="50dp"
+
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_more_vert_blue_24dp"
+            android:visibility="invisible"
+            android:id="@+id/imgmore"
+
+            />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/realtive2"
+        android:id="@+id/line2"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/img_doc"
+            android:src="@drawable/background"
+
+            />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:backgroundTint="@color/white"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="240dp"
+        android:id="@+id/fabrate"
+        android:visibility="invisible"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line2"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/realtive3"
+        >
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"
+            android:text="Doctor name"
+            android:textColor="#1283B3"
+            android:textAlignment="center"
+            android:id="@+id/doc_name"
+            android:fontFamily="@font/cairo_extralight"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:text="Doctor desc"
+            android:textAlignment="center"
+            android:fontFamily="@font/cairo_extralight"
+            android:id="@+id/doc_desc"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/doc_desc"
+            android:layout_marginTop="10dp"
+            android:textColor="#1283B3"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="من فضلك قيم الدكتور"
+            android:textAlignment="center"
+            android:fontFamily="@font/cairo_extralight"
+            android:id="@+id/txt4"
+            />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingbar"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/txt4"
+            android:rating="0"
+            android:max="5"
+            android:layout_centerHorizontal="true"
+
+            android:isIndicator="true"/>
+
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/goclinics1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/cairo_extralight"
+            android:text="للدخول للعيادات المتاحه"
+            android:textAlignment="center"
+            android:textColor="#1283B3"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+
+            />
+
+        <TextView
+            android:id="@+id/goclinics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/cairo_extralight"
+            android:text="اضغط هنا"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+
+
+            android:textStyle="bold" />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

@@ -10,6 +10,21 @@
         <item name="colorAccent">@color/colorAccent</item>
 
 
+
+
+
+
+    </style>
+
+    <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/styly_item</item>
+
+        <item name="colorPrimaryDark">@color/styly_item1</item>
+
+        <item name="colorAccent">@color/colorAccent</item>
+
+
     </style>
 
     <style name="AppTheme1" parent="Theme.AppCompat.Light.NoActionBar">
@@ -26,11 +41,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
-    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
 
     <style name="RatingDisplayStyle" parent="@style/Widget.AppCompat.ButtonBar.AlertDialog">
         <item name="android:background">@android:color/white</item>

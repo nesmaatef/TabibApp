@@ -5,6 +5,7 @@
 
 
 
+
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_enter_data_doc">enter_data_doc</string>
@@ -34,5 +35,10 @@
         <item>الخميس</item>
         <item>الجمعه</item>
     </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="tab_text_1">الصفحه الشخصيه</string>
+    <string name="tab_text_2">طلبات الحجز</string>
+    <string name="tab_text_3">الكشوفات</string>
 
 </resources>

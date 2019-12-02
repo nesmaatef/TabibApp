@@ -45,7 +45,7 @@ public class signup extends AppCompatActivity {
 
 
 				final ProgressDialog mdialog = new ProgressDialog(signup.this);
-				mdialog.setMessage("please waitting.....");
+				mdialog.setMessage("please waiting.....");
 				mdialog.show();
 
 

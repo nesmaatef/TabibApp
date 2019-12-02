@@ -8,6 +8,27 @@
     android:background="@drawable/group_8"
     android:id="@+id/relative">
 
+
+    <RelativeLayout
+        android:id="@+id/realtive4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_more_vert_blue_24dp"
+            android:visibility="visible"
+            android:id="@+id/imgmore"
+
+            />
+    </RelativeLayout>
+
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +74,7 @@
         android:layout_height="150dp"
         android:orientation="vertical"
 android:layout_below="@+id/txtphone"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_centerInParent="true"
 
         >
@@ -64,7 +85,7 @@ android:layout_below="@+id/txtphone"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@android:color/white"
-            android:fontFamily="@font/cairo_extralight"
+            android:fontFamily="@font/actor"
             android:text="تسجيل الدخول "
             android:textColor="@android:color/white"
             android:textSize="30sp"
@@ -74,7 +95,7 @@ android:layout_below="@+id/txtphone"
             app:shadowColor="@android:color/black"
             app:shadowEnabled="true"
             app:shadowHeight="2dp"
-            tools:fontFamily="@font/cairo_extralight" />
+            tools:fontFamily="@font/actor" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +106,7 @@ android:layout_below="@+id/txtphone"
             android:textSize="15sp"
             android:layout_marginLeft="180dp"
             android:textStyle="bold"
-            tools:fontFamily="@font/cairo_extralight"/>
+            tools:fontFamily="@font/actor"/>
 
         <TextView
             android:id="@+id/txtlogin"
@@ -98,7 +119,7 @@ android:layout_below="@+id/txtphone"
             android:textColor="#0e6e92"
             android:textSize="15sp"
             android:textStyle="bold"
-            tools:fontFamily="@font/cairo_extralight"/>
+            tools:fontFamily="@font/actor"/>
 
 
     </LinearLayout>

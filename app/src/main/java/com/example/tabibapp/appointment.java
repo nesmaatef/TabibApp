@@ -74,8 +74,6 @@ String clinicid="";
         setContentView(R.layout.activity_appointment);
 
         database3=FirebaseDatabase.getInstance();
-
-
         //try
         appointment3=database3.getReference("clinics");
         appointment4=database3.getReference("hospital");
@@ -399,7 +397,8 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
         adapter3 =new FirebaseRecyclerAdapter<appoint,appointmentviewholder>(appoint.class,
                 R.layout.appoint_item,
                 appointmentviewholder.class,
-                appointment3.child(clinicid).child("appointment")) {
+                appointment3.child(clinicid).child("appoin|tment")) {
+
             @Override
             protected void populateViewHolder(final appointmentviewholder viewholder, final appoint model, int i) {
 
