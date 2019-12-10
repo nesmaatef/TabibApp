@@ -85,7 +85,9 @@ public class hospital_profile extends AppCompatActivity {
         hospital_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent go = new Intent(hospital_profile.this, appointment.class);
+              //  Intent go = new Intent(hospital_profile.this, appointment.class);
+                Intent go = new Intent(hospital_profile.this, Services_hospital.class);
+
                 go.putExtra("hospitalid", hospitalid);
                 go.putExtra("hospitalname", currenthospital.getName());
                 go.putExtra("hospitalprice", currenthospital.getPrice());
@@ -250,8 +252,6 @@ public class hospital_profile extends AppCompatActivity {
 
 
     private void gethospitaldetails(String hospitalid) {
-
-
         hospital.child(hospitalid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

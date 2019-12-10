@@ -6,7 +6,7 @@ public class reserve {
     private String Clinic_price;
     private String Clinic_date;
     private String User_phone;
-    private String Comment;
+    private String Comment, company , city;
 
     public String getComment() {
         return Comment;
@@ -16,13 +16,31 @@ public class reserve {
         Comment = comment;
     }
 
-    public reserve(String doctor_phone, String clinic_name, String clinic_price, String clinic_date, String user_phone, String comment) {
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public reserve(String doctor_phone, String clinic_name, String clinic_price, String clinic_date, String user_phone, String comment, String company, String city) {
         Doctor_phone = doctor_phone;
         Clinic_name = clinic_name;
         Clinic_price = clinic_price;
         Clinic_date = clinic_date;
         User_phone = user_phone;
-        Comment=comment;
+        Comment = comment;
+        this.company = company;
+       this.city =city;
     }
 
     public String getDoctor_phone() {

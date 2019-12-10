@@ -30,37 +30,58 @@
         android:orientation="vertical"
         android:background="#3089A1"
         android:layout_below="@id/relative1"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true">
 
-<EditText
+<TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/edtdocname"
-    android:textColor="@android:color/white"
+    android:textColor="@android:color/black"
+    android:background="@android:color/white"
     android:layout_margin="10dp"
     android:fontFamily="@font/cairo_extralight"/>
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edtdocprice"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
+        android:background="@android:color/white"
         android:layout_margin="10dp"
         android:fontFamily="@font/cairo_extralight"/>
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edtdocdate"
-        android:textColor="@android:color/white"
+        android:id="@+id/edtcity"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black"
         android:layout_margin="10dp"
         android:fontFamily="@font/cairo_extralight"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtcompany"
+            android:textColor="@android:color/black"
+            android:background="@android:color/white"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/cairo_extralight"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtdocdate"
+            android:textColor="@android:color/black"
+            android:background="@android:color/white"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/cairo_extralight"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edtcomment"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:background="@android:color/white"
             android:layout_margin="10dp"
             android:fontFamily="@font/cairo_extralight"/>
 

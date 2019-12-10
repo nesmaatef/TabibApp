@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.face.itemclicklistner;
+import com.example.tabibapp.common.common;
 import com.example.tabibapp.viewholder.serviceviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -19,13 +20,14 @@ import java.text.ParseException;
 public class clinic_services extends AppCompatActivity {
 
     FirebaseDatabase database;
-    DatabaseReference services;
+    DatabaseReference services,services1;
     RecyclerView recycler1;
     RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<com.example.tabibapp.Model.clinic_services, serviceviewholder> adapter;
     String clinicid="";
     String clinic_map ="";
     String clinic_price ="";
+    String hospital_id ="";
 
 
     @Override
@@ -35,6 +37,7 @@ public class clinic_services extends AppCompatActivity {
 
         database=FirebaseDatabase.getInstance();
         services=database.getReference("clinics");
+        services1=database.getReference("Rooms");
         recycler1 =(RecyclerView) findViewById(R.id.recycler_service);
 
         recycler1.setHasFixedSize(true);
@@ -46,11 +49,57 @@ public class clinic_services extends AppCompatActivity {
 
         Intent intent = getIntent();
         clinicid = intent.getStringExtra("clinicid");
+
         clinic_map =intent.getStringExtra("namedoctor");
         clinic_price =intent.getStringExtra("clinicprice");
+        hospital_id = intent.getStringExtra("id");
 
+
+
+        loadhospitalservices(hospital_id);
+
+        if (common.person.equals("true") )
         loadclinicservices(clinicid);
+
+        else
+            loadhospitalservices(hospital_id);
+
     }
+
+    private void loadhospitalservices(String hospital_id) {
+        adapter= new FirebaseRecyclerAdapter<com.example.tabibapp.Model.clinic_services, serviceviewholder>(
+                com.example.tabibapp.Model.clinic_services.class,
+                R.layout.service_item,
+                serviceviewholder.class,
+                services1.child(hospital_id).child("services_items")
+        ) {
+
+            @Override
+            protected void populateViewHolder(serviceviewholder clinicviewholder, final com.example.tabibapp.Model.clinic_services clinic_services, int i) {
+                clinicviewholder.value.setText(clinic_services.getName());
+                clinicviewholder.value1.setText(clinic_services.getPrice());
+
+                clinicviewholder.setItemClickListener(new itemclicklistner() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) throws ParseException {
+                       // Intent intent =new Intent(com.example.tabibapp.clinic_services.this, appointment.class);
+
+                       // intent.putExtra("clinicid", clinicid);
+                       // intent.putExtra("namedoctor", clinic_map);
+                       // intent.putExtra("clinicprice", clinic_price);
+
+                       // startActivity(intent);
+
+
+                    }
+                });
+            }
+
+
+        };
+        recycler1.setAdapter(adapter);
+    }
+
     private void loadclinicservices(final String clinicid) {
         adapter= new FirebaseRecyclerAdapter<com.example.tabibapp.Model.clinic_services, serviceviewholder>(
                 com.example.tabibapp.Model.clinic_services.class,

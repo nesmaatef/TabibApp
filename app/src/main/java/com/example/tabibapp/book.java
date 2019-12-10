@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +24,8 @@ public class book extends AppCompatActivity {
 
     FirebaseDatabase database1;
     DatabaseReference book;
-EditText edtname,edtprice,edtdate, edtcomment;
+TextView edtname,edtprice,edtdate, edtcompany, edtcity;
+EditText edtcomment;
 RelativeLayout root;
   FButton fab ;
    reserve newreserve;
@@ -56,6 +58,10 @@ RelativeLayout root;
                 newreserve.setClinic_date(edtdate.getText().toString());
                 newreserve.setUser_phone(common.currentuserphone);
                 newreserve.setComment(edtcomment.getText().toString());
+                newreserve.setCity(edtcity.getText().toString());
+                newreserve.setCompany(edtcompany.getText().toString());
+
+
 
                 if (newreserve !=null){
                     book.push().setValue(newreserve);
@@ -75,10 +81,12 @@ RelativeLayout root;
 
             }
         });
-        edtname=(EditText) findViewById(R.id.edtdocname);
-        edtprice=(EditText) findViewById(R.id.edtdocprice);
-        edtdate=(EditText)findViewById(R.id.edtdocdate);
-        edtcomment=(EditText)findViewById(R.id.edtcomment);
+        edtname=(TextView) findViewById(R.id.edtdocname);
+        edtprice=(TextView) findViewById(R.id.edtdocprice);
+        edtdate=(TextView) findViewById(R.id.edtdocdate);
+        edtcomment=(EditText) findViewById(R.id.edtcomment);
+        edtcity=(TextView) findViewById(R.id.edtcity);
+        edtcompany=(TextView) findViewById(R.id.edtcompany);
 
         root=(RelativeLayout) findViewById(R.id.root);
 
@@ -93,6 +101,8 @@ RelativeLayout root;
         edtname.setText(clinicid);
         edtprice.setText(clinicprice);
         edtdate.setText(doctordate);
+        edtcompany.setText(common.currentcompany);
+        edtcity.setText(common.currentcity);
 
 
 

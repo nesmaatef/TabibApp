@@ -76,7 +76,7 @@ String clinicid="";
         database3=FirebaseDatabase.getInstance();
         //try
         appointment3=database3.getReference("clinics");
-        appointment4=database3.getReference("hospital");
+        appointment4=database3.getReference("Rooms");
 
 
 
@@ -128,12 +128,14 @@ String clinicid="";
 
         else if (common.currenthospital.equals("true")) {
             Intent intent = getIntent();
-            hospitalid=intent.getStringExtra("hospitalid");
+           hospitalid=intent.getStringExtra("serviceid");
             hospital_name=intent.getStringExtra("hospitalname");
             hospital_price=intent.getStringExtra("hospitalprice");
 
 
+         //  common.currentuserphone =hospitalid;
             loadhospitalappointments(hospitalid);
+
         }
 
 
@@ -244,6 +246,8 @@ String clinicid="";
                 appointmentviewholder.value1.setText(appoint.getFrom());
                 appointmentviewholder.value2.setText(appoint.getTo());
 
+                Toast.makeText(appointment.this, hospitalid+"null", Toast.LENGTH_SHORT).show();
+
                 final String date22 = new SimpleDateFormat("E, MMM dd yyyy", Locale.getDefault()).format(new Date());
                 Toast.makeText(appointment.this, "Current time =>"+ date22, Toast.LENGTH_SHORT).show();
 
@@ -266,8 +270,9 @@ String clinicid="";
 
                         if (date.before(date33)) {
                             Toast.makeText(appointment.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
-                            Intent hosdetail = new Intent(appointment.this, book.class);
+                            Intent hosdetail = new Intent(appointment.this, clinic_services.class);
                             hosdetail.putExtra("name", hospital_name);
+                            hosdetail.putExtra("id", hospitalid);
                             hosdetail.putExtra("price", hospital_price);
                             hosdetail.putExtra("docdate", appoint.getDay());
                             startActivity(hosdetail);
@@ -468,5 +473,6 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
         txtday.setText(currentDateString);
     }
+
 
 }

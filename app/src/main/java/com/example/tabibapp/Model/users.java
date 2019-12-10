@@ -1,13 +1,6 @@
 package com.example.tabibapp.Model;
 
 public class users {
-
-
-
-
-
-
-
     private String phone;
     private String isstaff;
     private String ispatient;

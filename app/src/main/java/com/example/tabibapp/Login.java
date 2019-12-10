@@ -376,6 +376,19 @@ alertdialog.setPositiveButton("تسجيل", new DialogInterface.OnClickListener(
                     Toast.makeText(Login.this, "this phone nuber is already exist", Toast.LENGTH_SHORT).show();
                 } else {
 
+                    if (ephone.getText().toString().length()==0){
+                        edtphone.setError("قم بادخال الرقم الخاص بك");}
+
+                    if (ecity.getText().toString().length()==0){
+                        edtphone.setError("قم بادخال المدينه الخاصه بك");}
+
+                    if (ecompany.getText().toString().length()==0){
+                        edtphone.setError("اكتب لا يوجد");}
+
+                    if (earea.getText().toString().length()==0){
+                        edtphone.setError("قم بادخال المنطقه الى تنتمي اليها");}
+
+
                     mdialog.dismiss();
                     users user = new users();
                     user.setIsadmin("false");
@@ -391,9 +404,11 @@ alertdialog.setPositiveButton("تسجيل", new DialogInterface.OnClickListener(
 
                     table_user.child(ephone.getText().toString()).setValue(user);
                     Toast.makeText(Login.this, "signup successful", Toast.LENGTH_SHORT).show();
+
                     Intent homeintent = new Intent(Login.this, home.class);
                     homeintent.putExtra("true", "false");
-
+                    common.currentcity =user.getCity();
+                    common.currentcompany =user.getCompany();
                     common.currentuser = user;
                     startActivity(homeintent);
                     finish();

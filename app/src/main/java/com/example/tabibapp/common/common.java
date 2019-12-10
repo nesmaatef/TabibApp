@@ -1,6 +1,5 @@
 package com.example.tabibapp.common;
 
-import com.example.tabibapp.Model.doctor;
 import com.example.tabibapp.Model.users;
 
 public class common {
@@ -11,6 +10,10 @@ public class common {
     public static  String currentadmin="false" ;
     public static  String currenthospital="false" ;
     public static  String currenthospital1="false" ;
+    public static  String currentcompany ;
+    public static  String currentcity;
+
+
 
 
 //try tabbed
@@ -22,7 +25,6 @@ public class common {
 
 
 
-    public static doctor currentprice ;
     public static String person ="false";
     public static String person1 ="false";
 
