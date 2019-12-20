@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
 
         >
 
@@ -43,6 +43,7 @@
         android:layout_height="match_parent"
         android:id="@+id/recycler_hospital"
         android:scrollbars="vertical"
+        android:layout_marginTop="20dp"
         android:layout_below="@id/searchBar">
     </androidx.recyclerview.widget.RecyclerView>
 

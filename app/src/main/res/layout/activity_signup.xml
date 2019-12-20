@@ -9,6 +9,25 @@
     android:id="@+id/relative">
 
     <RelativeLayout
+        android:id="@+id/realtive4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_more_vert_blue_24dp"
+            android:visibility="visible"
+            android:id="@+id/imgmore"
+
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="230dp"
         android:layout_height="191dp"
         android:layout_alignParentTop="true"
@@ -24,25 +43,75 @@
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:orientation="vertical"
         android:id="@+id/txtphone">
 
 
 
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtphone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/edittext"
             android:hint="رقم التليفون"
+            app:met_textColorHint="@android:color/black"
             android:drawableTint="@color/doctor"
             android:gravity="center"
             android:inputType="number"
-            android:drawableEnd="@drawable/ic_profile"
             android:drawablePadding="10dp"
             android:shadowColor="@android:color/black"
+
+            />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtcompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext"
+            app:met_textColorHint="@android:color/black"
+            android:hint="شركه التامين الخاصه"
+            android:drawableTint="@color/doctor"
+            android:gravity="center"
+            android:inputType="text"
+            android:drawablePadding="10dp"
+            android:shadowColor="@android:color/black"
+            android:layout_marginTop="10dp"
+
+
+            />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtcity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext"
+            app:met_textColorHint="@android:color/black"
+            android:hint="المدينه"
+            android:drawableTint="@color/doctor"
+            android:gravity="center"
+            android:inputType="text"
+            android:drawablePadding="10dp"
+            android:shadowColor="@android:color/black"
+            android:layout_marginTop="10dp"
+
+
+            />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtarea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext"
+            app:met_textColorHint="@android:color/black"
+            android:hint="المنطقه"
+            android:drawableTint="@color/doctor"
+            android:gravity="center"
+            android:inputType="text"
+            android:drawablePadding="10dp"
+            android:shadowColor="@android:color/black"
+            android:layout_marginTop="10dp"
+
 
             />
 
@@ -59,46 +128,20 @@
 
         >
 
-        <info.hoang8f.widget.FButton
+        <Button
             android:id="@+id/btnsignup"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:color/white"
+            android:background="@drawable/bookdoctor"
             android:text="انشاء حساب"
             android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="normal|bold|italic"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:cornerRadius="40sp"
-            app:fButtonColor="#0e6e92"
-            app:shadowColor="@android:color/black"
-            app:shadowEnabled="true"
-            app:shadowHeight="2dp"
             tools:fontFamily="@font/cairo_extralight" />
 
-        <TextView
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:text="لديك حساب بالفعل"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:layout_marginLeft="170dp"
-            android:textStyle="bold"
-            tools:fontFamily="@font/cairo_extralight"/>
 
-        <TextView
-            android:id="@+id/txtlogin"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="-33dp"
-            android:clickable="true"
-            android:text="تسجيل الدخول"
-            android:textColor="#0e6e92"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            tools:fontFamily="@font/cairo_extralight"/>
 
 
     </LinearLayout>

@@ -16,7 +16,11 @@
 
 
 
+
         <com.google.android.material.tabs.TabLayout
+
+
+
             android:id="@+id/tabs"
 android:fillViewport="true"
             android:layout_width="match_parent"
@@ -27,6 +31,8 @@ android:fillViewport="true"
             app:tabMaxWidth="0dp"
             app:tabMode="fixed"
             app:tabTextColor="@android:color/white" />
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

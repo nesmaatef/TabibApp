@@ -41,11 +41,11 @@ import static android.view.View.VISIBLE;
 
 public class hospital_profile extends AppCompatActivity {
 
-    TextView txt_name_hos,txt_price_hos,addrees,times,desc_hos,hospital_date;
+    TextView txt_name_hos,txt_price_hos,addrees,times,desc_hos,hospital_date,price,times1;
     ImageView imgprofile,imgmore;
     FButton fbhospital;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference hospital;
+    DatabaseReference hospital,hospital1 ;
     String hospitalid ="";
     hospitals currenthospital;
     FirebaseStorage storage;
@@ -54,7 +54,7 @@ public class hospital_profile extends AppCompatActivity {
     MaterialEditText edtname,edtdesc,hospital_price,wait, map_hos;
     Button btnselect,btnupload;
     hospitals current;
-
+    String hospitalname ="" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,8 @@ public class hospital_profile extends AppCompatActivity {
         //init firebase
         firebaseDatabase=FirebaseDatabase.getInstance();
         hospital =firebaseDatabase.getReference("hospital");
+        hospital1 =firebaseDatabase.getReference("hospital1");
+
 
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
@@ -78,6 +80,10 @@ public class hospital_profile extends AppCompatActivity {
         hospital_date= (TextView) findViewById(R.id.hospitaldate);
         imgmore= (ImageView) findViewById(R.id.imgmore);
 
+        price= (TextView) findViewById(R.id.txt_price);
+        times1= (TextView) findViewById(R.id.txt_time);
+
+
 
 
         imgprofile=(ImageView) findViewById(R.id.imgprofile);
@@ -85,14 +91,21 @@ public class hospital_profile extends AppCompatActivity {
         hospital_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent go = new Intent(hospital_profile.this, appointment.class);
-                Intent go = new Intent(hospital_profile.this, Services_hospital.class);
-
+                if (hospitalname.equals("06") ||hospitalname.equals("0") ){
+                Intent go = new Intent(hospital_profile.this, hospital_services.class);
                 go.putExtra("hospitalid", hospitalid);
                 go.putExtra("hospitalname", currenthospital.getName());
                 go.putExtra("hospitalprice", currenthospital.getPrice());
                 startActivity(go);
-                common.currenthospital= "true";
+                common.currenthospital= "true";}
+
+                else if (hospitalname.equals("11")){
+                    Intent go = new Intent(hospital_profile.this, category_hospital.class);
+                    go.putExtra("hospitalid", hospitalid);
+                    startActivity(go);
+
+
+                }
 
 
             }
@@ -114,9 +127,18 @@ public class hospital_profile extends AppCompatActivity {
 
         if (getIntent() !=null)
             hospitalid =getIntent().getStringExtra("hospitalid");
+        hospitalname = getIntent().getStringExtra("hospital");
 
-        if (!hospitalid.isEmpty())
+
+        if (hospitalname.equals("06") )
         {
+            gethospitaldetails(hospitalid);
+        }
+        else if (hospitalname.equals("11")){
+            gethospitaldetails1(hospitalid);
+        }
+         else if (common.currenthospital.equals("true")){
+            hospitalid= common.currentuserphone;
             gethospitaldetails(hospitalid);
         }
 
@@ -251,7 +273,7 @@ public class hospital_profile extends AppCompatActivity {
     }
 
 
-    private void gethospitaldetails(String hospitalid) {
+    private void gethospitaldetails(final String hospitalid) {
         hospital.child(hospitalid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -264,6 +286,8 @@ public class hospital_profile extends AppCompatActivity {
                 desc_hos.setText(currenthospital.getDesc());
                 common.currentdoctorphone=currenthospital.getPhone();
 
+                Toast.makeText(hospital_profile.this, "hi"+hospitalid, Toast.LENGTH_SHORT).show();
+
 
             }
 
@@ -273,4 +297,37 @@ public class hospital_profile extends AppCompatActivity {
             }
         });
     }
+
+    private void gethospitaldetails1(String hospitalid) {
+        hospital1.child(hospitalid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currenthospital=dataSnapshot.getValue(hospitals.class);
+                Picasso.get().load(currenthospital.getImage()).into(imgprofile);
+                txt_name_hos.setText(currenthospital.getName());
+               // txt_price_hos.setText(currenthospital.getPrice());
+
+                addrees.setText(currenthospital.getMap());
+               // times.setText(currenthospital.getTimes());
+                desc_hos.setText(currenthospital.getDesc());
+                common.currentdoctorphone=currenthospital.getPhone();
+
+                txt_price_hos.setVisibility(View.INVISIBLE);
+                times.setVisibility(View.INVISIBLE);
+                price.setVisibility(View.INVISIBLE);
+                times1.setVisibility(View.INVISIBLE);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
 }

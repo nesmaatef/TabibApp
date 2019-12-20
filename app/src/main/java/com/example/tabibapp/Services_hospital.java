@@ -3,16 +3,18 @@ package com.example.tabibapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.tabibapp.Model.Hospital_services;
-import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.service_hospital_viewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.ParseException;
 
 public class Services_hospital extends AppCompatActivity {
@@ -32,7 +34,7 @@ public class Services_hospital extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services_hospital);
         database=FirebaseDatabase.getInstance();
-        services=database.getReference("Rooms").child("services_items");
+        services=database.getReference("Rooms");
         recycler1 =(RecyclerView) findViewById(R.id.recycler_service_hospital);
 
         recycler1.setHasFixedSize(true);
@@ -42,12 +44,12 @@ public class Services_hospital extends AppCompatActivity {
 
 
 
-      //  Intent intent = getIntent();
-       // clinicid = intent.getStringExtra("clinicid");
+      Intent intent = getIntent();
+        hospitalid = intent.getStringExtra("hospitalid");
         //clinic_map =intent.getStringExtra("namedoctor");
         //clinic_price =intent.getStringExtra("clinicprice");
 
-        hospitalid =common.currentuserphone;
+       // hospitalid =common.currentuserphone;
 
         load_hospital_services(hospitalid);
     }
@@ -66,7 +68,7 @@ public class Services_hospital extends AppCompatActivity {
                 clinicviewholder.setItemClickListener(new itemclicklistner() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) throws ParseException {
-                      Intent intent =new Intent(Services_hospital.this, appointment.class);
+                      Intent intent =new Intent(Services_hospital.this, appoint_hospital.class);
 
                         intent.putExtra("serviceid", adapter.getRef(position).getKey());
 

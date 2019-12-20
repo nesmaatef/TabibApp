@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".clinic_services"
+    tools:context=".hospital_services"
     android:background="@drawable/group_8">
 
     <ImageView
@@ -21,13 +21,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_below="@id/imgmore1">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="اختر الخدمه المناسبه"
             android:textSize="20sp"
+            android:layout_alignParentRight="true"
             android:textColor="@android:color/black"
             android:fontFamily="@font/cairo_extralight"/>
 

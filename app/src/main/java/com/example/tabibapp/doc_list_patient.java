@@ -40,8 +40,9 @@ public class doc_list_patient extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
-    DatabaseReference doctorlist;
+    DatabaseReference doctorlist,doctorlist1;
     String categoryid="";
+    String doctorid="";
     RelativeLayout rootlayout;
 
     MaterialEditText edtname, edtdesc, edtprice, edtmap, edttimes, edttimeswait;
@@ -82,15 +83,16 @@ public class doc_list_patient extends AppCompatActivity {
 
 
         //getintent
-        if (getIntent()!=null)
+        if (getIntent()!=null){
             categoryid=getIntent().getStringExtra("categoryid");
-        if (!categoryid.isEmpty() && categoryid!=null) {
+        }
+         if (!categoryid.isEmpty() && categoryid!=null  ) {
             loaddoctorlist(categoryid);
         }
 
         //searchbar
         materialSearchBar=(MaterialSearchBar) findViewById(R.id.searchBar);
-        materialSearchBar.setHint("search your doctor here");
+        materialSearchBar.setHint("ابحث عن الدكتور هنا...");
         loadsuggest();
         materialSearchBar.setLastSuggestions(suggestList);
         materialSearchBar.setCardViewElevation(10);
@@ -155,6 +157,7 @@ public class doc_list_patient extends AppCompatActivity {
                 viewHolder.txtname.setText(model.getName());
                 viewHolder.txtdesc.setText(model.getDesc());
                 final doctor clickitem =model;
+
 
                 viewHolder.setItemClickListener(new itemclicklistner() {
                     @Override

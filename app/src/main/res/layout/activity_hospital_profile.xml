@@ -198,13 +198,12 @@ android:layout_toLeftOf="@id/txt_map"
 
 
     </LinearLayout>
-    android:id="@+id/fbhospital"
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="خدمات المركز"
+        android:text="الاقسام والخدمات..."
         android:fontFamily="@font/cairo_extralight"
         android:id="@+id/hospitaldate"
         android:textSize="20sp"

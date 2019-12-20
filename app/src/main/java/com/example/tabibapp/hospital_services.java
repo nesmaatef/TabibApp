@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tabibapp.Model.clinic_services;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.serviceviewholder;
@@ -24,70 +26,62 @@ import java.text.ParseException;
 
 import static android.view.View.VISIBLE;
 
-public class clinic_services extends AppCompatActivity {
+public class hospital_services extends AppCompatActivity {
 
     FirebaseDatabase database;
-    DatabaseReference services,services1;
+    DatabaseReference services;
     RecyclerView recycler1;
     RecyclerView.LayoutManager layoutManager;
-    FirebaseRecyclerAdapter<com.example.tabibapp.Model.clinic_services, serviceviewholder> adapter;
-    String clinicid="";
-    String clinic_map ="";
-    String clinic_price ="";
+    FirebaseRecyclerAdapter<clinic_services, serviceviewholder> adapter;
     ImageView imgmore;
+    String hospitalid ="";
     MaterialEditText edtservice, edtserviceprice;
-    com.example.tabibapp.Model.clinic_services currentservice, newservice;
+    com.example.tabibapp.Model.clinic_services currentservice;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clinic_services);
+        setContentView(R.layout.activity_hospital_services);
+
 
         database=FirebaseDatabase.getInstance();
-        services=database.getReference("clinics");
-               recycler1 =(RecyclerView) findViewById(R.id.recycler_service);
+        services=database.getReference("hospital");
+        recycler1 =(RecyclerView) findViewById(R.id.recycler_service);
 
         recycler1.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recycler1.setLayoutManager(layoutManager);
          imgmore = (ImageView) findViewById(R.id.imgmore1);
 
-
-
-        if (common.doctortrue.equals("true")){
-            imgmore.setVisibility(VISIBLE);
-        }
+         if (common.currenthospital.equals("true") )
+             imgmore.setVisibility(VISIBLE);
 
         imgmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              showdialog();
+                showdialog(hospitalid);
 
 
             }
         });
 
 
-        Intent intent = getIntent();
-        clinicid = intent.getStringExtra("clinicid");
+        if (getIntent() !=null)
+            hospitalid =getIntent().getStringExtra("hospitalid");
 
-        clinic_map =intent.getStringExtra("namedoctor");
-        clinic_price =intent.getStringExtra("clinicprice");
-
-
-        loadclinicservices(clinicid);
-
-
+        loadhospitalservices(hospitalid);
 
 
     }
-
-
-    private void loadclinicservices(final String clinicid) {
+    private void loadhospitalservices(final String hospital_id) {
         adapter= new FirebaseRecyclerAdapter<com.example.tabibapp.Model.clinic_services, serviceviewholder>(
                 com.example.tabibapp.Model.clinic_services.class,
                 R.layout.service_item,
                 serviceviewholder.class,
-                services.child(clinicid).child("services")
+                services.child(hospital_id).child("services_items")
         ) {
 
             @Override
@@ -95,14 +89,16 @@ public class clinic_services extends AppCompatActivity {
                 clinicviewholder.value.setText(clinic_services.getName());
                 clinicviewholder.value1.setText(clinic_services.getPrice());
 
+                Toast.makeText(hospital_services.this, "hi"+ hospital_id, Toast.LENGTH_SHORT).show();
+
                 clinicviewholder.setItemClickListener(new itemclicklistner() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) throws ParseException {
-                        Intent intent =new Intent(com.example.tabibapp.clinic_services.this, appointment.class);
+                        Intent intent =new Intent(hospital_services.this, Services_hospital.class);
 
-                        intent.putExtra("clinicid", clinicid);
-                        intent.putExtra("namedoctor", clinic_map);
-                        intent.putExtra("clinicprice", clinic_price);
+                         intent.putExtra("hospitalid",hospital_id);
+                        // intent.putExtra("namedoctor", clinic_map);
+                        // intent.putExtra("clinicprice", clinic_price);
 
                         startActivity(intent);
 
@@ -115,9 +111,8 @@ public class clinic_services extends AppCompatActivity {
         };
         recycler1.setAdapter(adapter);
     }
-
-    private void showdialog(){
-        AlertDialog.Builder alertdialog= new AlertDialog.Builder(clinic_services.this);
+    private void showdialog(final String clinicid){
+        AlertDialog.Builder alertdialog= new AlertDialog.Builder(hospital_services.this);
         alertdialog.setTitle("اضف حدمه جديده");
         LayoutInflater inflater =this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.add_services, null);
@@ -129,11 +124,10 @@ public class clinic_services extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
-                newservice =new  com.example.tabibapp.Model.clinic_services();
-                newservice.setName(edtservice.getText().toString());
-                newservice.setPrice(edtserviceprice.getText().toString());
+                currentservice.setName(edtservice.getText().toString());
+                currentservice.setPrice(edtserviceprice.getText().toString());
 
-                services.child(clinicid).child("services").push().setValue(newservice);
+                services.child(clinicid).child("services_items").setValue(currentservice);
 
             }
         });
@@ -145,4 +139,6 @@ public class clinic_services extends AppCompatActivity {
         });
         alertdialog.show();
     }
+
+
 }

@@ -13,10 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".book_hospital1"></activity>
+        <activity android:name=".book_hospital_doctor" />
+        <activity android:name=".doctor_list_hospital" />
+        <activity android:name=".appointment_hospital1" />
+        <activity android:name=".appoint_hospital" />
+        <activity android:name=".hospital_services" />
+        <activity android:name=".category_hospital" />
         <activity android:name=".Services_hospital" />
         <activity
             android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
+            android:label="Hi Doctor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".clinic_services" />
         <activity android:name=".requestStatus" />

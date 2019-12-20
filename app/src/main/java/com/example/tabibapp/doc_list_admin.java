@@ -144,10 +144,6 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         viewHolder.setItemClickListener(new itemclicklistner() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-               // Toast.makeText(doc_list_admin.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
-
-
-
                 Intent docdetails = new Intent(doc_list_admin.this, doc_details.class);
                 docdetails.putExtra("DoctorId", adapter.getRef(position).getKey());
                 startActivity(docdetails);
@@ -170,7 +166,6 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
        else if (item.getItemId()==R.id.action_refresh){
            loaddoctorlist(categoryid);
        }
-           //   Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();
            return super.onOptionsItemSelected(item);
 
     }

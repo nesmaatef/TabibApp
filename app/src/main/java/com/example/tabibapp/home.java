@@ -100,7 +100,9 @@ public class home extends AppCompatActivity
         if (common.currentadmin.equals("true")){
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_add_doctor);
+            MenuItem target1 = menu.findItem(R.id.nav_mydates);
             target.setVisible(true);
+            target1.setVisible(false);
             Toast.makeText(this, "true", Toast.LENGTH_SHORT).show();
         }
         else if (common.currentadmin.equals("false")){
@@ -141,7 +143,7 @@ public class home extends AppCompatActivity
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
 
-                        if (adapter.getRef(position).getKey().equals("06")){
+                        if (adapter.getRef(position).getKey().equals("06") || adapter.getRef(position).getKey().equals("11")){
                             Intent hoslist = new Intent(home.this, hospital.class);
                             hoslist.putExtra("categoryid1", adapter.getRef(position).getKey());
                             startActivity(hoslist);
@@ -156,6 +158,8 @@ public class home extends AppCompatActivity
                             doclist.putExtra("categoryid", adapter.getRef(position).getKey());
                             startActivity(doclist);
                         }
+
+
 
 
                     }
@@ -235,6 +239,7 @@ public class home extends AppCompatActivity
             if (common.currenthospital.equals("true")){
                 Intent intent = new Intent(home.this, hospital_profile.class);
                 intent.putExtra("hospitalid", common.currentuserphone);
+                intent.putExtra("hospital", "0");
                 startActivity(intent);
             }else if (common.currenthospital.equals("false")) {
                 Intent intent = new Intent(home.this, doc_details.class);
@@ -261,6 +266,13 @@ public class home extends AppCompatActivity
 
 
         }
+        else if (id == R.id.nav_Exit) {
+            finish();
+            moveTaskToBack(true);
+
+
+        }
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

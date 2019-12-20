@@ -19,12 +19,12 @@
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/edtname"
-                android:hint="name"
+                android:hint="اسم العياده"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 app:met_baseColor="@android:color/black"
                 app:met_floatingLabel="highlight"
                 app:met_primaryColor="@color/colorPrimary"
@@ -33,12 +33,12 @@
                 />
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/edttimes"
-                android:hint="time"
+                android:hint="مده الكشف"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 app:met_baseColor="@android:color/black"
                 app:met_floatingLabel="highlight"
                 app:met_primaryColor="@color/colorPrimary"
@@ -48,12 +48,12 @@
             />
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/edtmap"
-                android:hint="map"
+                android:hint="مكان العياده"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 app:met_baseColor="@android:color/black"
                 app:met_floatingLabel="highlight"
                 app:met_primaryColor="@color/colorPrimary"
@@ -63,12 +63,12 @@
             />
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/edtprice"
-                android:hint="price"
+                android:hint="السعر"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 app:met_baseColor="@android:color/black"
                 app:met_floatingLabel="highlight"
                 app:met_primaryColor="@color/colorPrimary"
@@ -104,13 +104,13 @@
                     android:layout_height="30dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="SELECT"
+                    android:text="اختر صوره"
                     android:textColor="@android:color/white"
                     android:layout_marginRight="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="8dp"
-                    android:background="@color/colorPrimary"
+                    android:background="#0E6E92"
 
                     />
 
@@ -119,13 +119,13 @@
                     android:layout_height="30dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="UPLOAD"
+                    android:text="رفع البيانات"
                     android:textColor="@android:color/white"
                     android:layout_marginRight="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="8dp"
-                    android:background="@color/colorPrimary"
+                    android:background="#0E6E92"
 
                     />
 

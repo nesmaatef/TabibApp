@@ -1,7 +1,6 @@
 package com.example.tabibapp;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.requests;
 import com.example.tabibapp.Model.reserve;
+import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.ui.main.PageViewModel;
 import com.example.tabibapp.viewholder.requestviewholder;
@@ -82,8 +82,8 @@ public class request_doctor extends Fragment {
         layoutManager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        Intent intent =new Intent();
-        value =intent.getStringExtra("doctorphone");
+       // Intent intent =new Intent();
+        value =common.currentuserphone;
 
         loadrequests(value);
 
@@ -117,7 +117,7 @@ public class request_doctor extends Fragment {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         showdialog();
-                        deleteitem(adapter.getRef(position).getKey());
+                      //  deleteitem(adapter.getRef(position).getKey());
 
 
                     }

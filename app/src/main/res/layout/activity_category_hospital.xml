@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/group_8"
-    tools:context=".doc_list_admin"
+    tools:context=".category_hospital"
     android:id="@+id/rootlayout">
 
 
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="اختر الدكتور المناسب.."
+        android:text="الاقسام المتاحه"
         android:textSize="23sp"
         android:layout_alignParentRight="true"
         android:id="@+id/txtview"
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        android:id="@+id/recycler_doc"
+        android:id="@+id/recycler_cat"
         android:layoutAnimation="@anim/layoutfalldown"
         android:scrollbars="vertical"
         android:layout_below="@id/txtview">

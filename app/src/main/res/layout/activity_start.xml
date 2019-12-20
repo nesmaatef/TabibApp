@@ -22,14 +22,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:id="@+id/login"
-        android:background="@color/colorPrimaryDark"
+        android:background="#0E6E92"
         android:textColor="#fff"
         android:text="login"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="#fff"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black"
         android:layout_marginTop="10dp"
         android:id="@+id/register"
         android:text="register"/>

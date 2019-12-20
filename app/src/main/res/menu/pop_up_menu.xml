@@ -3,7 +3,9 @@
 
     <item
         android:id="@+id/doctor"
-        android:title="تسجيل طبيب"
+        android:title="تسجيل طبيب/مركز"
         />
+
+
 
 </menu>

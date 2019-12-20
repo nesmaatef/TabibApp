@@ -6,6 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="4dp"
     >
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,19 +20,34 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtname"
-                android:hint="اضف اسم القسم...."
+                android:id="@+id/edtservice"
+                android:hint="نوع الخدمه"
                 android:textColorHint="@color/colorPrimary"
                 android:textColor="@android:color/black"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 app:met_baseColor="@android:color/black"
                 app:met_floatingLabel="highlight"
                 app:met_primaryColor="@color/colorPrimary"
                 app:met_singleLineEllipsis="true"
                 android:inputType="text"
                 />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:id="@+id/edtservice_price"
+                android:hint="سعر الخدمه"
+                android:textColorHint="@color/colorPrimary"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:met_baseColor="@android:color/black"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="@color/colorPrimary"
+                app:met_singleLineEllipsis="true"
+                android:inputType="textMultiLine"
+                />
 
 
-                    </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.cardview.widget.CardView>

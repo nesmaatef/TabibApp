@@ -9,24 +9,7 @@
     android:id="@+id/relative">
 
 
-    <RelativeLayout
-        android:id="@+id/realtive4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="60dp"
-        >
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_more_vert_blue_24dp"
-            android:visibility="visible"
-            android:id="@+id/imgmore"
-
-            />
-    </RelativeLayout>
 
 
     <RelativeLayout
@@ -45,33 +28,36 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:id="@+id/txtphone">
 
 
 
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtphone"
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:hint="رقم التليفون"
-            android:ems="10"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/edittext"
+            android:hint="رقم التليفون"
+            android:textColor="@android:color/black"
+            app:met_floatingLabel="highlight"
+            app:met_textColorHint="@android:color/black"
+            android:drawableTint="@color/doctor"
+            android:gravity="center"
             android:inputType="number"
-            android:drawableRight="@drawable/ic_profile"
-            android:padding="15dp"
-            android:drawablePadding="15dp"
+            android:drawablePadding="10dp"
             android:shadowColor="@android:color/black"
+
             />
 
     </RelativeLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
 android:layout_below="@+id/txtphone"
         android:layout_marginTop="30dp"
@@ -79,32 +65,30 @@ android:layout_below="@+id/txtphone"
 
         >
 
-        <info.hoang8f.widget.FButton
+        <Button
             android:id="@+id/btnlogin"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@android:color/white"
-            android:fontFamily="@font/actor"
+            android:background="@drawable/bookdoctor"
+            android:fontFamily="@font/cairo_extralight"
             android:text="تسجيل الدخول "
             android:textColor="@android:color/white"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:cornerRadius="40sp"
-            app:fButtonColor="#0e6e92"
-            app:shadowColor="@android:color/black"
-            app:shadowEnabled="true"
-            app:shadowHeight="2dp"
-            tools:fontFamily="@font/actor" />
+android:layout_centerHorizontal="true"
+
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             android:text="ليس لديك حساب؟"
+            android:id="@+id/txt"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:layout_marginLeft="180dp"
+            android:layout_below="@id/btnlogin"
             android:textStyle="bold"
             tools:fontFamily="@font/actor"/>
 
@@ -113,16 +97,17 @@ android:layout_below="@+id/txtphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="110dp"
-            android:layout_marginTop="-20dp"
             android:clickable="true"
             android:text="سجل الان"
             android:textColor="#0e6e92"
             android:textSize="15sp"
+            android:layout_marginTop="10dp"
             android:textStyle="bold"
+            android:layout_below="@id/btnlogin"
             tools:fontFamily="@font/actor"/>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 

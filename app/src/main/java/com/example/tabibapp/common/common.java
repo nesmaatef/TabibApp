@@ -4,7 +4,7 @@ import com.example.tabibapp.Model.users;
 
 public class common {
 
-    public static users currentuser ;
+    public static  users  currentuser ;
     public static  String currentdoctorphone ;
     public static  String currentuserphone ;
     public static  String currentadmin="false" ;
@@ -12,6 +12,9 @@ public class common {
     public static  String currenthospital1="false" ;
     public static  String currentcompany ;
     public static  String currentcity;
+    public static  String current_item= "false";
+    public static  String current_patient= "false";
+
 
 
 

@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.requests;
 import com.example.tabibapp.common.common;
+import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.ui.main.PageViewModel;
 import com.example.tabibapp.viewholder.request_status_viewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.ParseException;
 
 public class ContactsFragment extends Fragment {
 
@@ -98,6 +101,12 @@ public class ContactsFragment extends Fragment {
                 viewholder.status.setText(model.getStatus());
 
                 v =model.getStatus();
+                viewholder.setItemClickListener(new itemclicklistner() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) throws ParseException {
+
+                    }
+                });
 
 
 

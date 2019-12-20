@@ -112,8 +112,7 @@ public class clinicprofile extends AppCompatActivity {
 
 
                 startActivity(goappoint);
-                //make dialog of days in database
-           //   showdialog();
+                ;
 
             } });
 
