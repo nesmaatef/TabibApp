@@ -39,7 +39,7 @@ public class request_doctor extends Fragment {
     requests newrequest;
     AlertDialog dialog;
     MaterialEditText edtcomment;
-    String currentname,currentprice,currentdate,cureentphone, currentdoctorphone;
+    String currentname,currentprice,currentdate,cureentphone, currentdoctorphone, key;
 
     FirebaseRecyclerAdapter<reserve, requestviewholder> adapter;
 
@@ -118,6 +118,7 @@ public class request_doctor extends Fragment {
                     public void onClick(View view, int position, boolean isLongClick) {
                         showdialog();
                       //  deleteitem(adapter.getRef(position).getKey());
+                        key =adapter.getRef(position).getKey();
 
 
                     }
@@ -164,6 +165,7 @@ public class request_doctor extends Fragment {
                     request1.push().setValue(newrequest);
                     Toast.makeText(getActivity(), "done", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    deleteitem(key);
                 }
 
 
@@ -187,6 +189,7 @@ public class request_doctor extends Fragment {
                     request1.push().setValue(newrequest);
                     Toast.makeText(getActivity(), "done", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    deleteitem(key);
 
                 }
 

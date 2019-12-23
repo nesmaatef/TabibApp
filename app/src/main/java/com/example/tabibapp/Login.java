@@ -82,6 +82,7 @@ public class Login extends AppCompatActivity {
                                 homeintent.putExtra("true", "false");
                                 common.currentadmin = "true";
                                 common.currentuser = user;
+                                common.currentuserphone =user.getPhone();
                                 startActivity(homeintent);
                                 finish();
                                 Toast.makeText(Login.this, "Hello Admin", Toast.LENGTH_SHORT).show();

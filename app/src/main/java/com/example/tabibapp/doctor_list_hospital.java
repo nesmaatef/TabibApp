@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.doctor;
+import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.doctorviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -190,6 +191,8 @@ public class doctor_list_hospital extends AppCompatActivity {
                 viewHolder.txtname.setText(model.getName());
                 viewHolder.txtdesc.setText(model.getDesc());
                 final doctor clickitem =model;
+
+                common.currenthospital_service =model.getName();
 
                 viewHolder.setItemClickListener(new itemclicklistner() {
                     @Override

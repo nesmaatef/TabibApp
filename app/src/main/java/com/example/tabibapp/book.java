@@ -19,8 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import info.hoang8f.widget.FButton;
 
 public class book extends AppCompatActivity {
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database1;
     DatabaseReference book;

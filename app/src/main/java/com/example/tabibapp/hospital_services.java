@@ -89,6 +89,9 @@ public class hospital_services extends AppCompatActivity {
                 clinicviewholder.value.setText(clinic_services.getName());
                 clinicviewholder.value1.setText(clinic_services.getPrice());
 
+                common.currenthospital_service =clinic_services.getName();
+                common.currenthospital_service_price =clinic_services.getPrice();
+
                 Toast.makeText(hospital_services.this, "hi"+ hospital_id, Toast.LENGTH_SHORT).show();
 
                 clinicviewholder.setItemClickListener(new itemclicklistner() {

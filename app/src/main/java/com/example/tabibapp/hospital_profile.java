@@ -94,8 +94,6 @@ public class hospital_profile extends AppCompatActivity {
                 if (hospitalname.equals("06") ||hospitalname.equals("0") ){
                 Intent go = new Intent(hospital_profile.this, hospital_services.class);
                 go.putExtra("hospitalid", hospitalid);
-                go.putExtra("hospitalname", currenthospital.getName());
-                go.putExtra("hospitalprice", currenthospital.getPrice());
                 startActivity(go);
                 common.currenthospital= "true";}
 
@@ -285,6 +283,7 @@ public class hospital_profile extends AppCompatActivity {
                 times.setText(currenthospital.getTimes());
                 desc_hos.setText(currenthospital.getDesc());
                 common.currentdoctorphone=currenthospital.getPhone();
+                common.currenthospital_name =currenthospital.getName();
 
                 Toast.makeText(hospital_profile.this, "hi"+hospitalid, Toast.LENGTH_SHORT).show();
 
@@ -316,6 +315,7 @@ public class hospital_profile extends AppCompatActivity {
                 times.setVisibility(View.INVISIBLE);
                 price.setVisibility(View.INVISIBLE);
                 times1.setVisibility(View.INVISIBLE);
+                common.currenthospital_name =currenthospital.getName();
 
 
 

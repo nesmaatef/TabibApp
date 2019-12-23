@@ -40,4 +40,16 @@ public class common {
     public static final String UPDATE= "update";
     public static final String DELETE="Delete";
 
+
+
+    //  data for reserve hospital
+    public static String currenthospital_name ;
+    public static String currenthospital_service ;
+    public static String currenthospital_service_price ;
+    public static String currenthospital_date ;
+    public static String currenthospital_date1 ;
+    public static String currenthospital_room ;
+
+
+
 }

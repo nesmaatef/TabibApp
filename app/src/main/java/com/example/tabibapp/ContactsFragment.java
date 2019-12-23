@@ -105,6 +105,7 @@ public class ContactsFragment extends Fragment {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) throws ParseException {
 
+
                     }
                 });
 

@@ -185,6 +185,10 @@ public class appoint_hospital extends AppCompatActivity implements DatePickerDia
                 appointmentviewholder.value1.setText(appoint.getFrom());
                 appointmentviewholder.value2.setText(appoint.getTo());
 
+                common.currenthospital_date =appoint.getDay() ;
+                common.currenthospital_date1 =appoint.getFrom() ;
+
+
                 Toast.makeText(appoint_hospital.this, hospitalid+"null", Toast.LENGTH_SHORT).show();
 
                 final String date22 = new SimpleDateFormat("E, MMM dd yyyy", Locale.getDefault()).format(new Date());
@@ -209,7 +213,7 @@ public class appoint_hospital extends AppCompatActivity implements DatePickerDia
 
                             if (date.before(date33)) {
                                 Toast.makeText(appoint_hospital.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
-                                Intent hosdetail = new Intent(appoint_hospital.this, clinic_services.class);
+                                Intent hosdetail = new Intent(appoint_hospital.this, book_hospital_doctor.class);
                               //  hosdetail.putExtra("name", hospital_name);
                                 hosdetail.putExtra("id", hospitalid);
                               //  hosdetail.putExtra("price", hospital_price);

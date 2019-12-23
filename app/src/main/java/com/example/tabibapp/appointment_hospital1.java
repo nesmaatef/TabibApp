@@ -105,6 +105,9 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
                 viewholder.value1.setText(model.getFrom());
                 viewholder.value2.setText(model.getTo());
 
+                common.currenthospital_date =model.getDay();
+                common.currenthospital_date1 =model.getFrom();
+
                 final String date22 = new SimpleDateFormat("E, MMM dd yyyy", Locale.getDefault()).format(new Date());
                 Toast.makeText(appointment_hospital1.this, "Current time =>"+ date22, Toast.LENGTH_SHORT).show();
 
@@ -129,7 +132,7 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
 
                             if (date.before(date33)) {
                                 Toast.makeText(appointment_hospital1.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
-                                Intent docdetails = new Intent(appointment_hospital1.this, book.class);
+                                Intent docdetails = new Intent(appointment_hospital1.this, book_hospital1.class);
                               //  docdetails.putExtra("name", docname);
                                // docdetails.putExtra("price", clinicprice);
                                 docdetails.putExtra("docdate", model.getDay());

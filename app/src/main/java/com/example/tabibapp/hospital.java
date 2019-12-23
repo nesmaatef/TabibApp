@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,9 +41,9 @@ String hospitalid= "";
 
 
         recyclerView=(RecyclerView) findViewById(R.id.recycler_hospital);
-        recyclerView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+       // recyclerView.setHasFixedSize(true);
+     //   layoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
         //getintent
         if (getIntent()!=null)

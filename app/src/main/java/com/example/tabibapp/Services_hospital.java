@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.Hospital_services;
+import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.service_hospital_viewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -64,6 +65,7 @@ public class Services_hospital extends AppCompatActivity {
             @Override
             protected void populateViewHolder(service_hospital_viewholder clinicviewholder, final Hospital_services clinic_services, int i) {
                 clinicviewholder.name.setText(clinic_services.getName());
+                common.currenthospital_room =clinic_services.getName();
 
                 clinicviewholder.setItemClickListener(new itemclicklistner() {
                     @Override
