@@ -11,13 +11,10 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/iconfinder_edit_find_replace_118921"
-        android:visibility="invisible"
         android:layout_marginLeft="10dp"
         android:id="@+id/imgmore1"
         android:layout_marginTop="10dp"
-
         />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

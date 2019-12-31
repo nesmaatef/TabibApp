@@ -56,8 +56,6 @@ public class clinicprofile extends AppCompatActivity {
     ListView listView;
     ArrayList<String> arrayList =new ArrayList<>();
   ArrayAdapter<String> arrayAdapter;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,11 +159,6 @@ public class clinicprofile extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
-
-
-
-
         btnselect=add_menu_layout.findViewById(R.id.btnselect);
         btnupload=add_menu_layout.findViewById(R.id.btnupload);
 
@@ -185,7 +178,6 @@ public class clinicprofile extends AppCompatActivity {
         });
 
         alertdialog.setView(add_menu_layout);
-
         //setbutton
         alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
@@ -198,9 +190,6 @@ public class clinicprofile extends AppCompatActivity {
                 currentclinic.setPrice(txtprice.getText().toString());
                 currentclinic.setTimeswait(txtwait.getText().toString());
                 currentclinic.setDocid(txtphone.getText().toString());
-
-
-
                 clinicdata.child(clinicid).setValue(currentclinic);
                 // Snackbar.make(rootlayout, " Food" +item.getName()+ "was updated",Snackbar.LENGTH_SHORT).show();
 
@@ -256,7 +245,6 @@ public class clinicprofile extends AppCompatActivity {
             }
         });
     }
-
 
     private void changeimage(final clinics item) {
         final ProgressDialog mdialog = new ProgressDialog(this);

@@ -29,6 +29,7 @@ import com.example.tabibapp.Model.rating;
 import com.example.tabibapp.R;
 import com.example.tabibapp.clinicslist;
 import com.example.tabibapp.common.common;
+import com.example.tabibapp.home;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -57,7 +58,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.view.View.VISIBLE;
 
 
-public class Profile_Doctor extends Fragment implements RatingDialogListener {
+public class Profile_Doctor extends Fragment {
     TextView txtdesc,txtname,goclinic,txtcat;
     ImageView imgdoc,imgmore;
     RatingBar ratingBar;
@@ -78,6 +79,7 @@ public class Profile_Doctor extends Fragment implements RatingDialogListener {
     FirebaseStorage storage;
     StorageReference storageReference;
     Uri saveuri;
+
 
     @SuppressLint("RestrictedApi")
 
@@ -137,7 +139,7 @@ public class Profile_Doctor extends Fragment implements RatingDialogListener {
 
         goclinic=root.findViewById(R.id.goclinics);
         ratingBar=root.findViewById(R.id.ratingbar);
-        fab =root.findViewById(R.id.fabrate);
+        fab =root.findViewById(R.id.floating_action_button);
 
         edtname =root.findViewById(R.id.edtname);
         edtdesc =root.findViewById(R.id.edtdesc);
@@ -145,14 +147,6 @@ public class Profile_Doctor extends Fragment implements RatingDialogListener {
         butselect =root.findViewById(R.id.btnselect);
         butupload =root.findViewById(R.id.btnupload);
         root1 =root.findViewById(R.id.root1);
-
-        if (common.person.equals("false")){
-            fab.setVisibility(VISIBLE);
-
-        }
-
-
-
 
         goclinic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,18 +165,16 @@ public class Profile_Doctor extends Fragment implements RatingDialogListener {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showdialograte();
+               Intent fab =new Intent(getActivity(), home.class);
+               startActivity(fab);
             }
         });
 
         imgmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  showdialoge();
                 showupdatedialogfood(doctorphone);
-
-            }
-        });
+            }});
 
         Intent intent =new Intent();
         doctorid =intent.getStringExtra("DoctorId");
@@ -199,89 +191,19 @@ public class Profile_Doctor extends Fragment implements RatingDialogListener {
         });
         return root;
     }
-
     private void getdoc_details(String doctorphone) {
-        imgmore.setVisibility(VISIBLE);
-
-
         doctor.child(doctorphone).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentdoctor=dataSnapshot.getValue(com.example.tabibapp.Model.doctor.class);
-
                 Picasso.get().load(currentdoctor.getImage()).into(imgdoc);
                 txtdesc.setText(currentdoctor.getDesc());
                 txtname.setText(currentdoctor.getName());
                 common.currentdoctorphone=currentdoctor.getPhone();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
-
-    private void showdialograte() {
-        new AppRatingDialog.Builder()
-                .setPositiveButtonText("Sebmit")
-                .setNegativeButtonText("Cancel")
-                .setNoteDescriptions(Arrays.asList("Very Bad","Not Good","Quite Ok","Very Good","Excellent"))
-                .setDefaultRating(1)
-                .setTitle("Rate this doctor")
-                .setDescription("Please select some stars and give your feedback")
-                .setTitleTextColor(R.color.colorPrimary)
-                .setDescriptionTextColor(R.color.colorPrimary)
-                .setHint("Please write your comment here")
-                .setHintTextColor(R.color.colorAccent)
-                .setCommentTextColor(R.color.white)
-                .setCommentBackgroundColor(R.color.colorPrimaryDark)
-                .setWindowAnimation(R.style.RatingDialogFadeAnim)
-                .create(getActivity())
-                .show();
-
-
-    }
-
-
-    @Override
-    public void onNegativeButtonClicked() {
-
-    }
-
-    @Override
-    public void onPositiveButtonClicked(int value, @NotNull final String comments) {
-        final rating rating =new rating(common.currentuser.getPhone()
-                ,doctorid, String.valueOf(value), comments);
-
-        rate.child(common.currentuser.getPhone()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(common.currentuser.getPhone()).exists())
-                {
-                    rate.child(common.currentuser.getPhone()).removeValue();
-
-                    rate.child(common.currentuser.getPhone()).setValue(rating);
-                }
-                else {
-                    rate.child(common.currentuser.getPhone()).setValue(rating);
-
-                }
-                Toast.makeText(getActivity(), "thank you for your feedinback", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
-
-
+            }}); }
 
     private void uploadimage() {
         final ProgressDialog mdialog = new ProgressDialog(getContext());
@@ -403,14 +325,8 @@ public class Profile_Doctor extends Fragment implements RatingDialogListener {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
-
-
-
-
         btnselect=add_menu_layout.findViewById(R.id.btnselect);
         btnupload=add_menu_layout.findViewById(R.id.btnupload);
-
         //event for button
         btnselect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -419,13 +335,11 @@ public class Profile_Doctor extends Fragment implements RatingDialogListener {
 
             }
         });
-
         btnupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeimage(newdoctor);            }
         });
-
         alertdialog.setView(add_menu_layout);
 
         //setbutton
@@ -433,13 +347,10 @@ public class Profile_Doctor extends Fragment implements RatingDialogListener {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
-
                 //update information
                 newdoctor.setName(edtname.getText().toString());
                 newdoctor.setDesc(edtdesc.getText().toString());
                 newdoctor.setCatid(txtcat.getText().toString());
-
-
                 doctor.child(doctorphone).setValue(newdoctor);
                 // Snackbar.make(rootlayout, " Food" +item.getName()+ "was updated",Snackbar.LENGTH_SHORT).show();
 
@@ -451,6 +362,5 @@ public class Profile_Doctor extends Fragment implements RatingDialogListener {
                 dialogInterface.dismiss();
             }
         });
-        alertdialog.show();
-    }
+        alertdialog.show(); }
 }

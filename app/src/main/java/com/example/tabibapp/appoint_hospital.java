@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -46,29 +47,23 @@ public class appoint_hospital extends AppCompatActivity implements DatePickerDia
     ImageView img;
     TextView txtday,txtfrom,txtto;
     appoint newappoint;
-
     TimePickerDialog timePickerDialog;
     Calendar calendar;
     int currentHour;
     int currentMinute;
     String amPm;
     String serviceid;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appoint_hospital);
-
-        database3=FirebaseDatabase.getInstance();
-        appointment3=database3.getReference("Rooms");
-
-        recycler1 =(RecyclerView) findViewById(R.id.recycler1);
-        img =(ImageView) findViewById(R.id.imgmore1);
+        database3 = FirebaseDatabase.getInstance();
+        appointment3 = database3.getReference("Rooms");
+        recycler1 = (RecyclerView) findViewById(R.id.recycler1);
+        img = (ImageView) findViewById(R.id.imgmore1);
         recycler1.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         recycler1.setLayoutManager(layoutManager);
-
-        if (common.currenthospital.equals("true") )
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,12 +71,13 @@ public class appoint_hospital extends AppCompatActivity implements DatePickerDia
             }
         });
 
+        if (common.currentisstaff.equals("true")){
+            img.setVisibility(View.INVISIBLE);
+        }
         Intent intent = getIntent();
-       serviceid = intent.getStringExtra("serviceid");
-       loadhospitalappointments(serviceid);
-
+        serviceid = intent.getStringExtra("serviceid");
+        loadhospitalappointments(serviceid);
     }
-
     private void showdialog_hos() {
         AlertDialog.Builder alertdialog= new AlertDialog.Builder(appoint_hospital.this);
         LayoutInflater inflater =this.getLayoutInflater();
@@ -127,7 +123,6 @@ public class appoint_hospital extends AppCompatActivity implements DatePickerDia
                 calendar = Calendar.getInstance();
                 currentHour = calendar.get(Calendar.HOUR_OF_DAY);
                 currentMinute = calendar.get(Calendar.MINUTE);
-
                 timePickerDialog = new TimePickerDialog(appoint_hospital.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
@@ -139,29 +134,18 @@ public class appoint_hospital extends AppCompatActivity implements DatePickerDia
                         txtto.setText(String.format("%02d:%02d", hourOfDay, minutes) + amPm);
                     }
                 }, currentHour, currentMinute, false);
-
                 timePickerDialog.show();
-
-
             }
         });
         alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-
                 newappoint=new appoint();
                 newappoint.setDay(txtday.getText().toString());
                 newappoint.setFrom(txtfrom.getText().toString());
                 newappoint.setTo(txtto.getText().toString());
-                // appointment3.child(clinicid).child("appointment").child(txtday.getText().toString()).setValue(newappoint);
-                appointment3.child(serviceid).child("appointment").child(txtday.getText().toString()).setValue(newappoint);
-
-
-
-
-
-            }
+                appointment3.child(serviceid).child("appointment").child(txtday.getText().toString()).setValue(newappoint); }
         });
         alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -243,8 +227,6 @@ public class appoint_hospital extends AppCompatActivity implements DatePickerDia
 
 
     }
-
-
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
@@ -255,4 +237,105 @@ public class appoint_hospital extends AppCompatActivity implements DatePickerDia
         txtday.setText(currentDateString);
 
     }
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle().equals(common.UPDATE)){
+            updatedate(adapter3.getRef(item.getOrder()).getKey(),adapter3.getItem(item.getOrder()));
+        }
+
+        if (item.getTitle().equals(common.DELETE)){
+
+            deletefood(adapter3.getRef(item.getOrder()).getKey());
+
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    private void updatedate(final String key, final appoint item) {
+        AlertDialog.Builder alertdialog= new AlertDialog.Builder(appoint_hospital.this);
+        LayoutInflater inflater =this.getLayoutInflater();
+        View add_menu_layout = inflater.inflate(R.layout.dialog_day, null);
+        txtday=add_menu_layout.findViewById(R.id.txtday);
+        txtfrom=add_menu_layout.findViewById(R.id.txtfrom);
+        txtto=add_menu_layout.findViewById(R.id.txtto);
+        alertdialog.setView(add_menu_layout);
+        txtday.setText(item.getDay());
+        txtfrom.setText(item.getFrom());
+        txtto.setText(item.getTo());
+        txtday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+        txtfrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                currentMinute = calendar.get(Calendar.MINUTE);
+
+                timePickerDialog = new TimePickerDialog(appoint_hospital.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        if (hourOfDay >= 12) {
+                            amPm = "PM";
+                        } else {
+                            amPm = "AM";
+                        }
+                        txtfrom.setText(String.format("%02d:%02d", hourOfDay, minutes) + amPm);
+                    }
+                }, currentHour, currentMinute, false);
+
+                timePickerDialog.show();
+
+            }
+        });
+        txtto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                currentMinute = calendar.get(Calendar.MINUTE);
+                timePickerDialog = new TimePickerDialog(appoint_hospital.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        if (hourOfDay >= 12) {
+                            amPm = "PM";
+                        } else {
+                            amPm = "AM";
+                        }
+                        txtto.setText(String.format("%02d:%02d", hourOfDay, minutes) + amPm);
+                    }
+                }, currentHour, currentMinute, false);
+                timePickerDialog.show();
+            }
+        });
+        alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                item.setDay(txtday.getText().toString());
+                item.setFrom(txtfrom.getText().toString());
+                item.setTo(txtto.getText().toString());
+                appointment3.child(serviceid).child("appointment").child(key).setValue(item); }
+        });
+        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Toast.makeText(appoint_hospital.this, "no date added", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        alertdialog.show();
+
+
+    }
+    private void deletefood(String key) {
+        appointment3.child(serviceid).child("appointment").child(key).removeValue();
+    }
+
+
 }

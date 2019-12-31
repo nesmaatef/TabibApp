@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.requests;
 import com.example.tabibapp.Model.reserve;
+import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.requestviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -55,7 +56,7 @@ public class request extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         Intent intent =getIntent();
-        value =intent.getStringExtra("doctorphone");
+        value =common.currentuserphone ;
 
         loadrequests(value);
     }

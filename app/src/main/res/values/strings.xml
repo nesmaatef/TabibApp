@@ -21,12 +21,15 @@
     <string name="menu_send">Send</string>
 
     <string name="app_name1">SingleChoiceDialog</string>
-
-
     <string name="title_activity_main2">Main2Activity</string>
+
 
     <string name="tab_text_1">الصفحه الشخصيه</string>
     <string name="tab_text_2">طلبات الحجز</string>
     <string name="tab_text_3">الكشوفات</string>
+
+    <string name="tab_text_4">الصفحه الشخصيه</string>
+    <string name="tab_text_5">طلبات الحجز</string>
+    <string name="tab_text_6">الكشوفات</string>
 
 </resources>

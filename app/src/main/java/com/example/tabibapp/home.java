@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.category;
+import com.example.tabibapp.ui.main.Profile_Doctor;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.menuviewholder;
@@ -63,53 +64,23 @@ public class home extends AppCompatActivity
 
 
 
-        if (value.equals("true")) {
-            Menu menu = navigationView.getMenu();
-            MenuItem target = menu.findItem(R.id.nav_myprofile);
-            MenuItem target1 = menu.findItem(R.id.nav_dates);
-           // MenuItem target2 = menu.findItem(R.id.nav_mydates);
-            target1.setVisible(true);
-           // target2.setVisible(false);
-
-        } else if (value.equals("false")) {
-            Menu menu = navigationView.getMenu();
-            MenuItem target = menu.findItem(R.id.nav_myprofile);
-            MenuItem target1 = menu.findItem(R.id.nav_dates);
-           // MenuItem target2 = menu.findItem(R.id.nav_mydates);
-            target.setVisible(false);
-            target1.setVisible(false);
-           // target2.setVisible(true);
-
-
-        }
-
-         if (value1.equals("true")) {
-            Menu menu = navigationView.getMenu();
-            MenuItem target = menu.findItem(R.id.nav_setting);
-            target.setVisible(true);
-
-        }
-        else if (value1.equals("false")) {
-            Menu menu = navigationView.getMenu();
-            MenuItem target = menu.findItem(R.id.nav_setting);
-            target.setVisible(false);
-
-        }
-
-
         if (common.currentadmin.equals("true")){
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_add_doctor);
-            MenuItem target1 = menu.findItem(R.id.nav_mydates);
             target.setVisible(true);
-            target1.setVisible(false);
-            Toast.makeText(this, "true", Toast.LENGTH_SHORT).show();
         }
         else if (common.currentadmin.equals("false")){
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_add_doctor);
             target.setVisible(false);
-            Toast.makeText(this, "false", Toast.LENGTH_SHORT).show();
+        }
+        if (common.currenthospital.equals("true") || common.currenthospital1.equals("true")){
+            Menu menu = navigationView.getMenu();
+            MenuItem target = menu.findItem(R.id.nav_requests);
+            MenuItem target1 = menu.findItem(R.id.nav_request_status);
+
+            target.setVisible(true);
+            target1.setVisible(true);
 
         }
 
@@ -136,37 +107,19 @@ public class home extends AppCompatActivity
                 Picasso.get().load(model.getImage())
                         .into(viewHolder.imageView);
                 viewHolder.txtmenuname.setText(model.getName());
-
-
                 final category clickitem =model;
                 viewHolder.setItemClickListener(new itemclicklistner() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-
                         if (adapter.getRef(position).getKey().equals("06") || adapter.getRef(position).getKey().equals("11")){
                             Intent hoslist = new Intent(home.this, hospital.class);
                             hoslist.putExtra("categoryid1", adapter.getRef(position).getKey());
-                            startActivity(hoslist);
-                        }
-                        else if (value.equals("true") || common.currentadmin.equals("true")) {
+                            startActivity(hoslist); }
+                        else   {
                             Intent doclist = new Intent(home.this, doc_list_admin.class);
                             doclist.putExtra("categoryid", adapter.getRef(position).getKey());
                             startActivity(doclist);
-                        }
-                        else if (value.equals("false")) {
-                            Intent doclist = new Intent(home.this, doc_list_patient.class);
-                            doclist.putExtra("categoryid", adapter.getRef(position).getKey());
-                            startActivity(doclist);
-                        }
-
-
-
-
-                    }
-                });
-
-            }
-        };
+                        } }}); }};
 
         // load data
         recyclermenu =(RecyclerView) findViewById(R.id.recycler_menu);
@@ -174,15 +127,8 @@ public class home extends AppCompatActivity
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(recyclermenu.getContext(),
                 R.anim.layoutfalldown);
         recyclermenu.setLayoutAnimation(controller);
-
         loadmenu();
-
-
-
-
     }
-
-
 
     @Override
     public void onBackPressed() {
@@ -221,76 +167,51 @@ public class home extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_dates) {
-            Intent homeintent = new Intent(home.this, request.class);
-            homeintent.putExtra("doctorphone",common.currentuserphone);
-            startActivity(homeintent);
-        } else if (id == R.id.nav_callus) {
+        if (id == R.id.nav_callus) {
             Intent homeintent = new Intent(home.this, more.class);
             startActivity(homeintent);
-
         } else if (id == R.id.nav_about) {
             Intent intent = new Intent(home.this, more1.class);
             startActivity(intent);
-
         }else if (id == R.id.nav_myprofile) {
-
             if (common.currenthospital.equals("true")){
                 Intent intent = new Intent(home.this, hospital_profile.class);
                 intent.putExtra("hospitalid", common.currentuserphone);
                 intent.putExtra("hospital", "0");
                 startActivity(intent);
-            }else if (common.currenthospital.equals("false")) {
-                Intent intent = new Intent(home.this, doc_details.class);
-                intent.putExtra("doctorid1", doctor);
+            }
+            else if (common.currenthospital1.equals("true")){
+                Intent intent = new Intent(home.this, hospital1_profile.class);
+                intent.putExtra("hospitalid", common.currentuserphone);
+                intent.putExtra("hospital", "0");
                 startActivity(intent);
             }
-
-        }
+            else if (common.currenthospital.equals("false") ) {
+                Intent intent = new Intent(home.this, Main2Activity.class);
+                intent.putExtra("doctorid1", doctor);
+                startActivity(intent); } }
         else if (id == R.id.nav_chat) {
             Intent intent = new Intent(home.this, StartActivity.class);
-            startActivity(intent);
-
-
-        }
-        else if (id == R.id.nav_setting) {
-            Intent intent = new Intent(home.this, add_setting.class);
-            startActivity(intent);
-
-
-        }
-        else if (id == R.id.nav_mydates) {
-            Intent intent = new Intent(home.this, requestStatus.class);
-            startActivity(intent);
-
-
-        }
+            startActivity(intent); }
         else if (id == R.id.nav_Exit) {
             finish();
-            moveTaskToBack(true);
-
-
-        }
-
+            moveTaskToBack(true); }
         else if (id == R.id.nav_add_doctor) {
             Intent intent = new Intent(home.this, admin_requests.class);
+            startActivity(intent); }
+        else if (id == R.id.nav_requests) {
+             Intent intent = new Intent(home.this, request.class);
             startActivity(intent);
-
         }
-
-
+        else if (id == R.id.nav_request_status) {
+            Intent intent = new Intent(home.this, requestStatus.class);
+            startActivity(intent);
+        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+        return true; }
     // try
-
     private void loadmenu() {
         recyclermenu.setAdapter(adapter);
            recyclermenu.getAdapter().notifyDataSetChanged();
-          recyclermenu.scheduleLayoutAnimation();
-
-    }
-
-}
+          recyclermenu.scheduleLayoutAnimation(); }}

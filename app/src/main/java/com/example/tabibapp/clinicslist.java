@@ -41,13 +41,11 @@ public class clinicslist extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-
     FirebaseDatabase database;
     DatabaseReference cliniclist;
     String doctorid="";
      String docphone="";
     String docphone1="";
-
     FirebaseRecyclerAdapter<clinics, clinicviewholder> adapter;
     String doctorname="";
     ImageView imgmore;
@@ -58,14 +56,10 @@ public class clinicslist extends AppCompatActivity {
     MaterialEditText edtname,edtmap,edtprice,edttimes;
     Button butselect,butupload;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clinicslist);
-
-
         //firebase
         database=FirebaseDatabase.getInstance();
         cliniclist=database.getReference("clinics");
@@ -164,15 +158,9 @@ public class clinicslist extends AppCompatActivity {
         };
         recyclerView.setAdapter(adapter);
     }
-
-
 //add new clinic
-
     private void showdialoge() {
         AlertDialog.Builder alertdialog= new AlertDialog.Builder(clinicslist.this);
-        //  alertdialog.setTitle("Add new doctor");
-        // alertdialog.setMessage("please fill full information");
-
         LayoutInflater inflater =this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.add_new_clinic, null);
         edtname=add_menu_layout.findViewById(R.id.edtname);
@@ -230,8 +218,6 @@ public class clinicslist extends AppCompatActivity {
         alertdialog.show();
 
     }
-
-
     private void uploadimage() {
         final ProgressDialog mdialog = new ProgressDialog(this);
         mdialog.setMessage("Uploading");

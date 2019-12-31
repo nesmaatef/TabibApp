@@ -45,6 +45,7 @@ public  class appointmentviewholder extends RecyclerView.ViewHolder implements
             e.printStackTrace();
         }
 
+
     }
 
 

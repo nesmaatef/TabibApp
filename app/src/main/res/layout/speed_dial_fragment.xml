@@ -21,7 +21,6 @@
             android:layout_height="100dp"
             android:src="@drawable/group_9" />
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/realtive4"
         android:layout_width="wrap_content"
@@ -37,17 +36,15 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_more_vert_blue_24dp"
-            android:visibility="invisible"
             android:id="@+id/imgmore"
 
             />
     </RelativeLayout>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/realtive2"
+        android:layout_marginTop="30dp"
         android:id="@+id/line2"
         >
 
@@ -59,31 +56,15 @@
 
             />
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_star_border_black_24dp"
-        app:backgroundTint="@color/white"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="240dp"
-        android:id="@+id/fabrate"
-        android:visibility="invisible"
-
-        />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/line2"
         android:background="@android:color/white"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/realtive3"
         >
-
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,38 +90,7 @@
             android:fontFamily="@font/cairo_extralight"
             android:id="@+id/doc_desc"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/doc_desc"
-            android:layout_marginTop="10dp"
-            android:textColor="#1283B3"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="من فضلك قيم الدكتور"
-            android:textAlignment="center"
-            android:fontFamily="@font/cairo_extralight"
-            android:id="@+id/txt4"
-            />
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ratingbar"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/txt4"
-            android:rating="0"
-            android:max="5"
-            android:layout_centerHorizontal="true"
-
-            android:isIndicator="true"/>
-
-
-
-
     </RelativeLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -158,10 +108,7 @@
             android:textColor="#1283B3"
             android:textSize="20sp"
             android:textStyle="bold"
-
-
             />
-
         <TextView
             android:id="@+id/goclinics"
             android:layout_width="wrap_content"
@@ -173,16 +120,18 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-
-
             android:textStyle="bold" />
-
-
-
-
     </LinearLayout>
-
-
-
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_home_black_24dp"
+        app:maxImageSize="30dp"
+        android:layout_below="@id/line2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/white"
+        android:layout_alignParentLeft="true"
+        />
 </RelativeLayout>

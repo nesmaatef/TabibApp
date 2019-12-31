@@ -6,12 +6,6 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_dates"
-            android:icon="@drawable/ic_folder_black_24dp"
-            android:title="طلبات الحجز"
-
-            />
-        <item
             android:id="@+id/nav_callus"
             android:icon="@drawable/ic_phone_in_talk_black_24dp"
             android:title="اتصل بنا" />
@@ -30,16 +24,7 @@
             android:icon="@drawable/ic_chat_black_24dp"
             android:title="المحادثات"
             />
-        <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_settings_black_24dp"
-            android:title="الاعدادات"
-            />
-        <item
-            android:id="@+id/nav_mydates"
-            android:icon="@drawable/ic_add_alert_black_24dp"
-            android:title="طلب الكشف"
-            />
+
 
         <item
             android:id="@+id/nav_add_doctor"
@@ -52,6 +37,18 @@
             android:icon="@drawable/ic_add_alert_black_24dp"
             android:title="خروج"
             />
+
+        <item
+            android:id="@+id/nav_requests"
+            android:icon="@drawable/ic_phone_in_talk_black_24dp"
+            android:title="طلبات الحجز"
+            android:visible="false"/>
+
+        <item
+            android:id="@+id/nav_request_status"
+            android:icon="@drawable/ic_phone_in_talk_black_24dp"
+            android:title="الكشوفات"
+            android:visible="false"/>
 
 
 

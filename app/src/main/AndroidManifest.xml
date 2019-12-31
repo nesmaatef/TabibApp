@@ -13,7 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin_requests"></activity>
+        <activity android:name=".hospital1_profile"></activity>
+        <activity
+            android:name=".Main3Activity"
+            android:label="TabibApp"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".admin_requests" />
         <activity android:name=".book_hospital1" />
         <activity android:name=".book_hospital_doctor" />
         <activity android:name=".doctor_list_hospital" />
@@ -28,7 +33,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".clinic_services" />
         <activity android:name=".requestStatus" />
-        <activity android:name=".add_setting" />
         <activity android:name=".more1" />
         <activity
             android:name=".home"
@@ -52,16 +56,9 @@
         <activity
             android:name=".request"
             android:label="تاكيد الحجز" />
-        <activity android:name=".book" />
         <activity
             android:name=".more"
             android:theme="@style/AppTheme1" />
-        <activity
-            android:name=".doc_list_patient"
-            android:label="اختر الدكتور المناسب" />
-        <activity
-            android:name=".doc_details"
-            android:label="بيانات الدكتور" />
         <activity
             android:name=".doc_list_admin"
             android:label="اختر الدكتور المناسب"

@@ -26,40 +26,20 @@ public class Login extends AppCompatActivity {
     TextView txtlogin;
     FirebaseDatabase database;
     DatabaseReference table_user,doctorlist;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         edtphone= (MaterialEditText) findViewById(R.id.edtphone);
         btnlogin = (Button) findViewById(R.id.btnlogin);
         txtlogin= (TextView) findViewById(R.id.txtlogin);
-
-
-
         database =FirebaseDatabase.getInstance();
         table_user = database.getReference("users");
-
-
         txtlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(Login.this, signup.class);
-                startActivity(intent);
-
-             //  showdialogbox();
-            }
-        });
-
-
-
-
-
-
-
-
-
+                startActivity(intent); }});
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +52,6 @@ public class Login extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.child(edtphone.getText().toString()).exists()) {
                             mdialog.dismiss();
-
-
                             users user = dataSnapshot.child(edtphone.getText().toString()).getValue(users.class);
                             user.setPhone(edtphone.getText().toString());  //set phone
 
@@ -86,6 +64,7 @@ public class Login extends AppCompatActivity {
                                 startActivity(homeintent);
                                 finish();
                                 Toast.makeText(Login.this, "Hello Admin", Toast.LENGTH_SHORT).show();
+
                             } else if (Boolean.parseBoolean(user.getIsstaff())) {
 
                                 Intent docintent = new Intent(Login.this, Main2Activity.class);
@@ -102,79 +81,33 @@ public class Login extends AppCompatActivity {
 
                                 Toast.makeText(Login.this, "Hello Doctor", Toast.LENGTH_SHORT).show();
 
-                            } else if (Boolean.parseBoolean(user.getIspatient())) {
-                                Intent homeintent = new Intent(Login.this, home.class);
-                                homeintent.putExtra("true", "false");
-                                common.currentuser = user;
-                                common.currentuserphone = user.getPhone();
-                                common.current_patient ="true";
-                                common.currentcompany =user.getCompany();
-                                common.currentcity =user.getCity();
-                                startActivity(homeintent);
-                                finish();
-
-                                Toast.makeText(Login.this, "hello, you are sign successful", Toast.LENGTH_SHORT).show();
-
-                            } else if (Boolean.parseBoolean(user.getIshospital())) {
+                            }  else if (Boolean.parseBoolean(user.getIshospital())) {
                                 Intent homeintent = new Intent(Login.this, home.class);
                                 homeintent.putExtra("true", "true");
                                 common.currentuser = user;
                                 common.currenthospital = "true";
-                              //  common.currenthospital1 = "true";
                                 common.currentuserphone = user.getPhone();
                                 startActivity(homeintent);
                                 finish();
-
                                 Toast.makeText(Login.this, "hello, you are sign successful", Toast.LENGTH_SHORT).show();
-
                             }
-                        }
-
+                            else if (Boolean.parseBoolean(user.getIshospital1())) {
+                                Intent homeintent = new Intent(Login.this, home.class);
+                                common.currentuser = user;
+                                common.currenthospital1 = "true";
+                                common.currentuserphone = user.getPhone();
+                                startActivity(homeintent);
+                                finish();
+                                Toast.makeText(Login.this, "hello, you are sign successful", Toast.LENGTH_SHORT).show();
+                            }}
                         else {
                              Toast.makeText(Login.this, "user is not exist in database", Toast.LENGTH_SHORT).show();
                              mdialog.dismiss();
-
                         }
-
-
-
-
-
-
-
                                 if (edtphone.getText().toString().length()==0){
                                     edtphone.setError("Please, enter your number");
                                 }
-
-                              //  Toast.makeText(Login.this, "user is not exist in database", Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
-
-
-                      //  finish();
-
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
-        });
-
-
-    }
-
-
-
-
-
-
-}
+                    }}); }}); }}

@@ -7,30 +7,26 @@
     android:background="@drawable/group_8"
     tools:context=".doctor_list_hospital"
     android:id="@+id/rootlayout">
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/iconfinder_edit_find_replace_118921"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/imgmore1"
+        android:layout_marginTop="10dp"
 
-    <com.mancj.materialsearchbar.MaterialSearchBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchBar"
-        app:mt_speechMode="false"
-        android:layout_alignParentTop="true"
-        app:mt_hint="search your doctor here"/>
-
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="اختر الدكتور المناسب"
         android:textSize="18sp"
-        android:layout_below="@id/searchBar"
         android:layout_alignParentRight="true"
         android:id="@+id/txtview"
         android:fontFamily="@font/cairo_extralight"
         android:textColor="@android:color/white"
         />
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,16 +34,4 @@
         android:scrollbars="vertical"
         android:layout_below="@id/txtview">
     </androidx.recyclerview.widget.RecyclerView>"
-
-
-
-
-
-
-
-
-
-
-
-
 </RelativeLayout>

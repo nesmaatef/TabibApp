@@ -63,14 +63,8 @@ public class doc_list_admin extends AppCompatActivity {
     Uri saveuri;
     Context context;
     String user="";
-
-
     doctor newdoctor;
     users newuser;
-  //  EditText edtsearch;
-   // ImageButton imgsearch;
-
-
     FirebaseRecyclerAdapter<doctor, doctorviewholder> adapter;
 
     @Override
@@ -88,24 +82,21 @@ public class doc_list_admin extends AppCompatActivity {
         storageReference=storage.getReference();
 rootlayout=(RelativeLayout) findViewById(R.id.rootlayout);
 imgadmin=(ImageView) findViewById(R.id.imgadmin);
-      //  fav=(ImageView) findViewById(R.id.fav);
         recyclerView=(RecyclerView) findViewById(R.id.recycler_doc);
 
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        
-
-
          user =common.currentuser.toString();
-
-
         //getintent
         if (getIntent()!=null)
             categoryid=getIntent().getStringExtra("categoryid");
         if (!categoryid.isEmpty() && categoryid!=null) {
             loaddoctorlist(categoryid);
+        }
+
+        if (common.currenthospital1.equals("true") || common.currenthospital.equals("true")){
+            imgadmin.setVisibility(View.INVISIBLE);
         }
         imgadmin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,14 +104,8 @@ imgadmin=(ImageView) findViewById(R.id.imgadmin);
                 showdialoge();
             }
         });
-
-
     }
-
-
-
     private void loaddoctorlist(String categoryid) {
-
 adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         R.layout.doc_item,
         doctorviewholder.class,
@@ -130,34 +115,15 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);
 
     viewHolder.txtname.setText(model.getName());
-
-
-
         viewHolder.txtdesc.setText(model.getDesc());
-
-
-
-
         final doctor clickitem =model;
-
-
         viewHolder.setItemClickListener(new itemclicklistner() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                Intent docdetails = new Intent(doc_list_admin.this, doc_details.class);
-                docdetails.putExtra("DoctorId", adapter.getRef(position).getKey());
-                startActivity(docdetails);
-
+                Toast.makeText(doc_list_admin.this, ""+model.getName(), Toast.LENGTH_SHORT).show();
             }
-        });
-
-
-    }
-};
-        recyclerView.setAdapter(adapter);
-
-    }
-
+        }); }};
+        recyclerView.setAdapter(adapter); }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -176,8 +142,6 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         return true;
 
     }
-
-
     ///upload new doctor /delete/ update
     private void showdialoge() {
         AlertDialog.Builder alertdialog= new AlertDialog.Builder(doc_list_admin.this);
@@ -235,13 +199,10 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         alertdialog.show();
 
     }
-
-
     private void uploadimage() {
         final ProgressDialog mdialog = new ProgressDialog(this);
         mdialog.setMessage("Uploading");
         mdialog.show();
-
         String imagename = UUID.randomUUID().toString();
         final StorageReference imagefolder =storageReference.child("image/"+imagename);
         imagefolder.putFile(saveuri)
@@ -260,17 +221,11 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
                                 newdoctor.setImage(uri.toString());
                                 newdoctor.setCatid(categoryid);
                                 newdoctor.setPhone(edtphone.getText().toString());
-
                                 newuser.setIsstaff("true");
                                 newuser.setIspatient("false");
                                 newuser.setIsadmin("false");
                                 newuser.setIshospital("false");
-
-
-
-
-
-                            }
+                                newuser.setIshospital1("false");}
                         });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -306,7 +261,6 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
 
         }
     }
-
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle().equals(common.DELETE)){
@@ -317,50 +271,10 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
 
         return super.onContextItemSelected(item);
     }
-
     private void deletefood(String key) {
         doctorlist.child(key).removeValue();
 
     }
-
-
-    private void changeimage(final doctor item) {
-        final ProgressDialog mdialog = new ProgressDialog(this);
-        mdialog.setMessage("Uploading");
-        mdialog.show();
-
-        String imagename = UUID.randomUUID().toString();
-        final StorageReference imagefolder =storageReference.child("image/"+imagename);
-        imagefolder.putFile(saveuri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        mdialog.dismiss();
-                        Toast.makeText(doc_list_admin.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
-                        imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                item.setImage(uri.toString());
-                                // newcategory=new Category(edtname.getText().toString(),uri.toString());
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                mdialog.dismiss();
-                Toast.makeText(doc_list_admin.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress =(100.0* taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                mdialog.setMessage("Uploaded" +progress+"%");
-            }
-        });
-    }
-
 
 
 

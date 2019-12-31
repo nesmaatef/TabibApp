@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.appointmentviewholder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -68,7 +70,10 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
         layoutManager=new LinearLayoutManager(this);
         recycler1.setLayoutManager(layoutManager);
 
-        if (common.currenthospital.equals("true") )
+        if (common.currentisstaff.equals("true")){
+            img.setVisibility(View.INVISIBLE);
+        }
+
             img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -119,8 +124,6 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
 
-                        // Date c1 = model.getDay();
-                        //  String str_date = "11-June-07";
                         try {
                             DateFormat formatter;
                             formatter = new SimpleDateFormat("E, MMM dd yyyy");
@@ -133,8 +136,6 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
                             if (date.before(date33)) {
                                 Toast.makeText(appointment_hospital1.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
                                 Intent docdetails = new Intent(appointment_hospital1.this, book_hospital1.class);
-                              //  docdetails.putExtra("name", docname);
-                               // docdetails.putExtra("price", clinicprice);
                                 docdetails.putExtra("docdate", model.getDay());
                                 startActivity(docdetails);
 
@@ -168,6 +169,7 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
         txtto=add_menu_layout.findViewById(R.id.txtto);
 
         alertdialog.setView(add_menu_layout);
+
         txtday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,13 +233,7 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
                 newappoint.setDay(txtday.getText().toString());
                 newappoint.setFrom(txtfrom.getText().toString());
                 newappoint.setTo(txtto.getText().toString());
-                // appointment3.child(clinicid).child("appointment").child(txtday.getText().toString()).setValue(newappoint);
                 appointment3.child(serviceid).child("appointment").child(txtday.getText().toString()).setValue(newappoint);
-
-
-
-
-
             }
         });
         alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -251,6 +247,95 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
         alertdialog.show();
 
     }
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle().equals(common.UPDATE)){
+            updatedate(adapter3.getRef(item.getOrder()).getKey(),adapter3.getItem(item.getOrder()));
+        }
+
+        if (item.getTitle().equals(common.DELETE)){
+
+            deletefood(adapter3.getRef(item.getOrder()).getKey());
+
+        }
+
+        return super.onContextItemSelected(item);
+    }
+    private void updatedate(final String key, final appoint item) {
+        AlertDialog.Builder alertdialog= new AlertDialog.Builder(appointment_hospital1.this);
+        alertdialog.setTitle("Update your info");
+        LayoutInflater inflater =this.getLayoutInflater();
+        View add_menu_layout = inflater.inflate(R.layout.dialog_day, null);
+        txtday=add_menu_layout.findViewById(R.id.txtday);
+        txtfrom=add_menu_layout.findViewById(R.id.txtfrom);
+        txtto=add_menu_layout.findViewById(R.id.txtto);
+        alertdialog.setView(add_menu_layout);
+        txtday.setText(item.getDay());
+        txtfrom.setText(item.getFrom());
+        txtto.setText(item.getTo());
+        //update data
+        txtday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+        txtfrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { calendar = Calendar.getInstance();
+                currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                currentMinute = calendar.get(Calendar.MINUTE);
+                timePickerDialog = new TimePickerDialog(appointment_hospital1.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        if (hourOfDay >= 12) {
+                            amPm = "PM";
+                        } else {
+                            amPm = "AM";
+                        }
+                        txtfrom.setText(String.format("%02d:%02d", hourOfDay, minutes) + amPm);
+                    }
+                }, currentHour, currentMinute, false);
+                timePickerDialog.show();
+            }
+        });
+        txtto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                currentMinute = calendar.get(Calendar.MINUTE);
+
+                timePickerDialog = new TimePickerDialog(appointment_hospital1.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        if (hourOfDay >= 12) {
+                            amPm = "PM";
+                        } else {
+                            amPm = "AM";
+                        }
+                        txtto.setText(String.format("%02d:%02d", hourOfDay, minutes) + amPm);
+                    }
+                }, currentHour, currentMinute, false);
+                timePickerDialog.show(); }});
+        alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                item.setDay(txtday.getText().toString());
+                item.setFrom(txtfrom.getText().toString());
+                item.setTo(txtto.getText().toString());
+                appointment3.child(serviceid).child("appointment").child(key).setValue(item); }});
+        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Toast.makeText(appointment_hospital1.this, "no date added", Toast.LENGTH_SHORT).show(); }});
+        alertdialog.show(); }
+    private void deletefood(String key) {
+        appointment3.child(serviceid).child("appointment").child(key).removeValue();
+    }
+
 
 
 

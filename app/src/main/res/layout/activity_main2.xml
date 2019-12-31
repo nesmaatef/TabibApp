@@ -13,16 +13,9 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme2"
         >
-
-
-
-
         <com.google.android.material.tabs.TabLayout
-
-
-
             android:id="@+id/tabs"
-android:fillViewport="true"
+            android:fillViewport="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"

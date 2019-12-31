@@ -1,4 +1,6 @@
-package com.example.tabibapp;
+package com.example.tabibapp.ui.hospitalprofile;
+
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -6,19 +8,25 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.tabibapp.Model.hospitals;
+import com.example.tabibapp.R;
+import com.example.tabibapp.category_hospital;
 import com.example.tabibapp.common.common;
+import com.example.tabibapp.hospital_profile;
+import com.example.tabibapp.hospital_services;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -37,15 +45,16 @@ import java.util.UUID;
 
 import info.hoang8f.widget.FButton;
 
-import static android.view.View.VISIBLE;
+import static android.app.Activity.RESULT_OK;
 
-public class hospital_profile extends AppCompatActivity {
+public class HospitalProfileFragment extends Fragment {
 
+    private HospitalProfileViewModel mViewModel;
     TextView txt_name_hos,txt_price_hos,addrees,times,desc_hos,hospital_date,price,times1;
     ImageView imgprofile,imgmore;
     FButton fbhospital;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference hospital ;
+    DatabaseReference hospital,hospital1 ;
     String hospitalid ="";
     hospitals currenthospital;
     FirebaseStorage storage;
@@ -55,60 +64,79 @@ public class hospital_profile extends AppCompatActivity {
     Button btnselect,btnupload;
     hospitals current;
     String hospitalname ="" ;
-    String hospital1 ;
+
+    public static HospitalProfileFragment newInstance() {
+        return new HospitalProfileFragment();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.hospital_profile_fragment, container, false);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hospital_profile);
-
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(HospitalProfileViewModel.class);
         //init firebase
         firebaseDatabase=FirebaseDatabase.getInstance();
         hospital =firebaseDatabase.getReference("hospital");
+        hospital1 =firebaseDatabase.getReference("hospital1");
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
 
         // init view
-        txt_name_hos= (TextView) findViewById(R.id.txt_name_hos);
-        addrees= (TextView) findViewById(R.id.map);
-        times= (TextView) findViewById(R.id.times);
-        desc_hos= (TextView) findViewById(R.id.desc);
-        hospital_date= (TextView) findViewById(R.id.hospitaldate);
-        imgmore= (ImageView) findViewById(R.id.imgmore);
-        times1= (TextView) findViewById(R.id.txt_time);
-        imgprofile=(ImageView) findViewById(R.id.imgprofile);
+        txt_name_hos= (TextView) txt_name_hos.findViewById(R.id.txt_name_hos);
+        addrees= (TextView) addrees.findViewById(R.id.map);
+        times= (TextView) times.findViewById(R.id.times);
+        desc_hos= (TextView) desc_hos.findViewById(R.id.desc);
+        hospital_date= (TextView) hospital_date.findViewById(R.id.hospitaldate);
+        imgmore= (ImageView) imgmore.findViewById(R.id.imgmore);
+        times1= (TextView) times1.findViewById(R.id.txt_time);
+        imgprofile=(ImageView) imgprofile.findViewById(R.id.imgprofile);
 
         hospital_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent go = new Intent(hospital_profile.this, hospital_services.class);
-                go.putExtra("hospitalid", hospitalid);
-                startActivity(go);  }});
+                if (hospitalname.equals("06") ||hospitalname.equals("0") ){
+                    Intent go = new Intent(getActivity(), hospital_services.class);
+                    go.putExtra("hospitalid", hospitalid);
+                    startActivity(go);
+                    common.currenthospital= "true";}
 
-        if (hospitalname.equals("0")){
-            imgmore.setVisibility(VISIBLE); }
-
-
+                else if (hospitalname.equals("11")){
+                    Intent go = new Intent(getActivity(), category_hospital.class);
+                    go.putExtra("hospitalid", hospitalid);
+                    startActivity(go);
+                } }});
         imgmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showupdatedialoghospital(); }});
+                showupdatedialoghospital();
+            }
+        });
 
-        if (getIntent() !=null)
-            hospitalid =getIntent().getStringExtra("hospitalid");
-
-        hospitalname = getIntent().getStringExtra("hospital");
+        Intent intent =new Intent();
+            hospitalid =intent.getStringExtra("hospitalid");
+        hospitalname = intent.getStringExtra("hospital");
 
 
         if (hospitalname.equals("06") )
-        { gethospitaldetails(hospitalid); }
-         else if (common.currenthospital.equals("true")){
+        {
+            gethospitaldetails(hospitalid);
+        }
+        else if (hospitalname.equals("11")){
+            gethospitaldetails1(hospitalid);
+        }
+        else if (common.currenthospital.equals("true")){
             hospitalid= common.currentuserphone;
             gethospitaldetails(hospitalid);
-            Toast.makeText(this, ""+hospitalname, Toast.LENGTH_SHORT).show();
-        } }
+        }
+    }
     private void showupdatedialoghospital() {
-        AlertDialog.Builder alertdialog= new AlertDialog.Builder(hospital_profile.this);
+        AlertDialog.Builder alertdialog= new AlertDialog.Builder(getContext());
         LayoutInflater inflater =this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.update_hospital_info, null);
         edtname=add_menu_layout.findViewById(R.id.edtname_hos);
@@ -166,9 +194,8 @@ public class hospital_profile extends AppCompatActivity {
             }
         });
         alertdialog.show(); }
-
     private void changeimage(final hospitals item) {
-        final ProgressDialog mdialog = new ProgressDialog(this);
+        final ProgressDialog mdialog = new ProgressDialog(getContext());
         mdialog.setMessage("Uploading");
         mdialog.show();
 
@@ -179,7 +206,7 @@ public class hospital_profile extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         mdialog.dismiss();
-                        Toast.makeText(hospital_profile.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Uploaded!!!", Toast.LENGTH_SHORT).show();
                         imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
@@ -192,7 +219,7 @@ public class hospital_profile extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 mdialog.dismiss();
-                Toast.makeText(hospital_profile.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -203,15 +230,13 @@ public class hospital_profile extends AppCompatActivity {
             }
         });
     }
-
     private void chooseimage() {
         Intent intent =new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Select picture"), common.pick_image_request);
     }
-
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         if (requestCode== common.pick_image_request && resultCode==RESULT_OK
                 && data !=null&& data.getData() !=null)
@@ -221,12 +246,7 @@ public class hospital_profile extends AppCompatActivity {
 
         }
     }
-
     private void gethospitaldetails(final String hospitalid) {
-        if (hospitalname.equals("0")){
-            imgmore.setVisibility(VISIBLE); }
-
-
         hospital.child(hospitalid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -238,7 +258,10 @@ public class hospital_profile extends AppCompatActivity {
                 desc_hos.setText(currenthospital.getDesc());
                 common.currentdoctorphone=currenthospital.getPhone();
                 common.currenthospital_name =currenthospital.getName();
-                Toast.makeText(hospital_profile.this, "hi"+hospitalid, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getActivity(), "hi"+hospitalid, Toast.LENGTH_SHORT).show();
+
+
             }
 
             @Override
@@ -247,7 +270,28 @@ public class hospital_profile extends AppCompatActivity {
             }
         });
     }
+    private void gethospitaldetails1(String hospitalid) {
+        hospital1.child(hospitalid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currenthospital=dataSnapshot.getValue(hospitals.class);
+                Picasso.get().load(currenthospital.getImage()).into(imgprofile);
+                txt_name_hos.setText(currenthospital.getName());
+                // txt_price_hos.setText(currenthospital.getPrice());
 
+                addrees.setText(currenthospital.getMap());
+                // times.setText(currenthospital.getTimes());
+                desc_hos.setText(currenthospital.getDesc());
+                common.currentdoctorphone=currenthospital.getPhone();
 
+                txt_price_hos.setVisibility(View.INVISIBLE);
+                times.setVisibility(View.INVISIBLE);
+                price.setVisibility(View.INVISIBLE);
+                times1.setVisibility(View.INVISIBLE);
+                common.currenthospital_name =currenthospital.getName();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }}); }
 
 }

@@ -23,8 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabibapp.Model.appoint;
-import com.example.tabibapp.Model.doctor;
-import com.example.tabibapp.Model.users;
 import com.example.tabibapp.common.common;
 import com.example.tabibapp.face.itemclicklistner;
 import com.example.tabibapp.viewholder.appointmentviewholder;
@@ -45,12 +43,11 @@ import static android.view.View.VISIBLE;
 public class appointment extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     FirebaseDatabase  database3 ;
-    DatabaseReference appointment3, appointment4,appointment5;
+    DatabaseReference appointment3;
     RecyclerView recycler1,recycler2 ;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.LayoutManager layoutmanager ;
     FirebaseRecyclerAdapter<appoint, appointmentviewholder> adapter3;
-    doctor currentdoctor ;
     ImageView img;
 TextView txtday,txtfrom,txtto;
 appoint newappoint;
@@ -59,19 +56,12 @@ String clinicid="";
     String docname="";
     String clinicprice="";
     String clinicname="";
-    String hospitalid="";
-    String doctorid="";
-    String hospital_name="";
-    String hospital_price="";
 
     TimePickerDialog timePickerDialog;
     Calendar calendar;
     int currentHour;
     int currentMinute;
     String amPm;
-    users user;
-    TextView txt1,txt2,txt3;
-    appoint currentappointment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +79,6 @@ String clinicid="";
         recycler1.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recycler1.setLayoutManager(layoutManager);
-
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,19 +86,12 @@ String clinicid="";
             }
         });
 
-       if (common.person.equals("true")){
-           img.setVisibility(VISIBLE);
-           img.setOnClickListener(new View.OnClickListener() {
+                  img.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
                    showdialog();
                }
            });
-       }
-
-
-
-
 
             Intent intent = getIntent();
             docname = intent.getStringExtra("namedoctor");
@@ -117,16 +99,7 @@ String clinicid="";
             clinicid = intent.getStringExtra("clinicid");
             clinicname = intent.getStringExtra("clinicname");
 
-            loadappointlist3(clinicid);
-
-
-
-
-
-
-    }
-
-
+            loadappointlist3(clinicid); }
 
     private void showdialog() {
 
@@ -153,7 +126,6 @@ String clinicid="";
                 calendar = Calendar.getInstance();
                 currentHour = calendar.get(Calendar.HOUR_OF_DAY);
                 currentMinute = calendar.get(Calendar.MINUTE);
-
                 timePickerDialog = new TimePickerDialog(appointment.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
@@ -230,30 +202,29 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 R.layout.appoint_item,
                 appointmentviewholder.class,
                 appointment3.child(clinicid).child("appointment")) {
-
             @Override
             protected void populateViewHolder(final appointmentviewholder viewholder, final appoint model, int i) {
-
                 viewholder.value.setText(model.getDay());
                 viewholder.value1.setText(model.getFrom());
                 viewholder.value2.setText(model.getTo());
 
 
 
+
                 final String date22 = new SimpleDateFormat("E, MMM dd yyyy", Locale.getDefault()).format(new Date());
                 Toast.makeText(appointment.this, "Current time =>"+ date22, Toast.LENGTH_SHORT).show();
-
                 final appoint clickitem =model;
                 final String string =model.getDay();
 
                 viewholder.setItemClickListener(new itemclicklistner() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
+                    public void onClick(View view, int position, boolean isLongClick) throws ParseException {
 
-                        // Date c1 = model.getDay();
-                        //  String str_date = "11-June-07";
-                                             try {
+                     //   SimpleDateFormat sdf =new SimpleDateFormat("E, MMM dd yyyy");
+                      //  Date date =sdf.parse(currentDate);
+                      //  Date date33 =sdf.parse(string) ;
+
                             DateFormat formatter;
                             formatter = new SimpleDateFormat("E, MMM dd yyyy");
                            Date date = formatter.parse(date22);
@@ -261,37 +232,15 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                            DateFormat formatter1;
                            formatter1 = new SimpleDateFormat("E, MMM dd, yyyy");
                            Date  date33 = formatter1.parse(string);
-
                            if (date.before(date33)) {
                                Toast.makeText(appointment.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
-                               Intent docdetails = new Intent(appointment.this, book.class);
-                               docdetails.putExtra("name", docname);
-                               docdetails.putExtra("price", clinicprice);
-                               docdetails.putExtra("docdate", model.getDay());
-                               startActivity(docdetails);
-
                            }
                            else if (date.after(date33)){
-                               Toast.makeText(appointment.this, "you cannot submit in this day", Toast.LENGTH_SHORT).show();
-
-                                                 }
+                               Toast.makeText(appointment.this, "you cannot submit in this day", Toast.LENGTH_SHORT).show(); }
 
 
-                                             } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-
-
-
-
-                    }
-                });
-            }
-        };
-        recycler1.setAdapter(adapter3);
-
-    }
-
+                        }}); }};
+        recycler1.setAdapter(adapter3); }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -321,38 +270,28 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
     private void updatedate(final String key, final appoint item) {
         AlertDialog.Builder alertdialog= new AlertDialog.Builder(appointment.this);
         alertdialog.setTitle("Update your info");
-
         LayoutInflater inflater =this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.dialog_day, null);
         txtday=add_menu_layout.findViewById(R.id.txtday);
         txtfrom=add_menu_layout.findViewById(R.id.txtfrom);
         txtto=add_menu_layout.findViewById(R.id.txtto);
-
         alertdialog.setView(add_menu_layout);
-
-
                 txtday.setText(item.getDay());
                 txtfrom.setText(item.getFrom());
                 txtto.setText(item.getTo());
-
-
         //update data
-
         txtday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date picker");
-
             }
         });
-
         txtfrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { calendar = Calendar.getInstance();
                 currentHour = calendar.get(Calendar.HOUR_OF_DAY);
                 currentMinute = calendar.get(Calendar.MINUTE);
-
                 timePickerDialog = new TimePickerDialog(appointment.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
@@ -364,12 +303,9 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                         txtfrom.setText(String.format("%02d:%02d", hourOfDay, minutes) + amPm);
                     }
                 }, currentHour, currentMinute, false);
-
                 timePickerDialog.show();
-
             }
         });
-
         txtto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -388,43 +324,22 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                         txtto.setText(String.format("%02d:%02d", hourOfDay, minutes) + amPm);
                     }
                 }, currentHour, currentMinute, false);
-
-                timePickerDialog.show();
-
-            }
-        });
-
+                timePickerDialog.show(); }});
         alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-
                 item.setDay(txtday.getText().toString());
                 item.setFrom(txtfrom.getText().toString());
                 item.setTo(txtto.getText().toString());
-                appointment3.child(clinicid).child("appointment").child(key).setValue(item);
-
-
-
-
-            }
-        });
+                appointment3.child(clinicid).child("appointment").child(key).setValue(item); }});
         alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                Toast.makeText(appointment.this, "no date added", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        alertdialog.show();
-
-
-    }
-
+                Toast.makeText(appointment.this, "no date added", Toast.LENGTH_SHORT).show(); }});
+        alertdialog.show(); }
     private void deletefood(String key) {
-      //  doctorlist.child(key).removeValue();
-
+        appointment3.child(clinicid).child("appointment").child(key).removeValue();
     }
-
 }

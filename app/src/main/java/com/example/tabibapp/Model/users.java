@@ -6,6 +6,9 @@ public class users {
     private String ispatient;
     private String city,area,company;
 
+    public users() {
+    }
+
     public String getCity() {
         return city;
     }
@@ -39,7 +42,15 @@ public class users {
     }
 
     private String ishospital;
+    private String ishospital1;
 
+    public String getIshospital1() {
+        return ishospital1;
+    }
+
+    public void setIshospital1(String ishospital1) {
+        this.ishospital1 = ishospital1;
+    }
 
     public String getIsadmin() {
         return isadmin;
@@ -68,7 +79,17 @@ public class users {
         return isstaff;
     }
 
-
+    public users(String phone, String isstaff, String ispatient, String city, String area, String company, String ishospital, String ishospital1, String isadmin) {
+        this.phone = phone;
+        this.isstaff = isstaff;
+        this.ispatient = ispatient;
+        this.city = city;
+        this.area = area;
+        this.company = company;
+        this.ishospital = ishospital;
+        this.ishospital1 = ishospital1;
+        this.isadmin = isadmin;
+    }
 
     public void setIsstaff(String isstaff) {
         this.isstaff = isstaff;
@@ -83,11 +104,5 @@ public class users {
         this.ispatient = ispatient;
     }
 
-    public users() {
-        this.isstaff="false";
-        this.ispatient="false";
-        this.city="false";
-        this.area="false";
-        this.company="false";
-    }
+
 }

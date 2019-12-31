@@ -24,7 +24,6 @@ public class hospitals {
     private String desc;
     private String times;
     private String image;
-    private String price;
     private String catid;
 
     public String getName() {
@@ -67,21 +66,14 @@ public class hospitals {
         this.image = image;
     }
 
-    public String getPrice() {
-        return price;
-    }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
 
-    public hospitals(String name, String map, String desc, String times, String image, String price, String catid, String phone) {
+    public hospitals(String name, String map, String desc, String times, String image, String catid, String phone) {
         this.name = name;
         this.map = map;
         this.desc = desc;
         this.times = times;
         this.image = image;
-        this.price = price;
         this.catid= catid;
         this.phone=phone;
     }
