@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    app:cardBackgroundColor="#4CC4B3"
+    app:cardElevation="10dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <TextView
+            android:id="@+id/txtvalue_neme"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#4CC4B3"
+            android:layout_alignParentRight="true"
+            android:text="نوع الخدمه"
+            android:layout_marginRight="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/cairo_extralight"
+            />
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

@@ -135,9 +135,9 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
 
                             if (date.before(date33)) {
                                 Toast.makeText(appointment_hospital1.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
-                                Intent docdetails = new Intent(appointment_hospital1.this, book_hospital1.class);
-                                docdetails.putExtra("docdate", model.getDay());
-                                startActivity(docdetails);
+                               //Intent docdetails = new Intent(appointment_hospital1.this, book_hospital1.class);
+                               // docdetails.putExtra("docdate", model.getDay());
+                                //startActivity(docdetails);
 
                             }
                             else if (date.after(date33)){
@@ -224,7 +224,7 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
 
             }
         });
-        alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+        alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -236,7 +236,7 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
                 appointment3.child(serviceid).child("appointment").child(txtday.getText().toString()).setValue(newappoint);
             }
         });
-        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -318,7 +318,7 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
                     }
                 }, currentHour, currentMinute, false);
                 timePickerDialog.show(); }});
-        alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+        alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -326,7 +326,7 @@ public class appointment_hospital1 extends AppCompatActivity implements DatePick
                 item.setFrom(txtfrom.getText().toString());
                 item.setTo(txtto.getText().toString());
                 appointment3.child(serviceid).child("appointment").child(key).setValue(item); }});
-        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

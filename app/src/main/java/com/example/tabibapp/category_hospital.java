@@ -101,7 +101,7 @@ public class category_hospital extends AppCompatActivity {
 
             }
         });
-        alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -138,7 +138,7 @@ public class category_hospital extends AppCompatActivity {
 
             }
         });
-        alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

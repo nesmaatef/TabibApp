@@ -197,12 +197,6 @@ public class appoint_hospital extends AppCompatActivity implements DatePickerDia
 
                             if (date.before(date33)) {
                                 Toast.makeText(appoint_hospital.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
-                                Intent hosdetail = new Intent(appoint_hospital.this, book_hospital_doctor.class);
-                              //  hosdetail.putExtra("name", hospital_name);
-                                hosdetail.putExtra("id", hospitalid);
-                              //  hosdetail.putExtra("price", hospital_price);
-                                hosdetail.putExtra("docdate", appoint.getDay());
-                                startActivity(hosdetail);
 
                             }
                             else if (date.after(date33)){

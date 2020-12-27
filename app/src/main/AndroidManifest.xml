@@ -19,8 +19,6 @@
             android:label="TabibApp"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".admin_requests" />
-        <activity android:name=".book_hospital1" />
-        <activity android:name=".book_hospital_doctor" />
         <activity android:name=".doctor_list_hospital" />
         <activity android:name=".appointment_hospital1" />
         <activity android:name=".appoint_hospital" />

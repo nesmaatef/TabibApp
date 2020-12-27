@@ -54,14 +54,11 @@ public class doc_list_admin extends AppCompatActivity {
     String categoryid="";
     RelativeLayout rootlayout;
 
-    MaterialEditText edtname, edtdesc, edtphone, edtmap, edttimes, edttimeswait;
-    Button btnselect, btnupload;
+    MaterialEditText edtname, edtdesc, edtphone;
 
     FirebaseStorage storage;
     StorageReference storageReference;
-    ImageView imgadmin,fav;
-    Uri saveuri;
-    Context context;
+    ImageView imgadmin;
     String user="";
     doctor newdoctor;
     users newuser;
@@ -112,10 +109,15 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         doctorlist.orderByChild("catid").equalTo(categoryid)) {
     @Override
     protected void populateViewHolder(final doctorviewholder viewHolder, final doctor model, final int position) {
-        Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);
+        if (model.getImage().equals("default")){
+            viewHolder.imgdoc.setImageResource(R.mipmap.ic_launcher);
+        }
+        else {
+        Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);}
 
     viewHolder.txtname.setText(model.getName());
         viewHolder.txtdesc.setText(model.getDesc());
+        viewHolder.txtprice.setVisibility(View.INVISIBLE);
         final doctor clickitem =model;
         viewHolder.setItemClickListener(new itemclicklistner() {
             @Override
@@ -151,32 +153,26 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         edtdesc=add_menu_layout.findViewById(R.id.edtdesc);
         edtphone=add_menu_layout.findViewById(R.id.edtphone);
 
-        btnselect=add_menu_layout.findViewById(R.id.btnselect);
-        btnupload=add_menu_layout.findViewById(R.id.btnupload);
-
-        //event for button
-        btnselect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseimage();
-
-            }
-        });
-
-        btnupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadimage();
-            }
-        });
-
         alertdialog.setView(add_menu_layout);
         alertdialog.setIcon(R.drawable.ic_add_to_photos_black_24dp);
 
         //setbutton
-        alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
+                newdoctor=new doctor();
+                newuser=new users();
+                newdoctor.setName(edtname.getText().toString());
+                newdoctor.setDesc(edtdesc.getText().toString());
+                newdoctor.setImage("default");
+                newdoctor.setCatid(categoryid);
+                newdoctor.setPhone(edtphone.getText().toString());
+                newuser.setIsstaff("true");
+                newuser.setIspatient("false");
+                newuser.setIsadmin("false");
+                newuser.setIshospital("false");
+                newuser.setIshospital1("false");
 
                 if (newdoctor !=null)
                 {
@@ -190,7 +186,7 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
 
             }
         });
-        alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -199,68 +195,7 @@ adapter=new FirebaseRecyclerAdapter<doctor, doctorviewholder>(doctor.class,
         alertdialog.show();
 
     }
-    private void uploadimage() {
-        final ProgressDialog mdialog = new ProgressDialog(this);
-        mdialog.setMessage("Uploading");
-        mdialog.show();
-        String imagename = UUID.randomUUID().toString();
-        final StorageReference imagefolder =storageReference.child("image/"+imagename);
-        imagefolder.putFile(saveuri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        mdialog.dismiss();
-                        Toast.makeText(doc_list_admin.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
-                        imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                 newdoctor=new doctor();
-                 newuser=new users();
-                               newdoctor.setName(edtname.getText().toString());
-                                newdoctor.setDesc(edtdesc.getText().toString());
-                                newdoctor.setImage(uri.toString());
-                                newdoctor.setCatid(categoryid);
-                                newdoctor.setPhone(edtphone.getText().toString());
-                                newuser.setIsstaff("true");
-                                newuser.setIspatient("false");
-                                newuser.setIsadmin("false");
-                                newuser.setIshospital("false");
-                                newuser.setIshospital1("false");}
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                mdialog.dismiss();
-                Toast.makeText(doc_list_admin.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
 
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress =(100.0* taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                mdialog.setMessage("Uploaded" +progress+"%");
-            }
-        });
-    }
-    private void chooseimage() {
-        Intent intent =new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select picture"), common.pick_image_request);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-        if (requestCode== common.pick_image_request && resultCode==RESULT_OK
-                && data !=null&& data.getData() !=null)
-        {
-            saveuri =data.getData();
-            btnselect.setText("image selected !   ");
-
-        }
-    }
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle().equals(common.DELETE)){

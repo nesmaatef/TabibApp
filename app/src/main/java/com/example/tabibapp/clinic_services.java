@@ -94,7 +94,7 @@ public class clinic_services extends AppCompatActivity {
         edtservice=add_menu_layout.findViewById(R.id.edtservice);
         edtserviceprice=add_menu_layout.findViewById(R.id.edtservice_price);
         alertdialog.setView(add_menu_layout);
-        alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -106,7 +106,7 @@ public class clinic_services extends AppCompatActivity {
 
             }
         });
-        alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

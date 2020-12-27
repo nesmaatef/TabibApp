@@ -169,7 +169,7 @@ txtto.setOnClickListener(new View.OnClickListener() {
 
 
 
-alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
     @Override
     public void onClick(DialogInterface dialog, int which) {
 dialog.dismiss();
@@ -179,13 +179,13 @@ dialog.dismiss();
         newappoint.setFrom(txtfrom.getText().toString());
         newappoint.setTo(txtto.getText().toString());
             appointment3.child(clinicid).child("appointment").child(txtday.getText().toString()).setValue(newappoint);
-        
+
 
 
 
     }
 });
-alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
     @Override
     public void onClick(DialogInterface dialog, int which) {
         dialog.dismiss();
@@ -214,32 +214,28 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 final String date22 = new SimpleDateFormat("E, MMM dd yyyy", Locale.getDefault()).format(new Date());
                 Toast.makeText(appointment.this, "Current time =>"+ date22, Toast.LENGTH_SHORT).show();
                 final appoint clickitem =model;
-                final String string =model.getDay();
 
                 viewholder.setItemClickListener(new itemclicklistner() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
+                 //   @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
-                    public void onClick(View view, int position, boolean isLongClick) throws ParseException {
+                    public void onClick(View view, int position, boolean isLongClick) {
+                        final String string =model.getDay();
 
-                     //   SimpleDateFormat sdf =new SimpleDateFormat("E, MMM dd yyyy");
-                      //  Date date =sdf.parse(currentDate);
-                      //  Date date33 =sdf.parse(string) ;
-
+                        try {
                             DateFormat formatter;
                             formatter = new SimpleDateFormat("E, MMM dd yyyy");
-                           Date date = formatter.parse(date22);
+                            Date date = formatter.parse(date22);
+                            DateFormat formatter1;
+                            formatter1 = new SimpleDateFormat("E, MMM dd, yyyy");
+                            Date  date33 = formatter1.parse(string);
+                            if (date.before(date33)) {
+                                Toast.makeText(appointment.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
 
-                           DateFormat formatter1;
-                           formatter1 = new SimpleDateFormat("E, MMM dd, yyyy");
-                           Date  date33 = formatter1.parse(string);
-                           if (date.before(date33)) {
-                               Toast.makeText(appointment.this, "you can submit in this day", Toast.LENGTH_SHORT).show();
-                           }
-                           else if (date.after(date33)){
-                               Toast.makeText(appointment.this, "you cannot submit in this day", Toast.LENGTH_SHORT).show(); }
-
-
-                        }}); }};
+                            }
+                            else if (date.after(date33)){
+                                Toast.makeText(appointment.this, "you cannot submit in this day", Toast.LENGTH_SHORT).show();
+                            } } catch (ParseException e) {
+                            e.printStackTrace(); } }}); }};
         recycler1.setAdapter(adapter3); }
 
     @Override
@@ -333,7 +329,7 @@ alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 item.setFrom(txtfrom.getText().toString());
                 item.setTo(txtto.getText().toString());
                 appointment3.child(clinicid).child("appointment").child(key).setValue(item); }});
-        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

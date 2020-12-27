@@ -52,7 +52,7 @@ import java.util.UUID;
 public class doctor_list_hospital extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    MaterialEditText edtname, edtdesc, edtphone;
+    MaterialEditText edtname, edtdesc, edtprice;
     Button btnselect, btnupload;
     FirebaseDatabase database;
     DatabaseReference doctorlist;
@@ -105,28 +105,20 @@ ImageView img;
         View add_menu_layout = inflater.inflate(R.layout.add_doctor_hospital, null);
         edtname=add_menu_layout.findViewById(R.id.edtname);
         edtdesc=add_menu_layout.findViewById(R.id.edtdesc);
-        btnselect=add_menu_layout.findViewById(R.id.btnselect);
-        btnupload=add_menu_layout.findViewById(R.id.btnupload);
-        //event for button
-        btnselect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseimage();
-
-            }
-        });
-        btnupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadimage();
-            }
-        });
+        edtprice=add_menu_layout.findViewById(R.id.edtprice);
         alertdialog.setView(add_menu_layout);
         alertdialog.setIcon(R.drawable.ic_add_to_photos_black_24dp);
         //setbutton
         alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                newdoctor=new doctor();
+                newdoctor.setName(edtname.getText().toString());
+                newdoctor.setDesc(edtdesc.getText().toString());
+                newdoctor.setImage("default");
+                newdoctor.setPrice(edtprice.getText().toString());
+                newdoctor.setCatid(categoryid);
+
                 if (newdoctor !=null)
                 {
                     doctorlist.push().setValue(newdoctor);
@@ -149,10 +141,15 @@ ImageView img;
                 doctorviewholder.class,
                 doctorlist.orderByChild("catid").equalTo(categoryid)) {
             @Override
-            protected void populateViewHolder(final doctorviewholder viewHolder, doctor model, int position) {
-                Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);
+            protected void populateViewHolder(final doctorviewholder viewHolder, final doctor model, int position) {
+               if (model.getImage().equals("default")){
+                   viewHolder.imgdoc.setImageResource(R.mipmap.ic_launcher);}
+               else {
+                Picasso.get().load(model.getImage()).into(viewHolder.imgdoc);}
                 viewHolder.txtname.setText(model.getName());
                 viewHolder.txtdesc.setText(model.getDesc());
+                viewHolder.txtprice.setText(model.getPrice());
+
                 final doctor clickitem =model;
 
                 common.currenthospital_service =model.getName();
@@ -160,6 +157,9 @@ ImageView img;
                 viewHolder.setItemClickListener(new itemclicklistner() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
+                        common.currenthospital_service =model.getName();
+                        common.currenthospital_service_price=model.getPrice();
+
                         // Toast.makeText(doc_list_admin.this, ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
                         Intent docdetails = new Intent(doctor_list_hospital.this, appointment_hospital1.class);
 
@@ -187,44 +187,6 @@ ImageView img;
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Select picture"), common.pick_image_request);
     }
-    private void uploadimage() {
-        final ProgressDialog mdialog = new ProgressDialog(this);
-        mdialog.setMessage("Uploading");
-        mdialog.show();
-        String imagename = UUID.randomUUID().toString();
-        final StorageReference imagefolder =storageReference.child("image/"+imagename);
-        imagefolder.putFile(saveuri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        mdialog.dismiss();
-                        Toast.makeText(doctor_list_hospital.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
-                        imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                newdoctor=new doctor();
-                                newdoctor.setName(edtname.getText().toString());
-                                newdoctor.setDesc(edtdesc.getText().toString());
-                                newdoctor.setImage(uri.toString());
-                                newdoctor.setCatid(categoryid);
-                                 }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                mdialog.dismiss();
-                Toast.makeText(doctor_list_hospital.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress =(100.0* taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                mdialog.setMessage("Uploaded" +progress+"%");
-            }
-        });
-    }
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle().equals(common.UPDATE)){
             updatedate(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
@@ -241,9 +203,11 @@ ImageView img;
         View add_menu_layout = inflater.inflate(R.layout.doctor_item_hospital, null);
         edtname=add_menu_layout.findViewById(R.id.edtname);
         edtdesc=add_menu_layout.findViewById(R.id.edtdesc);
+        edtprice=add_menu_layout.findViewById(R.id.edtprice);
 
         edtname.setText(item.getName());
         edtdesc.setText(item.getDesc());
+        edtprice.setText(item.getPrice());
 
         btnselect=add_menu_layout.findViewById(R.id.btnselect);
         btnupload=add_menu_layout.findViewById(R.id.btnupload);
@@ -268,9 +232,10 @@ ImageView img;
             public void onClick(DialogInterface dialogInterface, int i) {
                 item.setName(edtname.getText().toString());
                 item.setDesc(edtdesc.getText().toString());
+                item.setPrice(edtprice.getText().toString());
 
                     doctorlist.child(key).setValue(item);
-                    Snackbar.make(rootlayout, "New category" +newdoctor.getName()+ "was added",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(rootlayout, "تم التعديل",Snackbar.LENGTH_SHORT).show();
 
             }
         });
@@ -327,7 +292,6 @@ ImageView img;
                 && data !=null&& data.getData() !=null)
         {
             saveuri =data.getData();
-            // butselect.setText("image selected !");
 
         }
     }

@@ -2,12 +2,14 @@ package com.example.tabibapp;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,8 +21,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tabibapp.Model.hospitals;
 import com.example.tabibapp.common.common;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,10 +34,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import info.hoang8f.widget.FButton;
@@ -50,16 +57,19 @@ public class hospital1_profile extends AppCompatActivity {
     hospitals currenthospital;
     FirebaseStorage storage;
     StorageReference storageReference;
-    Uri saveuri;
-    MaterialEditText edtname,edtdesc,hospital_price,wait, map_hos;
-    Button btnselect,btnupload;
+    MaterialEditText edtname,edtdesc,wait, map_hos;
     hospitals current;
     String hospitalname ="" ;
+
+
+    private static final int IMAGE_REQUEST = 1;
+    private Uri imageUri;
+    private StorageTask uploadTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hospital_profile);
+        setContentView(R.layout.activity_hospital1_profile);
 
         //init firebase
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -84,8 +94,6 @@ public class hospital1_profile extends AppCompatActivity {
                     go.putExtra("hospitalid", hospitalid);
                     startActivity(go);
                  }});
-            imgmore.setVisibility(View.INVISIBLE);
-
             imgmore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,66 +101,22 @@ public class hospital1_profile extends AppCompatActivity {
         if (getIntent() !=null)
             hospitalid =getIntent().getStringExtra("hospitalid");
         hospitalname = getIntent().getStringExtra("hospital");
-
-
          if (common.currenthospital1.equals("true")){
             hospitalid= common.currentuserphone;
             gethospitaldetails1(hospitalid);
+            //try image
+             imgprofile.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     chooseimage();
+                 }
+             });
         } }
-
-    private void changeimage(final hospitals item) {
-        final ProgressDialog mdialog = new ProgressDialog(this);
-        mdialog.setMessage("Uploading");
-        mdialog.show();
-
-        String imagename = UUID.randomUUID().toString();
-        final StorageReference imagefolder =storageReference.child("Image/"+imagename);
-        imagefolder.putFile(saveuri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        mdialog.dismiss();
-                        Toast.makeText(hospital1_profile.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
-                        imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                item.setImage(uri.toString());
-                                // newcategory=new Category(edtname.getText().toString(),uri.toString());
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                mdialog.dismiss();
-                Toast.makeText(hospital1_profile.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress =(100.0* taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                mdialog.setMessage("Uploaded" +progress+"%");
-            }
-        });
-    }
-
-    private void chooseimage() {
+        private void chooseimage() {
         Intent intent =new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select picture"), common.pick_image_request);
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-        if (requestCode== common.pick_image_request && resultCode==RESULT_OK
-                && data !=null&& data.getData() !=null)
-        {
-            saveuri =data.getData();
-            // butselect.setText("image selected !");
-
-        }
+        startActivityForResult(intent, IMAGE_REQUEST);
     }
 
     private void gethospitaldetails1(String hospitalid) {
@@ -185,8 +149,7 @@ public class hospital1_profile extends AppCompatActivity {
         wait=add_menu_layout.findViewById(R.id.edttime_hos);
         map_hos=add_menu_layout.findViewById(R.id.edtmap_hos);
 
-        btnselect=add_menu_layout.findViewById(R.id.btnselect);
-        btnupload=add_menu_layout.findViewById(R.id.btnupload);
+
         hospital1.child(hospitalid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -201,21 +164,9 @@ public class hospital1_profile extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-        btnselect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseimage();
 
-            }
-        });
-
-        btnupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeimage(current);            }
-        });
         alertdialog.setView(add_menu_layout);
-        alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -228,12 +179,85 @@ public class hospital1_profile extends AppCompatActivity {
                 hospital1.child(hospitalid).setValue(current);
             }
         });
-        alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
         alertdialog.show(); }
+
+
+
+        //try change image
+        private String getFileExtension(Uri uri){
+            ContentResolver contentResolver = this.getContentResolver();
+            MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+            return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+        }
+    private void uploadImage(){
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Uploading");
+        pd.show();
+
+        if (imageUri != null){
+            final  StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+                    +"."+getFileExtension(imageUri));
+
+            uploadTask = fileReference.putFile(imageUri);
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()){
+                        throw  task.getException();
+                    }
+
+                    return  fileReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()){
+                        Uri downloadUri = task.getResult();
+                        String mUri = downloadUri.toString();
+
+                        hospital = FirebaseDatabase.getInstance().getReference("hospital1").child(hospitalid);
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("image", ""+mUri);
+                        hospital.updateChildren(map);
+
+                        pd.dismiss();
+                    } else {
+                        Toast.makeText(hospital1_profile.this, "Failed!", Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(hospital1_profile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                }
+            });
+        } else {
+            Toast.makeText(hospital1_profile.this, "No image selected", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null){
+            imageUri = data.getData();
+
+            if (uploadTask != null && uploadTask.isInProgress()){
+                Toast.makeText(hospital1_profile.this, "Upload in preogress", Toast.LENGTH_SHORT).show();
+            } else {
+                uploadImage();
+            }
+        }
+    }
 
 }

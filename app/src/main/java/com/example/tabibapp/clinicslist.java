@@ -169,47 +169,31 @@ public class clinicslist extends AppCompatActivity {
         edttimes=add_menu_layout.findViewById(R.id.edttimes);
 
 
-        butselect=add_menu_layout.findViewById(R.id.btnselect);
-        butupload=add_menu_layout.findViewById(R.id.btnupload);
-
-        //event for button
-        butselect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseimage();
-
-            }
-        });
-
-        butupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadimage();
-            }
-        });
-
         alertdialog.setView(add_menu_layout);
         alertdialog.setIcon(R.drawable.ic_add_to_photos_black_24dp);
 
         //setbutton
-        alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
 
+                newclinic=new clinics();
+                newclinic.setName(edtname.getText().toString());
+                newclinic.setMap(edtmap.getText().toString());
+                newclinic.setImage("default");
+                newclinic.setPrice(edtprice.getText().toString());
+                newclinic.setTimeswait(edttimes.getText().toString());
+                newclinic.setDocid(common.currentdoctorphone);
                 if (newclinic !=null)
                 {
-                    //     doctorlist.push().setValue(newdoctor);
                     cliniclist.push().setValue(newclinic);
-                    //  adduser.child(edtphone.getText().toString()).setValue(newuser);
-                    //doctorlist.child(edtphone.getText().toString()).setValue(common.currentuser.toString());
 
-                    //  Snackbar.make(root1, "New category" +newclinic.getName()+ "was added",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
         });
-        alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -218,67 +202,7 @@ public class clinicslist extends AppCompatActivity {
         alertdialog.show();
 
     }
-    private void uploadimage() {
-        final ProgressDialog mdialog = new ProgressDialog(this);
-        mdialog.setMessage("Uploading");
-        mdialog.show();
 
-        String imagename = UUID.randomUUID().toString();
-        final StorageReference imagefolder =storageReference.child("image/"+imagename);
-        imagefolder.putFile(saveuri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        mdialog.dismiss();
-                        Toast.makeText(clinicslist.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
-                        imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                newclinic=new clinics();
-                                newclinic.setName(edtname.getText().toString());
-                                newclinic.setMap(edtmap.getText().toString());
-                                newclinic.setImage(uri.toString());
-                                newclinic.setPrice(edtprice.getText().toString());
-                                newclinic.setTimeswait(edttimes.getText().toString());
-                                newclinic.setDocid(common.currentdoctorphone);
-
-
-
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                mdialog.dismiss();
-                Toast.makeText(clinicslist.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress =(100.0* taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                mdialog.setMessage("Uploaded" +progress+"%");
-            }
-        });
-    }
-    private void chooseimage() {
-        Intent intent =new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select picture"), common.pick_image_request);
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-        if (requestCode== common.pick_image_request && resultCode==RESULT_OK
-                && data !=null&& data.getData() !=null)
-        {
-            saveuri =data.getData();
-            butselect.setText("image selected !   ");
-
-        }
-    }
 
 
 }

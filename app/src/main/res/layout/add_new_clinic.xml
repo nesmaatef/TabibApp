@@ -74,46 +74,6 @@
                 android:inputType="textMultiLine"
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnselect"
-                    android:layout_height="40dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="SELECT"
-                    android:textColor="@android:color/white"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="8dp"
-                    android:background="#0E6E92"
-
-                    />
-
-                <Button
-                    android:id="@+id/btnupload"
-                    android:layout_height="40dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="UPLOAD"
-                    android:textColor="@android:color/white"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="8dp"
-                    android:background="#0E6E92"
-
-                    />
-
-
-
-
-            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

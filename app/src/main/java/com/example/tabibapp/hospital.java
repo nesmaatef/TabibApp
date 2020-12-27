@@ -80,17 +80,60 @@ MaterialEditText edtname,edtphone ;
         else if (hospitalid.equals("11")) {
             loadhospitallist1(hospitalid);
             common.current_item = "true"; }
-        if (common.currentisstaff.equals("true")) {
-            img.setVisibility(View.INVISIBLE);
-        } else if (common.currentisstaff.equals("false"))
-            img.setOnClickListener(new View.OnClickListener() {
+        if (common.currentadmin.equals("true")) {
+            img.setVisibility(View.VISIBLE);
+        }
+
+
+            img.setOnClickListener(
+                    new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (hospitalid.equals("11"))
                         showdialog();
                     else if (hospitalid.equals("06"))
                         showdialog1(); }}); }
+
     private void showdialog1() {
+        AlertDialog.Builder alertdialog= new AlertDialog.Builder(hospital.this);
+        alertdialog.setTitle("اضف جديده");
+        LayoutInflater inflater =this.getLayoutInflater();
+        View add_menu_layout = inflater.inflate(R.layout.add_hospital, null);
+        edtname=add_menu_layout.findViewById(R.id.edtname);
+        edtphone=add_menu_layout.findViewById(R.id.edtphone);
+        text=add_menu_layout.findViewById(R.id.txtcatid);
+        btnselect=add_menu_layout.findViewById(R.id.btnselect);
+        btnupload=add_menu_layout.findViewById(R.id.btnupload);
+        text.setText(hospitalid);
+        btnselect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseimage();
+
+            }
+        });
+        btnupload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uploadimage1();
+            }
+        });
+        alertdialog.setView(add_menu_layout);
+        alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                if (newhospital !=null){
+                    hospital.child(edtphone.getText().toString()).setValue(newhospital);
+                    adduser.child(edtphone.getText().toString()).setValue(newuser);
+                } }});
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        alertdialog.show();
     }
     private void loadhospitallist(String hospitalid) {
         adapter=new FirebaseRecyclerAdapter<hospitals,hospitalviewholder>(hospitals.class,
@@ -112,10 +155,9 @@ MaterialEditText edtname,edtphone ;
                         gohospital.putExtra("hospitalid", adapter.getRef(position).getKey());
                         gohospital.putExtra("hospital","06");
 
-                        //goclinic.putExtra("docname", doctorname);
                         startActivity(gohospital);}
                         else
-                            Toast.makeText(hospital.this, ""+hospitalviewholder.txtname, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(hospital.this, ""+hospitalviewholder.txtname.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -141,13 +183,13 @@ MaterialEditText edtname,edtphone ;
                 hospitalviewholder.setItemClickListener(new itemclicklistner() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        if (common.currenthospital1.equals("true")){
-                        Intent gohospital = new Intent(hospital.this, hospital1_profile.class);
-                        gohospital.putExtra("hospitalid", adapter.getRef(position).getKey());
-                        gohospital.putExtra("hospital", "11");
-                        startActivity(gohospital);}
-                        else
-                            Toast.makeText(hospital.this, ""+hospitalviewholder.txtname, Toast.LENGTH_SHORT).show();
+                //        if (common.currenthospital1.equals("true")){
+                  //      Intent gohospital = new Intent(hospital.this, hospital1_profile.class);
+                    //    gohospital.putExtra("hospitalid", adapter.getRef(position).getKey());
+                      //  gohospital.putExtra("hospital", "11");
+                        //startActivity(gohospital);}
+                        //else
+                            Toast.makeText(hospital.this, ""+hospitalviewholder.txtname.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -183,7 +225,7 @@ MaterialEditText edtname,edtphone ;
             }
         });
         alertdialog.setView(add_menu_layout);
-        alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertdialog.setPositiveButton("تم", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -191,7 +233,7 @@ MaterialEditText edtname,edtphone ;
                     hospital1.child(edtphone.getText().toString()).setValue(newhospital);
                     adduser.child(edtphone.getText().toString()).setValue(newuser);
                 } }});
-        alertdialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -258,6 +300,50 @@ MaterialEditText edtname,edtphone ;
 
         }
     }
+    private void uploadimage1() {
+        final ProgressDialog mdialog = new ProgressDialog(this);
+        mdialog.setMessage("Uploading");
+        mdialog.show();
+        String imagename = UUID.randomUUID().toString();
+        final StorageReference imagefolder =storageReference.child("image/"+imagename);
+        imagefolder.putFile(saveuri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        mdialog.dismiss();
+                        Toast.makeText(hospital.this, "Uploaded!!!", Toast.LENGTH_SHORT).show();
+                        imagefolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                newhospital=new hospitals();
+                                newuser=new users();
+                                newhospital.setName(edtname.getText().toString());
+                                newhospital.setImage(uri.toString());
+                                newhospital.setCatid(hospitalid);
+                                newhospital.setPhone(edtphone.getText().toString());
+                                newuser.setIsstaff("false");
+                                newuser.setIspatient("false");
+                                newuser.setIsadmin("false");
+                                newuser.setIshospital("true");
+                                newuser.setIshospital1("false");}
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                mdialog.dismiss();
+                Toast.makeText(hospital.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress =(100.0* taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                mdialog.setMessage("Uploaded" +progress+"%");
+            }
+        });
+    }
+
 
 
 }

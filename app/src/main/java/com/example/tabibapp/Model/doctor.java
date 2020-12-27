@@ -5,6 +5,16 @@ public class doctor {
     private String desc;
     private String image;
     private String catid;
+    private String price ;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     private String phone;
 
     public String getPhone() {
@@ -15,12 +25,13 @@ public class doctor {
         this.phone = phone;
     }
 
-    public doctor(String name, String desc, String image, String catid, String phone) {
+    public doctor(String name, String desc, String image, String catid, String price, String phone) {
         this.name = name;
         this.desc = desc;
         this.image = image;
         this.catid = catid;
-        this.phone=phone;
+        this.price = price;
+        this.phone = phone;
     }
 
     public String getName() {

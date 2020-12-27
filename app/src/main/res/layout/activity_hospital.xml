@@ -23,6 +23,7 @@
             android:layout_height="40dp"
             android:src="@drawable/iconfinder_edit_find_replace_118921"
             android:id="@+id/imgmore"
+            android:visibility="invisible"
 
             />
     </RelativeLayout>

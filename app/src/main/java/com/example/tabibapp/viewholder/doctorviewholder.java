@@ -21,7 +21,7 @@ public class doctorviewholder extends RecyclerView.ViewHolder implements View.On
 
 
 {
-    public TextView txtname, txtdesc, txtphone;
+    public TextView txtname, txtdesc, txtphone, txtprice;
     public CircleImageView imgdoc;
     private itemclicklistner itemClickListener;
 
@@ -36,6 +36,8 @@ public class doctorviewholder extends RecyclerView.ViewHolder implements View.On
         txtdesc= (TextView) itemView.findViewById(R.id.txtdesc);
         txtphone= (TextView) itemView.findViewById(R.id.txtphone);
         imgdoc = (CircleImageView) itemView.findViewById(R.id.doctor_image);
+        txtprice = (TextView) itemView.findViewById(R.id.txtprice);
+
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
 

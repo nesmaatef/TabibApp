@@ -38,7 +38,6 @@ public class request extends AppCompatActivity {
 
     FirebaseRecyclerAdapter<reserve, requestviewholder> adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
